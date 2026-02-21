@@ -1,8 +1,6 @@
 export const FLOW = [
-  // Интро (2 вопроса) — с подсказками, без таймера
   { id: "intro", mode: "learn", file: "./data/ru/intro/00_intro_ai.txt", timeSec: 0 },
 
-  // Stage1 — микс 4 типов (2/2/2/1), таймер 25с на вопрос
   {
     id: "stage1",
     mode: "quiz",
@@ -15,7 +13,6 @@ export const FLOW = [
     ],
   },
 
-  // Физика — 10 вопросов (4/3/3), таймер 35с
   {
     id: "physics",
     mode: "quiz",
@@ -27,7 +24,6 @@ export const FLOW = [
     ],
   },
 
-  // IT — 10 вопросов (4/3/3), таймер 30с
   {
     id: "it",
     mode: "quiz",

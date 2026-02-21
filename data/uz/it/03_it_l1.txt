@@ -1,0 +1,52 @@
+Nima baytlarda o‘lchanadi?
+A) Internet tezligi
+*B) Axborot hajmi
+C) Kuchlanish
+D) Protsessor chastotasi
+
+1 kilobayt teng:
+A) 100 bayt
+B) 1000 bayt
+*C) 1024 bayt
+D) 2048 bayt
+
+Protsessor nima qiladi?
+A) Fayllarni saqlaydi
+*B) Buyruqlarni bajaradi
+C) Tasvirni ko‘rsatadi
+D) Internetni uzatadi
+
+RAM nima?
+A) Doimiy xotira
+*B) Operativ xotira
+C) Qattiq disk
+D) Videokarta
+
+Kompyuter qaysi tilni bevosita tushunadi?
+*A) Mashina kodi
+B) Python
+C) JavaScript
+D) HTML
+
+Algoritm nima?
+A) Dastur
+*B) Masalani yechish uchun qadamlar ketma ketligi
+C) Fayl
+D) O‘yin
+
+Bit nima?
+*A) Axborotning eng kichik birligi
+B) 8 bayt
+C) 1 kilobayt
+D) 1 megabayt
+
+Videokarta nima qiladi?
+A) Internetni tezlashtiradi
+B) Ma’lumotlarni saqlaydi
+*C) Grafikani qayta ishlaydi
+D) Hujjatlarni chop etadi
+
+“Onlayn” nimani anglatadi?
+A) O‘chirilgan
+*B) Tarmoqqa ulangan
+C) Uyqu rejimida

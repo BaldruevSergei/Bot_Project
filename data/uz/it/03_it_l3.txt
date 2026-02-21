@@ -1,0 +1,59 @@
+Agar algoritm murakkabligi O(n) bo‘lsa, bu nimani anglatadi?
+A) Bir zumda ishlaydi
+B) Har doim bir xil tezlikda ishlaydi
+*C) Vaqt ma’lumotlar hajmiga proporsional ravishda oshadi
+D) Tasodifiy ishlaydi
+
+Rekursiya nima qiladi?
+A) Siklni to‘xtatadi
+*B) Funksiya o‘zini o‘zi chaqiradi
+C) Kodni o‘chiradi
+D) Internetni tezlashtiradi
+
+Agar ma’lumotlar bazasida indeks bo‘lmasa, qidiruv:
+A) Tezroq bo‘ladi
+*B) Sekinroq bo‘ladi
+C) O‘zgarmaydi
+D) Imkonsiz bo‘ladi
+
+API nima?
+A) Dastur
+*B) Dasturlar o‘zaro ishlashi uchun interfeys
+C) Server
+D) Til
+
+Xesh funksiya nima qiladi?
+*A) Ma’lumotni qat’iy uzunlikdagi satrga aylantiradi
+B) Internetni siqadi
+C) Viruslarni o‘chiradi
+D) Abadiy shifrlaydi
+
+Bulutli hisoblash nima?
+A) Faqat telefonda ishlash
+*B) Masofaviy serverlardan foydalanish
+C) Onlayn o‘yin
+D) Fayllarni siqish
+
+Cheksiz sikl bo‘lsa, nima sodir bo‘ladi?
+A) Dastur tugaydi
+*B) Dastur qotib qoladi
+C) Internet tezlashadi
+D) Kompyuter o‘chadi
+
+NOT operatori nima qiladi?
+*A) Rostni yolg‘onga o‘zgartiradi
+B) Sonlarni qo‘shadi
+C) Ko‘paytiradi
+D) Taqqoslaydi
+
+Git nima?
+A) Ma’lumotlar bazasi
+*B) Versiyalarni boshqarish tizimi
+C) Server
+D) Til
+
+Agar server ortiqcha yuklama ostida bo‘lsa, nima sodir bo‘ladi?
+A) Tezlashadi
+*B) Javob sekinlashadi yoki xatolik paydo bo‘ladi
+C) Hech narsa
+D) Abadiy o‘chadi

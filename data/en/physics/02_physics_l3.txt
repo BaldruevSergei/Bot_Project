@@ -1,0 +1,60 @@
+Two identical 10 Ohm resistors are connected in parallel. If the current through the circuit is 4 Amperes, the voltage across the circuit is:
+A) 10 V
+*B) 20 V
+C) 40 V
+D) 80 V
+
+A body slides without friction from a height of 5 m g ≈ 10 m/s². Its speed at the bottom is approximately:
+A) 5 m/s
+B) 7 m/s
+*C) 10 m/s
+D) 50 m/s
+
+A 5 kg block is pulled across a table. The coefficient of friction is 0.2 g ≈ 10. The friction force is:
+A) 2 N
+B) 5 N
+*C) 10 N
+D) 50 N
+
+If a device has a power of 100 W and works for 10 seconds, the work done is:
+A) 10 J
+B) 100 J
+*C) 1000 J
+D) 10000 J
+
+A body with a mass of 2 kg moves at 3 m/s. Its kinetic energy is:
+A) 3 J
+B) 6 J
+*C) 9 J
+D) 18 J
+
+If the voltage is doubled and the resistance is halved, the current:
+A) Increases two times
+B) Does not change
+*C) Increases four times
+D) Decreases four times
+
+In zero gravity, an astronaut pushes the station wall. What happens?
+*A) The astronaut pushes backward
+B) Nothing happens
+C) The wall breaks
+D) The astronaut stays floating
+
+A feather and a stone fall in a vacuum. What is correct?
+*A) They fall at the same time
+B) The stone falls faster
+C) The feather falls faster
+D) It depends on mass
+
+If the support area is reduced by two times while the force remains the same, the pressure:
+A) Decreases
+*B) Increases two times
+C) Does not change
+D) Disappears
+
+A body floats in water and is submerged halfway. This means its density is:
+A) Greater than the density of water
+B) Two times greater than the density of water
+*C) Approximately two times less than the density of water
+D) Equal to the density of water
+

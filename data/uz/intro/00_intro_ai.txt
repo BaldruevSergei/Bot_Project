@@ -1,0 +1,17 @@
+2026 yilda sun’iy intellekt AI allaqachon matnlar, tasvirlar, videolar va musiqa yaratmoqda. U kod yozishda yordam beradi, suratlarda kasalliklarni aniqlaydi va savollarga javob beradi. Neyron tarmoqlar internetdagi juda katta hajmdagi misollar asosida o‘qitiladi va qonuniyatlarni topishni o‘rganadi. Agar neyron tarmoq katta hajmdagi ma’lumotlar asosida o‘qitilgan bo‘lsa, bu har doim yangi vaziyatni to‘g‘ri tushunadi deganimi?
+A) Ha, katta hajmdagi ma’lumot to‘g‘ri javobni kafolatlaydi
+B) Ha, chunki u hamma narsani eslab qoladi
+*C) Yo‘q, chunki ma’lumotlar asosida o‘qitish yangi vaziyatda to‘g‘ri yechimni kafolatlamaydi
+D) Ha, agar ma’lumotlar insonnikidan ko‘p bo‘lsa
+
+!!To‘g‘ri. Hatto katta hajmdagi ma’lumot ham yangi vaziyatni to‘g‘ri tushunishni kafolatlamaydi. AI ehtimollik asosida ishlaydi.
+!Ma’lumotlar ko‘p bo‘lsa ham, yangi vaziyatlar misollardan farq qilishi mumkin. AI o‘xshashlik va ehtimollik asosida xulosa chiqaradi, shuning uchun xato qilishi mumkin.
+
+2026 yilda AI matnli tavsif asosida tasvirlar yaratishi mumkin. Agar neyron tarmoqqa «kosmosda uchayotgan mushukni chiz» deb so‘ralsa, u bunday mushuk mavjud bo‘lmasa ham rasm yaratadi. Bu nimani anglatadi?
+A) Neyron tarmoq haqiqiy uchayotgan mushukni ko‘rgan
+B) Neyron tarmoq inson kabi fantaziya qiladi
+*C) Neyron tarmoq o‘ziga ma’lum bo‘lgan ma’lumotlarni kombinatsiya qiladi
+D) Neyron tarmoq hamma narsani tasodifan o‘ylab topadi
+
+!!A’lo. Neyron tarmoq «dunyoni ko‘rmaydi» inson kabi — u o‘rganilgan andozalar va misollarni birlashtiradi.
+!Neyron tarmoq «dunyoni ko‘rmaydi» inson kabi. U natijani o‘rganilgan andozalar va kombinatsiyalardan yig‘adi, shuning uchun haqiqatda mavjud bo‘lmagan narsalarni ham yaratishi mumkin.

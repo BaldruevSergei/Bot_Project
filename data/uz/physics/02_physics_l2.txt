@@ -1,0 +1,59 @@
+Jism 5 m/s tezlik bilan 20 soniya harakatlanmoqda. U qanday masofani bosib o‘tdi?
+A) 4 m
+B) 25 m
+*C) 100 m
+D) 200 m
+
+Massasi 3 kg bo‘lgan jism 2 m/s² tezlanish bilan harakatlanmoqda. Kuch nechaga teng?
+A) 1,5 N
+B) 3 N
+*C) 6 N
+D) 9 N
+
+Ikki dona 10 Om rezistor parallel ulangan. Umumiy qarshilik:
+A) 20 Om
+*B) 5 Om
+C) 10 Om
+D) 100 Om
+
+Agar kuchlanish 2 marta oshirilsa va qarshilik o‘zgarmasa, tok:
+A) 2 marta kamayadi
+*B) 2 marta oshadi
+C) O‘zgarmaydi
+D) 4 marta oshadi
+
+Kuchning ishi quyidagi formula bilan aniqlanadi:
+A) A = F / S
+*B) A = F · s
+C) A = m · g
+D) A = U · I
+
+Agar jism 5 m balandlikdan tushsa g ≈ 10 m/s², yerga yetgandagi tezligi taxminan:
+A) 5 m/s
+B) 7 m/s
+*C) 10 m/s
+D) 50 m/s
+
+Bosim quyidagi formula bilan aniqlanadi:
+A) p = m / V
+*B) p = F / S
+C) p = U / I
+D) p = A / t
+
+Agar ishqalanish kuchi oshsa, jismning harakati:
+A) Tezlashadi
+*B) Sekinlashadi
+C) O‘zgarmaydi
+D) Bir tekis bo‘ladi
+
+Agar moddaning zichligi 2 marta oshsa va hajm o‘zgarmasa, massa:
+A) Kamayadi
+*B) Oshadi
+C) O‘zgarmaydi
+D) Nolga teng bo‘ladi
+
+4 Om va 6 Om bo‘lgan ikki rezistor ketma ket ulangan. Umumiy qarshilik:
+A) 2 Om
+*B) 10 Om
+C) 24 Om
+D) 1 Om

@@ -1,0 +1,53 @@
+If all programmers love logic, and Petya is a programmer, then Petya:
+*A) Loves logic
+B) Does not love it
+C) Unknown
+D) Not related
+
+If all robots are machines, but not all machines are robots, is it true that all machines are robots?
+A) Yes
+*B) No
+C) Sometimes
+D) Impossible to determine
+
+Sequence: 3, 6, 12, 24, ?
+A) 36
+B) 42
+*C) 48
+D) 30
+
+If all students study computer science, and Anna is a student, then Anna:
+*A) Studies computer science
+B) Does not study
+C) Unknown
+D) Not related
+
+If all squares are rectangles, but not all rectangles are squares, is it true that all rectangles are squares?
+A) Yes
+*B) No
+C) Sometimes
+D) Impossible to determine
+
+Sequence: 2, 5, 10, 17, 26, ?
+A) 35
+B) 40
+*C) 37
+D) 39
+
+Sequence: 1, 3, 5, 7, ?
+A) 8
+*B) 9
+C) 10
+D) 11
+
+If all cats are animals, and Barsik is a cat, then Barsik:
+*A) Is an animal
+B) Is not an animal
+C) Unknown
+D) Not related
+
+If you add 2 to the number 4 each time, what number comes after 4, 6, 8, 10, ?
+A) 11
+*B) 12
+C) 14
+D) 16

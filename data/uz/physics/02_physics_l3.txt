@@ -1,0 +1,59 @@
+Ikki bir xil 10 Om rezistor parallel ulangan. Agar zanjirdan 4 Amper tok oqsa, zanjirdagi kuchlanish:
+A) 10 V
+*B) 20 V
+C) 40 V
+D) 80 V
+
+Jism ishqalanishsiz 5 m balandlikdan sirg‘alib tushmoqda g ≈ 10 m/s². Asosdagi tezligi taxminan:
+A) 5 m/s
+B) 7 m/s
+*C) 10 m/s
+D) 50 m/s
+
+Massasi 5 kg bo‘lgan brusok stol ustida tortilmoqda. Ishqalanish koeffitsienti 0,2 g ≈ 10. Ishqalanish kuchi:
+A) 2 N
+B) 5 N
+*C) 10 N
+D) 50 N
+
+Agar qurilmaning quvvati 100 Vt bo‘lib, u 10 soniya ishlasa, bajarilgan ish:
+A) 10 J
+B) 100 J
+*C) 1000 J
+D) 10000 J
+
+Massasi 2 kg bo‘lgan jism 3 m/s tezlik bilan harakatlanmoqda. Uning kinetik energiyasi:
+A) 3 J
+B) 6 J
+*C) 9 J
+D) 18 J
+
+Agar kuchlanish 2 marta oshirilsa va qarshilik 2 marta kamaytirilsa, tok:
+A) 2 marta oshadi
+B) O‘zgarmaydi
+*C) 4 marta oshadi
+D) 4 marta kamayadi
+
+Vaznsizlikda kosmonavt stansiya devorini itaradi. Nima sodir bo‘ladi?
+*A) Kosmonavt orqaga itariladi
+B) Hech narsa sodir bo‘lmaydi
+C) Devor buziladi
+D) Kosmonavt muallaq qoladi
+
+Vakuumda pat va tosh tushmoqda. Qaysi biri to‘g‘ri?
+*A) Bir vaqtda tushadi
+B) Tosh tezroq
+C) Pat tezroq
+D) Massaga bog‘liq
+
+Agar tayanch yuzasi 2 marta kamaytirilsa va kuch o‘zgarmasa, bosim:
+A) Kamayadi
+*B) 2 marta oshadi
+C) O‘zgarmaydi
+D) Yo‘qoladi
+
+Jism suvda suzmoqda va yarmigacha botgan. Bu uning zichligi:
+A) Suv zichligidan katta
+B) Suv zichligidan 2 marta katta
+*C) Taxminan suv zichligidan 2 marta kichik
+D) Suv zichligiga teng

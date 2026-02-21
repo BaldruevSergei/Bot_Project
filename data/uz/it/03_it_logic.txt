@@ -1,0 +1,59 @@
+Tartiblangan massivda elementni qidirish uchun qaysi usul samaraliroq?
+A) Chiziqli qidiruv
+*B) Ikkilik qidiruv
+C) Tasodifiy tanlash
+D) Qayta kiritish
+
+Agar parol faqat raqamlardan iborat bo‘lsa, u:
+A) Xavfsizroq
+*B) Kamroq xavfsiz
+C) Farqi yo‘q
+D) Tezroq
+
+Agar dastur katta hajmdagi ma’lumotlar bilan sekin ishlasa, muammo quyidagida bo‘lishi mumkin:
+*A) Algoritmda
+B) Monitorda
+C) Klaviaturada
+D) Sichqonchada
+
+Qaysi biri xavfsizroq?
+A) Barcha saytlar uchun bitta parol
+*B) Turli parollar
+C) Oddiy parol
+D) Foydalanuvchi nomini parol qilish
+
+Agar ikkita shart bir vaqtda rost bo‘lishi kerak bo‘lsa, ishlatiladi:
+*A) AND
+B) OR
+C) NOT
+D) LOOP
+
+Agar muhim tizim fayli o‘chirib yuborilsa, nima sodir bo‘ladi?
+A) Hech narsa
+*B) Tizim ishlamay qolishi mumkin
+C) Internet tezlashadi
+D) Xotira oshadi
+
+Agar tarmoqda himoya bo‘lmasa, quyidagisi mumkin:
+*A) Ma’lumotlar sizib chiqishi
+B) Wi-Fi tezlashishi
+C) Fayllar siqilishi
+D) O‘z o‘zidan yangilanish
+
+Dastur o‘rnatishdan oldin nima qilish mantiqan to‘g‘ri?
+A) Antivirusni o‘chirish
+*B) Manbani tekshirish
+C) Tizimni o‘chirish
+D) Routerni qayta yuklash
+
+Agar dastur xato bersa, birinchi harakat:
+A) Hammasini o‘chirish
+*B) Xato xabarini o‘qish
+C) Kompyuterni o‘chirish
+D) E’tiborsiz qoldirish
+
+Dasturlashda nima muhimroq?
+A) Kodning chiroyli rangi
+*B) Yechimning mantiqi
+C) Tez yozish
+D) Katta monitor

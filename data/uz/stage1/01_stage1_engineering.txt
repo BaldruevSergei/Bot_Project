@@ -1,0 +1,29 @@
+Agar ikki kishi arqonni bir xil kuch bilan qarama qarshi tomonga tortsa, arqon:
+A) Chapga harakat qiladi
+B) O‘ngga harakat qiladi
+*C) O‘z joyida qoladi
+D) Albatta uziladi
+
+Agar qurilma katta hajmdagi ma’lumotlar bilan sekin ishlasa, muammo ehtimol:
+*A) Ma’lumotlarni qayta ishlash usulida
+B) Korpus rangida
+C) Sim uzunligida
+D) Dastur nomida
+
+Agar jismga ikki kuch ta’sir qilsa: biri 10 N o‘ngga, ikkinchisi 5 N chapga, unda jism:
+A) O‘z joyida qoladi
+*B) O‘ngga harakat qiladi
+C) Chapga harakat qiladi
+D) Uziladi
+
+Agar dastur bir amalni 10 marta bajarishi kerak bo‘lsa, qaysi turdagi algoritmni ishlatish ma’qul?
+A) Ketma ketlik
+B) Tarmoqlanish
+*C) Takrorlash
+D) Tasodif
+
+Agar tizimda foydalanuvchilar soni oshib, u qotib qolishni boshlasa, bu ko‘pincha quyidagiga bog‘liq:
+A) Interfeys rangiga
+*B) Server yuklamasiga
+C) Sayt nomiga
+D) Ekran ruxsatiga

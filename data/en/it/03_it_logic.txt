@@ -1,0 +1,60 @@
+What is more efficient for searching an element in a sorted array?
+A) Linear search
+*B) Binary search
+C) Random selection
+D) Re-entering
+
+If a password consists only of digits, it is:
+A) More secure
+*B) Less secure
+C) It does not matter
+D) Faster
+
+If a program works slowly with a large amount of data, the problem may be in:
+*A) The algorithm
+B) The monitor
+C) The keyboard
+D) The mouse
+
+What is more secure?
+A) One password for all websites
+*B) Different passwords
+C) A simple password
+D) Username as password
+
+If two conditions must be true at the same time, which is used?
+*A) AND
+B) OR
+C) NOT
+D) LOOP
+
+What will happen if an important system file is deleted?
+A) Nothing
+*B) The system may stop working
+C) The internet will speed up
+D) Memory will increase
+
+If there is no protection in the network, what is possible?
+*A) Data leakage
+B) Wi-Fi acceleration
+C) File compression
+D) Automatic updates
+
+What is logical to do before installing a program?
+A) Disable antivirus
+*B) Check the source
+C) Delete the system
+D) Restart the router
+
+If a program gives an error, the first action is:
+A) Delete everything
+*B) Read the error message
+C) Turn off the computer
+D) Ignore it
+
+What is more important in programming?
+A) Beautiful code color
+*B) Logic of the solution
+C) Fast typing
+D) Large monitor
+

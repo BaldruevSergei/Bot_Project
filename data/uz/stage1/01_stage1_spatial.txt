@@ -1,0 +1,17 @@
+Kub barcha tomonlaridan bo‘yaldi va 27 ta kichik kubga bo‘lindi. Ularning nechta kubi uch tomondan bo‘yalgan bo‘ladi?
+A) 4
+*B) 8
+C) 12
+D) 6
+
+Agar barqaror to‘rt oyoqli stolning bitta oyog‘i olib tashlansa, u:
+A) Yanada barqaror bo‘ladi
+B) Hech narsa o‘zgarmaydi
+*C) Barqarorligini yo‘qotadi
+D) Yengilroq bo‘ladi
+
+Qaysi biri barqarorroq?
+A) Tor va baland minora
+*B) Keng va past minora
+C) Farqi yo‘q
+D) Yengil minora

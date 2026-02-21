@@ -1,0 +1,59 @@
+A car is moving at a speed of 36 km/h. This is approximately how many m/s?
+A) 5 m/s
+B) 8 m/s
+*C) 10 m/s
+D) 20 m/s
+
+What is the unit of force in the SI system?
+A) Watt
+B) Joule
+*C) Newton
+D) Pascal
+
+A body with a mass of 2 kg is on Earth. What is the approximate gravitational force? g ? 10 m/s?
+A) 2 N
+B) 10 N
+*C) 20 N
+D) 200 N
+
+The formula for density is:
+*A) ? = m / V
+B) ? = F / S
+C) ? = U / I
+D) ? = A / t
+
+If the voltage is 12 V and the resistance is 6 Ohm, what is the current?
+A) 0.5 A
+*B) 2 A
+C) 6 A
+D) 72 A
+
+What happens to the speed of a body if no force acts on it?
+A) It increases
+B) It decreases
+*C) It remains constant
+D) It will обязательно stop
+
+Two 5 Ohm resistors are connected in series. The total resistance is:
+A) 2.5 Ohm
+B) 5 Ohm
+*C) 10 Ohm
+D) 25 Ohm
+
+Which is heavier: 1 kg of iron or 1 kg of cotton?
+A) Iron
+B) Cotton
+*C) The same
+D) Depends on volume
+
+At the highest point of its flight, a ball thrown upward has a speed:
+A) Maximum
+*B) Equal to zero
+C) Negative
+D) Greater than initial
+
+If the density of a body is less than the density of water, it will:
+A) Sink
+*B) Float
+C) Dissolve
+D) Evaporate
