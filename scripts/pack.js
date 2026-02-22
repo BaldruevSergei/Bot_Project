@@ -1,144 +1,138 @@
 // scripts/pack.js
-// Упаковка вопросов из data/**.txt -> public/questions/**.packed.json
-// Шифруем только индекс правильного ответа (k) и сохраняем подсказки (!! / !)
+// Usage: npm run pack
+// Input:  data/<lang>/**/<name>.txt
+// Output: public/questions/<lang>/**/<name>.packed.json  (+ .packed mirror)
 
 const fs = require("fs");
 const path = require("path");
 
-// !!! ДОЛЖЕН СОВПАДАТЬ С core/cryptobox.js !!!
-const KEY = "forbrain_secret_2026";
+const ROOT = process.cwd();
+const DATA_DIR = path.join(ROOT, "data");
+const OUT_DIR = path.join(ROOT, "public", "questions");
 
-// XOR + Base64 (совместимо с твоим cryptobox: btoa/atob + XOR)
-function encXorBase64(str) {
-  let out = "";
-  for (let i = 0; i < str.length; i++) {
-    out += String.fromCharCode(
-      str.charCodeAt(i) ^ KEY.charCodeAt(i % KEY.length)
-    );
-  }
-  return Buffer.from(out, "binary").toString("base64");
-}
-
-/**
- * Формат блока в txt:
- * Вопрос
- * *A) ...
- * B) ...
- * !! Подсказка если верно
- * ! Подсказка если неверно
- *
- * Блоки разделяются пустой строкой.
- */
-function parseTxtToPacked(txt, prefix = "q") {
-  const blocks = txt
-    .replace(/\r/g, "")
-    .split("\n\n")
-    .map(b => b.trim())
-    .filter(Boolean);
-
-  const packed = [];
-  let qCounter = 0;
-
-  for (const block of blocks) {
-    const lines = block
-      .split("\n")
-      .map(l => l.trim())
-      .filter(Boolean);
-
-    if (lines.length < 3) continue;
-
-    const question = lines[0];
-
-    const options = [];
-    let correctIndex = -1;
-
-    const okHints = [];
-    const badHints = [];
-
-    for (let i = 1; i < lines.length; i++) {
-      const s = lines[i];
-
-      // подсказки
-      if (s.startsWith("!!")) {
-        okHints.push(s.replace(/^!!\s?/, "").trim());
-        continue;
-      }
-      if (s.startsWith("!")) {
-        // важно: сюда попадут только одиночные "!" (не "!!"), т.к. выше уже отфильтровали
-        badHints.push(s.replace(/^!\s?/, "").trim());
-        continue;
-      }
-
-      // варианты ответа
-      const isCorrect = s.startsWith("*");
-      const clean = isCorrect ? s.slice(1).trim() : s.trim();
-
-      options.push(clean);
-      if (isCorrect) correctIndex = options.length - 1;
-    }
-
-    if (options.length < 2 || correctIndex < 0) continue;
-
-    qCounter += 1;
-
-    packed.push({
-      type: "question",
-      id: `${prefix}_${String(qCounter).padStart(3, "0")}`,
-      q: question,
-      o: options,
-      k: encXorBase64(String(correctIndex)), // шифруем индекс
-      ok: okHints.join("\n").trim(),         // подсказка "верно"
-      bad: badHints.join("\n").trim()        // подсказка "неверно"
-    });
-  }
-
-  return packed;
-}
-
-function isDir(p) {
-  try { return fs.statSync(p).isDirectory(); } catch { return false; }
-}
-
+// -------- helpers --------
 function ensureDir(p) {
   fs.mkdirSync(p, { recursive: true });
 }
 
-// Рекурсивно проходит inputDir и создаёт outputDir с теми же подпапками
-function processDir(inputDir, outputDir) {
-  if (!isDir(inputDir)) {
-    console.error(`❌ Input dir not found: ${inputDir}`);
-    process.exit(1);
+function readText(p) {
+  return fs.readFileSync(p, "utf8");
+}
+
+function writeJson(p, obj) {
+  ensureDir(path.dirname(p));
+  fs.writeFileSync(p, JSON.stringify(obj, null, 2), "utf8");
+}
+
+// -------- parser (TXT -> questions) --------
+// формат:
+// Вопрос?
+// A) ...
+// *B) ...   // * = правильный (single)
+// (пустая строка) разделяет вопросы
+function parseTxt(raw) {
+  const text = raw.replace(/\r\n/g, "\n").trim();
+  if (!text) return [];
+
+  const blocks = text.split(/\n\s*\n+/g).map(s => s.trim()).filter(Boolean);
+
+  const out = [];
+
+  for (const block of blocks) {
+    const lines = block.split("\n").map(s => s.trim()).filter(Boolean);
+    if (lines.length < 3) continue;
+
+    const q = lines[0];
+
+    const options = [];
+    let correctIndex = -1;
+
+    for (let i = 1; i < lines.length; i++) {
+      let line = lines[i];
+      let isCorrect = false;
+
+      if (line.startsWith("*")) {
+        isCorrect = true;
+        line = line.slice(1).trim();
+      }
+
+      // уберём "A) " "B) "
+      line = line.replace(/^[A-DА-Г]\)\s*/i, "");
+
+      options.push(line);
+      if (isCorrect) correctIndex = options.length - 1;
+    }
+
+    if (correctIndex < 0) correctIndex = 0; // fallback
+
+    out.push({
+      q,
+      o: options,
+      k: String(correctIndex), // можно шифровать позже
+      ok: "",                  // подсказки можно добавлять позже
+      bad: ""
+    });
   }
 
-  ensureDir(outputDir);
+  return out;
+}
 
-  const items = fs.readdirSync(inputDir, { withFileTypes: true });
+// -------- walk --------
+function walkDir(dir, files = []) {
+  for (const name of fs.readdirSync(dir)) {
+    const full = path.join(dir, name);
+    const st = fs.statSync(full);
+    if (st.isDirectory()) walkDir(full, files);
+    else files.push(full);
+  }
+  return files;
+}
 
-  for (const it of items) {
-    const fullIn = path.join(inputDir, it.name);
-    const fullOut = path.join(outputDir, it.name);
+function isLangFolderName(x) {
+  return x === "ru" || x === "uz" || x === "en";
+}
 
-    if (it.isDirectory()) {
-      processDir(fullIn, fullOut);
+function packAll() {
+  if (!fs.existsSync(DATA_DIR)) {
+    throw new Error(`No data dir: ${DATA_DIR}`);
+  }
+
+  const all = walkDir(DATA_DIR).filter(f => f.toLowerCase().endsWith(".txt"));
+  let count = 0;
+
+  for (const filePath of all) {
+    // data/<lang>/.../<name>.txt
+    const rel = path.relative(DATA_DIR, filePath).replace(/\\/g, "/");
+    const parts = rel.split("/");
+
+    const lang = parts[0];
+    if (!isLangFolderName(lang)) {
+      console.log(`[skip] unknown lang folder: ${rel}`);
       continue;
     }
 
-    if (it.isFile() && it.name.toLowerCase().endsWith(".txt")) {
-      const txt = fs.readFileSync(fullIn, "utf8");
-      const prefix = path.basename(it.name, ".txt").replace(/[^a-zA-Z0-9]+/g, "_");
-      const packed = parseTxtToPacked(txt, prefix);
+    const relNoExt = rel.replace(/\.txt$/i, "");
+    // remove "<lang>/"
+    const relInsideLang = relNoExt.split("/").slice(1).join("/");
 
-      const outFile = path.join(
-        outputDir,
-        it.name.replace(/\.txt$/i, ".packed.json")
-      );
+    const outBase = path.join(OUT_DIR, lang, relInsideLang).replace(/\\/g, "/");
 
-      fs.writeFileSync(outFile, JSON.stringify(packed, null, 0), "utf8");
-      console.log(`✅ Packed ${packed.length} -> ${outFile}`);
-    }
+    const raw = readText(filePath);
+    const parsed = parseTxt(raw);
+
+    // write .packed.json
+    const outJson = outBase + ".packed.json";
+    writeJson(outJson, parsed);
+
+    // mirror .packed (чтобы старые пути тоже работали)
+    const outPacked = outBase + ".packed";
+    writeJson(outPacked, parsed);
+
+    count++;
+    console.log(`[ok] ${rel} -> ${path.relative(ROOT, outJson)}`);
   }
+
+  console.log(`DONE. Packed files: ${count}`);
 }
 
-// ---- RUN ----
-processDir("data", path.join("public", "questions"));
-console.log("DONE ✅");
+packAll();
