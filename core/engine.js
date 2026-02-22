@@ -1,8 +1,9 @@
-// core/engine.js
+import { decrypt } from "./cryptobox.js";
+
 export class Engine {
   constructor(questions = [], mode = "quiz") {
     this.questions = questions;
-    this.mode = mode; // "learn" | "quiz"
+    this.mode = mode;
     this.index = 0;
     this.score = 0;
   }
@@ -15,21 +16,20 @@ export class Engine {
     return this.questions[this.index] || null;
   }
 
-  answer(selectedIndex) {
-    const q = this.current();
-    if (!q) return { ok: false, feedback: "" };
+ answer(selectedIndex) {
+  const q = this.current();
+  if (!q) return { ok: false, feedback: "" };
 
-    const ok = Number(selectedIndex) === Number(q.correctIndex);
-    if (ok) this.score += 1;
+  // 🔐 Дешифровываем индекс
+  const realIndex = Number(decrypt(q.k));
 
-    // ВАЖНО: возвращаем feedback
-    const feedback = ok ? (q.feedbackOk || "") : (q.feedbackBad || "");
+  const ok = Number(selectedIndex) === realIndex;
+  if (ok) this.score += 1;
 
-    return { ok, feedback };
-  }
+  return { ok, feedback: "" };
+}
 
   skip() {
-    // пропуск = просто дальше, без очков
     this.index += 1;
     return true;
   }

@@ -1,0 +1,8 @@
+{
+  "name": "forbrain_prod",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "pack": "node scripts/pack.js"
+  }
+}
