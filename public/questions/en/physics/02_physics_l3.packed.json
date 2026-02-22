@@ -7,7 +7,7 @@
       "40 V",
       "80 V"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "10 m/s",
       "50 m/s"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "10 N",
       "50 N"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "1000 J",
       "10000 J"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "9 J",
       "18 J"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -67,7 +67,7 @@
       "Increases four times",
       "Decreases four times"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -79,7 +79,7 @@
       "The wall breaks",
       "The astronaut stays floating"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -91,7 +91,7 @@
       "The feather falls faster",
       "It depends on mass"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -103,7 +103,7 @@
       "Does not change",
       "Disappears"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -115,7 +115,7 @@
       "Approximately two times less than the density of water",
       "Equal to the density of water"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   }

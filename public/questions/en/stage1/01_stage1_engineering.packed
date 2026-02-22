@@ -7,7 +7,7 @@
       "Stays in place",
       "Will definitely break"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "The length of the cable",
       "The name of the program"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "Move to the left",
       "Break"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "Repetition",
       "Randomness"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "The website name",
       "Screen resolution"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   }

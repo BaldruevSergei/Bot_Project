@@ -7,7 +7,7 @@
       "Voltage",
       "Processor frequency"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "1024 bytes",
       "2048 bytes"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "Displays images",
       "Transmits the internet"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "Hard disk",
       "Graphics card"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "JavaScript",
       "HTML"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -67,7 +67,7 @@
       "A file",
       "A game"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -79,7 +79,7 @@
       "1 kilobyte",
       "1 megabyte"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -91,7 +91,7 @@
       "Processes graphics",
       "Prints documents"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -102,7 +102,7 @@
       "Connected to a network",
       "In sleep mode"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   }

@@ -7,7 +7,7 @@
       "No, because training on data does not guarantee a correct solution in a new situation",
       "Yes, if it has more data than a human"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "The neural network combines data it already knows",
       "The neural network invents everything randomly"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   }

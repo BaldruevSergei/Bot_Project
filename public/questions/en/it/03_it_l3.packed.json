@@ -7,7 +7,7 @@
       "The time grows proportionally to the size of the data",
       "It works randomly"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "Deletes code",
       "Speeds up the internet"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "No change",
       "Impossible"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "A server",
       "A language"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "Deletes viruses",
       "Encrypts forever"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -67,7 +67,7 @@
       "Playing online games",
       "Compressing files"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -79,7 +79,7 @@
       "The internet speeds up",
       "The computer turns off"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -91,7 +91,7 @@
       "Multiplies",
       "Compares"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -103,7 +103,7 @@
       "A server",
       "A language"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -115,7 +115,7 @@
       "Nothing",
       "It will shut down forever"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   }

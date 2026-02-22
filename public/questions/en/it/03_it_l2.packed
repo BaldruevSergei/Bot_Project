@@ -7,7 +7,7 @@
       "8",
       "15"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "Boolean",
       "Float"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "Deletes variables",
       "Loads the internet"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "6",
       "2"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "NOT",
       "XOR"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -67,7 +67,7 @@
       "Password",
       "Cable"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -79,7 +79,7 @@
       "Deletes a variable",
       "Divides a number"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -91,7 +91,7 @@
       "Large server",
       "Gaming protocol"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -103,7 +103,7 @@
       "An error occurs",
       "Nothing"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -115,7 +115,7 @@
       "Dictionary",
       "Loop"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   }

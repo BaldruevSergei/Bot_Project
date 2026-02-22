@@ -7,7 +7,7 @@
       "Tasodifiy tanlash",
       "Qayta kiritish"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "Farqi yo‘q",
       "Tezroq"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "Klaviaturada",
       "Sichqonchada"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "Oddiy parol",
       "Foydalanuvchi nomini parol qilish"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "NOT",
       "LOOP"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -67,7 +67,7 @@
       "Internet tezlashadi",
       "Xotira oshadi"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -79,7 +79,7 @@
       "Fayllar siqilishi",
       "O‘z o‘zidan yangilanish"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -91,7 +91,7 @@
       "Tizimni o‘chirish",
       "Routerni qayta yuklash"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -103,7 +103,7 @@
       "Kompyuterni o‘chirish",
       "E’tiborsiz qoldirish"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -115,7 +115,7 @@
       "Tez yozish",
       "Katta monitor"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   }

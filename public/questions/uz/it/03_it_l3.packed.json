@@ -7,7 +7,7 @@
       "Vaqt ma’lumotlar hajmiga proporsional ravishda oshadi",
       "Tasodifiy ishlaydi"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "Kodni o‘chiradi",
       "Internetni tezlashtiradi"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "O‘zgarmaydi",
       "Imkonsiz bo‘ladi"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "Server",
       "Til"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "Viruslarni o‘chiradi",
       "Abadiy shifrlaydi"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -67,7 +67,7 @@
       "Onlayn o‘yin",
       "Fayllarni siqish"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -79,7 +79,7 @@
       "Internet tezlashadi",
       "Kompyuter o‘chadi"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -91,7 +91,7 @@
       "Ko‘paytiradi",
       "Taqqoslaydi"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -103,7 +103,7 @@
       "Server",
       "Til"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -115,7 +115,7 @@
       "Hech narsa",
       "Abadiy o‘chadi"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   }

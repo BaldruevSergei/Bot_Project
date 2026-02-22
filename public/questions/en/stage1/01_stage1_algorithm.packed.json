@@ -7,7 +7,7 @@
       "3 4 1 2",
       "2 1 4 3"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "Error",
       "Delay"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "Put filling → Take bread → Slice the bread → Cover with the second slice",
       "Slice the bread → Take bread → Put filling → Cover with the second slice"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "Repetition",
       "Error"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "Connect the power → Press the power button → Wait for the system to boot → Turn on the monitor",
       "Turn on the monitor → Connect the power → Press the power button → Wait for the system to boot"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   }

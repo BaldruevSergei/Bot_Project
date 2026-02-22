@@ -1,14 +1,23 @@
-// scripts/pack.js
-// Usage: npm run pack
-// Input:  data/<lang>/**/<name>.txt
-// Output: public/questions/<lang>/**/<name>.packed.json  (+ .packed mirror)
-
 const fs = require("fs");
 const path = require("path");
 
 const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, "data");
 const OUT_DIR = path.join(ROOT, "public", "questions");
+
+// 🔐 КЛЮЧ ДОЛЖЕН БЫТЬ ТАКОЙ ЖЕ КАК В cryptobox.js
+const KEY = "forbrain_secret_key_2026";
+
+// -------- crypto (Node version of cryptobox.js) --------
+function encryptNode(str) {
+  let out = "";
+  for (let i = 0; i < str.length; i++) {
+    out += String.fromCharCode(
+      str.charCodeAt(i) ^ KEY.charCodeAt(i % KEY.length)
+    );
+  }
+  return Buffer.from(out, "binary").toString("base64");
+}
 
 // -------- helpers --------
 function ensureDir(p) {
@@ -24,26 +33,27 @@ function writeJson(p, obj) {
   fs.writeFileSync(p, JSON.stringify(obj, null, 2), "utf8");
 }
 
-// -------- parser (TXT -> questions) --------
-// формат:
-// Вопрос?
-// A) ...
-// *B) ...   // * = правильный (single)
-// (пустая строка) разделяет вопросы
+// -------- parser --------
 function parseTxt(raw) {
   const text = raw.replace(/\r\n/g, "\n").trim();
   if (!text) return [];
 
-  const blocks = text.split(/\n\s*\n+/g).map(s => s.trim()).filter(Boolean);
+  const blocks = text
+    .split(/\n\s*\n+/g)
+    .map((s) => s.trim())
+    .filter(Boolean);
 
   const out = [];
 
   for (const block of blocks) {
-    const lines = block.split("\n").map(s => s.trim()).filter(Boolean);
+    const lines = block
+      .split("\n")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
     if (lines.length < 3) continue;
 
     const q = lines[0];
-
     const options = [];
     let correctIndex = -1;
 
@@ -56,20 +66,22 @@ function parseTxt(raw) {
         line = line.slice(1).trim();
       }
 
-      // уберём "A) " "B) "
       line = line.replace(/^[A-DА-Г]\)\s*/i, "");
 
       options.push(line);
       if (isCorrect) correctIndex = options.length - 1;
     }
 
-    if (correctIndex < 0) correctIndex = 0; // fallback
+    if (correctIndex < 0) correctIndex = 0;
+
+    // 🔐 Шифруем индекс
+    const encrypted = encryptNode(String(correctIndex));
 
     out.push({
       q,
       o: options,
-      k: String(correctIndex), // можно шифровать позже
-      ok: "",                  // подсказки можно добавлять позже
+      k: encrypted,
+      ok: "",
       bad: ""
     });
   }
@@ -93,46 +105,30 @@ function isLangFolderName(x) {
 }
 
 function packAll() {
-  if (!fs.existsSync(DATA_DIR)) {
-    throw new Error(`No data dir: ${DATA_DIR}`);
-  }
-
   const all = walkDir(DATA_DIR).filter(f => f.toLowerCase().endsWith(".txt"));
-  let count = 0;
 
   for (const filePath of all) {
-    // data/<lang>/.../<name>.txt
     const rel = path.relative(DATA_DIR, filePath).replace(/\\/g, "/");
     const parts = rel.split("/");
-
     const lang = parts[0];
-    if (!isLangFolderName(lang)) {
-      console.log(`[skip] unknown lang folder: ${rel}`);
-      continue;
-    }
+
+    if (!isLangFolderName(lang)) continue;
 
     const relNoExt = rel.replace(/\.txt$/i, "");
-    // remove "<lang>/"
     const relInsideLang = relNoExt.split("/").slice(1).join("/");
 
-    const outBase = path.join(OUT_DIR, lang, relInsideLang).replace(/\\/g, "/");
+    const outBase = path.join(OUT_DIR, lang, relInsideLang);
 
     const raw = readText(filePath);
     const parsed = parseTxt(raw);
 
-    // write .packed.json
-    const outJson = outBase + ".packed.json";
-    writeJson(outJson, parsed);
+    writeJson(outBase + ".packed.json", parsed);
+    writeJson(outBase + ".packed", parsed);
 
-    // mirror .packed (чтобы старые пути тоже работали)
-    const outPacked = outBase + ".packed";
-    writeJson(outPacked, parsed);
-
-    count++;
-    console.log(`[ok] ${rel} -> ${path.relative(ROOT, outJson)}`);
+    console.log("[ok]", rel);
   }
 
-  console.log(`DONE. Packed files: ${count}`);
+  console.log("DONE");
 }
 
 packAll();

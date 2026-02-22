@@ -7,7 +7,7 @@
       "3 4 1 2",
       "2 1 4 3"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "Xato",
       "Kechikish"
     ],
-    "k": "0",
+    "k": "Vg==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "Ichlik qo‘yish → Non olish → Nonni kesish → Ikkinchi bo‘lak bilan yopish",
       "Nonni kesish → Non olish → Ichlik qo‘yish → Ikkinchi bo‘lak bilan yopish"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "Takrorlash",
       "Xato"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "Elektr tarmog‘iga ulash → Quvvat tugmasini bosish → Tizim yuklanishini kutish → Monitorni yoqish",
       "Monitorni yoqish → Elektr tarmog‘iga ulash → Quvvat tugmasini bosish → Tizim yuklanishini kutish"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   }

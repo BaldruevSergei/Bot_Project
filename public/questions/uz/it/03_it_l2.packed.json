@@ -7,7 +7,7 @@
       "8",
       "15"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -19,7 +19,7 @@
       "Boolean",
       "Float"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -31,7 +31,7 @@
       "O‘zgaruvchilarni o‘chiradi",
       "Internetni yuklaydi"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -43,7 +43,7 @@
       "6",
       "2"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -55,7 +55,7 @@
       "NOT",
       "XOR"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -67,7 +67,7 @@
       "Parol",
       "Kabel"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -79,7 +79,7 @@
       "O‘zgaruvchini o‘chiradi",
       "Sonni bo‘ladi"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -91,7 +91,7 @@
       "Katta server",
       "O‘yin protokoli"
     ],
-    "k": "1",
+    "k": "Vw==",
     "ok": "",
     "bad": ""
   },
@@ -103,7 +103,7 @@
       "Xatolik yuz beradi",
       "Hech narsa"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   },
@@ -115,7 +115,7 @@
       "Lug‘at",
       "Sikl"
     ],
-    "k": "2",
+    "k": "VA==",
     "ok": "",
     "bad": ""
   }
