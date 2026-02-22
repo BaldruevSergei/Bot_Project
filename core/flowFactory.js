@@ -36,6 +36,7 @@ export function makeFlow(lang = "ru") {
         { tag: "it", file: `./data/${lang}/it/03_it_l1.txt`, pick: 2 },
         { tag: "it", file: `./data/${lang}/it/03_it_l2.txt`, pick: 2 },
         { tag: "it", file: `./data/${lang}/it/03_it_l3.txt`, pick: 2 },
+        { tag: "it", file: `./data/${lang}/it/03_it_logic.txt`, pick: 2 },
       ],
     },
   ];

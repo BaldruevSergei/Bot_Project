@@ -3,7 +3,7 @@ import { decrypt } from "./cryptobox.js";
 export class Engine {
   constructor(questions = [], mode = "quiz") {
     this.questions = questions;
-    this.mode = mode;
+    this.mode = mode; // "learn" | "quiz"
     this.index = 0;
     this.score = 0;
   }
@@ -16,18 +16,18 @@ export class Engine {
     return this.questions[this.index] || null;
   }
 
- answer(selectedIndex) {
-  const q = this.current();
-  if (!q) return { ok: false, feedback: "" };
+  answer(selectedIndex) {
+    const q = this.current();
+    if (!q) return { ok: false, feedback: "" };
 
-  // 🔐 Дешифровываем индекс
-  const realIndex = Number(decrypt(q.k));
+    const correctIndex = Number(decrypt(q.k));
+    const ok = Number(selectedIndex) === correctIndex;
 
-  const ok = Number(selectedIndex) === realIndex;
-  if (ok) this.score += 1;
+    if (ok) this.score += 1;
 
-  return { ok, feedback: "" };
-}
+    // feedback можно держать пустым, а в app.js подставлять t.feedbackOk/Bad
+    return { ok, feedback: q.feedback || "" };
+  }
 
   skip() {
     this.index += 1;

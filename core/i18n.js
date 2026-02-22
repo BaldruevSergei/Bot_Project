@@ -6,41 +6,53 @@ export const LANGS = [
 
 export const I18N = {
   ru: {
+    // -------- Language --------
     chooseLangTitle: "Выбор языка",
-    chooseLangText: "Выберите язык интерфейса и тестов.",
+    chooseLangText: "Сначала выберите язык — дальше будет описание теста.",
+
     openInTelegramTitle: "Открой в Telegram",
     openInTelegramText: "Этот тест работает как Telegram WebApp.",
     openInTelegramHint: "Открой через бота и нажми кнопку запуска.",
 
+    // -------- Intro --------
     introTitle: "Технологии 2026",
-    introText: "2 вопроса с подсказками, потом быстрый челлендж с таймером.",
+    introText:
+      "Короткий тест (3–5 минут) для учеников и родителей. Покажет сильные стороны: логика, алгоритмы, пространственное мышление, основы физики и IT. В конце вы получите профиль и рекомендации по направлению (3D / кибербезопасность / программирование / физика / IT).",
     startBtn: "Начать",
-    tipFast: "Совет: отвечай быстро. Назад не возвращаемся.",
+    tipFast: "⏱ Отвечайте быстро. Назад не возвращаемся.",
 
+    // -------- Top bar --------
     block: "Блок",
     question: "Вопрос",
     score: "Очки",
 
+    // -------- Buttons --------
     answerBtn: "Ответить",
     nextBtn: "Дальше",
     learnHint: "Интро: после ответа покажем подсказку.",
     quizHint: "Челлендж: без подсказок. Есть таймер!",
 
+    // -------- Block summary --------
     doneTitle: "Готово!",
     result: "Результат",
     continueQ: "Продолжить?",
     yes: "Да",
     no: "Нет",
 
+    // -------- Consent --------
     consentTitle: "Согласие",
-    consentText: "Мы можем сохранить твой результат и выбор курса, чтобы дать рекомендации.",
-    consentChk: "Я согласен(на), что мои ответы могут быть сохранены и проанализированы.",
+    consentText:
+      "Мы можем сохранить твой результат и выбор курса, чтобы дать рекомендации.",
+    consentChk:
+      "Я согласен(на), что мои ответы могут быть сохранены и проанализированы.",
     consentYes: "Да, показать результат",
     consentNo: "Нет, не сохранять",
 
+    // -------- Feedback --------
     feedbackOk: "Отлично! Идём дальше.",
     feedbackBad: "Смотри внимательнее. Идём дальше.",
 
+    // -------- Profile --------
     profileTitle: "Твой профиль",
     profileLabel: "Предрасположенность",
     strengthsTitle: "Сильные стороны",
@@ -50,8 +62,10 @@ export const I18N = {
     profileUniversal: "⚖️ Универсальный технарь",
     profileNeedStage1: "ℹ️ Пройди Stage1 для профиля",
 
+    // -------- Course pick --------
     coursePickTitle: "Что прокачать дальше?",
-    coursePickHint: "Выбери интерес. Сохранение — только если ты дал согласие.",
+    coursePickHint:
+      "Выбери интерес. Сохранение — только если ты дал согласие.",
     course3d: "🎮 3D-моделирование",
     courseCyber: "🛡️ Кибербезопасность",
     coursePhysics: "⚡ Физика",
@@ -66,8 +80,10 @@ export const I18N = {
     savedOnce: "Этот аккаунт уже сохранил выбор (1 раз).",
     needConsent: "Нужно согласие (галочка).",
     savedOk: "Готово! (Сохранено локально для демо.)",
-    savedDemoHint: "Сейчас это сохраняется в localStorage (демо).",
+    savedDemoHint:
+      "Сейчас это сохраняется в localStorage (демо).",
 
+    // -------- Tags --------
     tags: {
       logic: "Логика",
       spatial: "Пространство",
@@ -80,15 +96,20 @@ export const I18N = {
 
   en: {
     chooseLangTitle: "Choose language",
-    chooseLangText: "Select interface + tests language.",
-    openInTelegramTitle: "Open in Telegram",
-    openInTelegramText: "This works as a Telegram WebApp.",
-    openInTelegramHint: "Open via the bot and press Start.",
+    chooseLangText:
+      "Choose language first — test information will be shown next.",
 
-    introTitle: "Tech 2026",
-    introText: "2 learning questions, then a fast timed challenge.",
+    openInTelegramTitle: "Open in Telegram",
+    openInTelegramText:
+      "This test works as a Telegram WebApp.",
+    openInTelegramHint:
+      "Open via the bot and press Start.",
+
+    introTitle: "Technology 2026",
+    introText:
+      "A short test (3–5 minutes) for students and parents. It shows strengths: logic, algorithms, spatial thinking, basic physics and IT. At the end you get a profile and recommendations (3D / Cybersecurity / Programming / Physics / IT).",
     startBtn: "Start",
-    tipFast: "Tip: answer fast. No going back.",
+    tipFast: "⏱ Answer fast. No going back.",
 
     block: "Block",
     question: "Question",
@@ -96,8 +117,10 @@ export const I18N = {
 
     answerBtn: "Answer",
     nextBtn: "Next",
-    learnHint: "Learn mode: show hint after answer.",
-    quizHint: "Quiz mode: no hints. Timer is on.",
+    learnHint:
+      "Intro: you will see a hint after answering.",
+    quizHint:
+      "Challenge: no hints. Timer is on.",
 
     doneTitle: "Done!",
     result: "Result",
@@ -106,8 +129,10 @@ export const I18N = {
     no: "No",
 
     consentTitle: "Consent",
-    consentText: "We can save your result and chosen course to give recommendations.",
-    consentChk: "I agree that my answers may be saved and analyzed.",
+    consentText:
+      "We can save your result and chosen course to give recommendations.",
+    consentChk:
+      "I agree that my answers may be saved and analyzed.",
     consentYes: "Yes, show result",
     consentNo: "No, don't save",
 
@@ -117,29 +142,39 @@ export const I18N = {
     profileTitle: "Your profile",
     profileLabel: "Profile",
     strengthsTitle: "Strengths",
-    strengthsNeed: "Strengths will appear after Stage1.",
-    profileEngineer: "🛠️ Engineering / 3D",
-    profileCoder: "💻 IT / Coding",
-    profileUniversal: "⚖️ Universal",
-    profileNeedStage1: "ℹ️ Finish Stage1 for profile",
+    strengthsNeed:
+      "Strengths will appear after Stage1.",
+    profileEngineer:
+      "🛠️ Engineering / 3D",
+    profileCoder:
+      "💻 IT / Programming",
+    profileUniversal:
+      "⚖️ Universal",
+    profileNeedStage1:
+      "ℹ️ Finish Stage1 for profile",
 
-    coursePickTitle: "What to improve?",
-    coursePickHint: "Pick your interest. Saved only if you gave consent.",
-    course3d: "🎮 3D",
+    coursePickTitle:
+      "What to improve next?",
+    coursePickHint:
+      "Pick your interest. Saved only if you gave consent.",
+    course3d: "🎮 3D Modeling",
     courseCyber: "🛡️ Cybersecurity",
     coursePhysics: "⚡ Physics",
     courseIT: "🧠 IT",
     courseProg: "💻 Programming",
     courseOther: "✍️ Other",
-    courseOtherPlaceholder: "If Other — type here",
+    courseOtherPlaceholder:
+      "If Other — type here",
 
     saveBtn: "Save choice",
     restartBtn: "Restart",
     consentShort: "Consent",
-    savedOnce: "Already saved once (per account).",
+    savedOnce:
+      "Already saved once (per account).",
     needConsent: "Consent required.",
     savedOk: "Saved (local demo).",
-    savedDemoHint: "Currently saved to localStorage (demo).",
+    savedDemoHint:
+      "Currently saved to localStorage (demo).",
 
     tags: {
       logic: "Logic",
@@ -152,11 +187,104 @@ export const I18N = {
   },
 
   uz: {
-    // пока можно оставить русские строки как временный fallback
-    // (или позже переведёшь)
-    ...null
+    chooseLangTitle: "Tilni tanlang",
+    chooseLangText:
+      "Avval tilni tanlang — keyin test haqida ma’lumot chiqadi.",
+
+    openInTelegramTitle:
+      "Telegram orqali oching",
+    openInTelegramText:
+      "Bu test Telegram WebApp sifatida ishlaydi.",
+    openInTelegramHint:
+      "Bot orqali oching va Start tugmasini bosing.",
+
+    introTitle: "Texnologiyalar 2026",
+    introText:
+      "Qisqa test (3–5 daqiqa) o‘quvchilar va ota-onalar uchun. Kuchli tomonlarni aniqlaydi: mantiq, algoritmlar, fazoviy fikrlash, fizika va IT asoslari. Yakunda profil va tavsiyalar olasiz (3D / Kiber / Dasturlash / Fizika / IT).",
+    startBtn: "Boshlash",
+    tipFast:
+      "⏱ Tez javob bering. Orqaga qaytilmaydi.",
+
+    block: "Blok",
+    question: "Savol",
+    score: "Ball",
+
+    answerBtn: "Javob berish",
+    nextBtn: "Keyingi",
+    learnHint:
+      "Kirish: javobdan keyin izoh chiqadi.",
+    quizHint:
+      "Challenge: izohsiz. Timer bor.",
+
+    doneTitle: "Tugadi!",
+    result: "Natija",
+    continueQ: "Davom etamizmi?",
+    yes: "Ha",
+    no: "Yo‘q",
+
+    consentTitle: "Rozilik",
+    consentText:
+      "Natijani va kurs tanlovini saqlab, tavsiya berishimiz mumkin.",
+    consentChk:
+      "Javoblarim saqlanishi va tahlil qilinishiga roziman.",
+    consentYes:
+      "Ha, natijani ko‘rsat",
+    consentNo:
+      "Yo‘q, saqlama",
+
+    feedbackOk: "A’lo! Davom etamiz.",
+    feedbackBad:
+      "Yana bir qarab ko‘ring. Davom etamiz.",
+
+    profileTitle: "Profilingiz",
+    profileLabel: "Yo‘nalish",
+    strengthsTitle: "Kuchli tomonlar",
+    strengthsNeed:
+      "Kuchli tomonlar Stage1 dan keyin chiqadi.",
+    profileEngineer:
+      "🛠️ Muhandis / 3D yo‘nalish",
+    profileCoder:
+      "💻 IT / Dasturlash",
+    profileUniversal:
+      "⚖️ Universal",
+    profileNeedStage1:
+      "ℹ️ Profil uchun Stage1 ni tugating",
+
+    coursePickTitle:
+      "Nimani rivojlantiramiz?",
+    coursePickHint:
+      "Qiziqishni tanlang. Saqlash faqat rozilik bo‘lsa.",
+    course3d:
+      "🎮 3D-modellashtirish",
+    courseCyber:
+      "🛡️ Kiberxavfsizlik",
+    coursePhysics: "⚡ Fizika",
+    courseIT: "🧠 Informatika",
+    courseProg:
+      "💻 Dasturlash",
+    courseOther: "✍️ Boshqa",
+    courseOtherPlaceholder:
+      "Agar boshqa bo‘lsa — yozing",
+
+    saveBtn: "Saqlash",
+    restartBtn: "Qayta boshlash",
+    consentShort: "Rozilik",
+    savedOnce:
+      "Bu akkaunt 1 marta saqlagan.",
+    needConsent:
+      "Rozilik kerak (belgi).",
+    savedOk:
+      "Tayyor! (Demo: lokal saqlandi.)",
+    savedDemoHint:
+      "Hozir localStorage ga saqlanadi (demo).",
+
+    tags: {
+      logic: "Mantiq",
+      spatial: "Fazoviy",
+      algorithm: "Algoritmlar",
+      engineering: "Muhandislik",
+      physics: "Fizika",
+      it: "IT",
+    },
   },
 };
-
-// простой fallback: если uz пустой — используем ru
-I18N.uz = I18N.uz && Object.keys(I18N.uz).length ? I18N.uz : I18N.ru;

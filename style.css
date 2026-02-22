@@ -289,3 +289,112 @@ li{ margin: 6px 0; color: rgba(234,240,255,.82); }
 ::-webkit-scrollbar-thumb:hover{
   background: rgba(255,255,255,.14);
 }
+/* =========================
+   ForBrain Gate (Play Intro)
+   ========================= */
+
+.gate{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  overflow:hidden;
+}
+
+.gateNoise{
+  position:absolute;
+  inset:-30%;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.05) 0px,
+      rgba(255,255,255,.05) 1px,
+      rgba(0,0,0,0) 3px,
+      rgba(0,0,0,0) 6px
+    );
+  opacity:.10;
+  transform: rotate(6deg);
+  animation: noiseMove 1.7s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes noiseMove{
+  from { transform: translateY(0) rotate(6deg); }
+  to   { transform: translateY(28px) rotate(6deg); }
+}
+
+.gateCenter{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  text-align:center;
+  animation: gateIn .5s ease-out both;
+}
+
+@keyframes gateIn{
+  from { opacity:0; transform: translateY(12px) scale(.99); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+
+.playBtn{
+  width:88px;
+  height:88px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(20,26,44,.55);
+  box-shadow: 0 14px 50px rgba(0,0,0,.6);
+  backdrop-filter: blur(10px);
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.playBtn:active{ transform: scale(.96); }
+
+.playBtn:hover{
+  border-color: rgba(160,190,255,.35);
+  background: rgba(20,26,44,.68);
+}
+
+.playIcon{
+  font-size:34px;
+  line-height:1;
+  opacity:.92;
+  transform: translateX(2px);
+  text-shadow: 0 0 18px rgba(120,170,255,.25);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%,100% { opacity:.75; }
+  50%     { opacity:1; }
+}
+
+.gateText{
+  font-weight:800;
+  font-size:20px;
+  letter-spacing:.2px;
+  opacity:.9;
+}
+
+.gateSub{
+  font-size:14px;
+  opacity:.55;
+}
+
+.gate.fadeOut{
+  animation: fadeOut .22s ease-out forwards;
+}
+
+@keyframes fadeOut{
+  to { opacity:0; transform: scale(1.01); }
+}
