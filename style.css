@@ -1,5 +1,5 @@
 /* =========================================================
-   ForBrain UI — Production Ready (Mobile Optimized)
+   ForBrain UI — Premium Mobile (drop-in full CSS)
    ========================================================= */
 
 /* =========================
@@ -14,16 +14,17 @@ body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 
-  /* 🔥 Улучшена читаемость */
+  /* Premium readability */
   font-size:16px;
-  line-height:1.45;
+  line-height:1.5;
   -webkit-text-size-adjust:100%;
+  text-rendering: optimizeLegibility;
 
-  color: rgba(234,240,255,.92);
+  color: rgba(242,246,255,.94);
 
   background:
-    radial-gradient(1000px 600px at 20% -10%, rgba(59,130,246,.25), transparent 60%),
-    radial-gradient(900px 500px at 80% 0%, rgba(99,102,241,.18), transparent 60%),
+    radial-gradient(1100px 700px at 18% -12%, rgba(59,130,246,.28), transparent 62%),
+    radial-gradient(1000px 560px at 86% 0%, rgba(99,102,241,.20), transparent 62%),
     linear-gradient(180deg, #070A12, #0A0F1D);
 
   overflow-x:hidden;
@@ -37,7 +38,7 @@ img{ max-width:100%; display:block; }
 
 .container{
   width:min(760px, calc(100% - 32px));
-  margin: 36px auto 60px;
+  margin: 34px auto 60px;
 }
 
 .spacer{ height:14px; }
@@ -59,12 +60,15 @@ img{ max-width:100%; display:block; }
 .card{
   border-radius:22px;
   padding:20px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.10);
+
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+
   box-shadow:
-    0 26px 70px rgba(0,0,0,.55),
-    0 0 0 1px rgba(255,255,255,.06) inset;
-  backdrop-filter: blur(10px);
+    0 28px 78px rgba(0,0,0,.58),
+    0 0 0 1px rgba(255,255,255,.07) inset;
+
+  backdrop-filter: blur(12px);
 }
 
 /* =========================
@@ -72,34 +76,37 @@ img{ max-width:100%; display:block; }
    ========================= */
 
 h1{
-  font-size: clamp(26px, 3.6vw, 36px);
+  font-size: clamp(28px, 3.8vw, 38px);
   margin:0 0 12px;
-  line-height:1.2;
+  line-height:1.16;
+  letter-spacing:-0.01em;
 }
 
 h2{
-  font-size: clamp(18px, 2.2vw, 22px);
+  font-size: clamp(19px, 2.35vw, 23px);
   margin: 10px 0 16px;
-  line-height:1.4;
-  font-weight:600;
+  line-height:1.35;
+  font-weight:650;
+  letter-spacing:-0.005em;
 }
 
 h3{
   margin:0 0 10px;
   font-size:18px;
+  font-weight:650;
 }
 
 p{
   margin:0 0 10px;
   font-size:16px;
-  line-height:1.55;
-  color: rgba(234,240,255,.85);
+  line-height:1.6;
+  color: rgba(242,246,255,.86);
 }
 
 .small{
   font-size:14px;
-  line-height:1.4;
-  color: rgba(234,240,255,.65);
+  line-height:1.45;
+  color: rgba(242,246,255,.68);
 }
 
 /* =========================
@@ -109,7 +116,7 @@ p{
 .progress{
   height:10px;
   border-radius:999px;
-  background: rgba(255,255,255,.06);
+  background: rgba(255,255,255,.07);
   overflow:hidden;
 }
 
@@ -125,24 +132,28 @@ p{
    ========================= */
 
 .option{
-  padding:14px;
+  padding:14px 14px;
   border-radius:16px;
-  background: rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.10);
+
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+
   cursor:pointer;
   transition:.15s;
+
   font-size:16px;
+  line-height:1.4;
 }
 
 .option + .option{ margin-top:10px; }
 
 .option:hover{
-  border-color: rgba(59,130,246,.25);
+  border-color: rgba(59,130,246,.30);
 }
 
 .option.selected{
-  border-color: rgba(59,130,246,.55);
-  background: rgba(59,130,246,.16);
+  border-color: rgba(59,130,246,.62);
+  background: rgba(59,130,246,.18);
 }
 
 /* =========================
@@ -152,11 +163,15 @@ p{
 .btn{
   border-radius:14px;
   padding:13px 16px;
+
   min-height:44px; /* iOS tap area */
   font-size:16px;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.06);
-  color:rgba(234,240,255,.92);
+  font-weight:600;
+
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.07);
+  color:rgba(242,246,255,.94);
+
   cursor:pointer;
   transition:.15s;
 }
@@ -170,7 +185,7 @@ p{
   background: linear-gradient(135deg,#3B82F6,#6366F1);
   border:none;
   color:#fff;
-  font-weight:600;
+  font-weight:700;
 }
 
 /* =========================
@@ -180,11 +195,14 @@ p{
 .input{
   width:100%;
   padding:14px;
-  border-radius:14px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.12);
-  color:#fff;
+
+  min-height:44px;
   font-size:16px;
+
+  border-radius:14px;
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  color:#fff;
 }
 
 /* =========================
@@ -194,8 +212,8 @@ p{
 .finalPromo{
   padding:16px;
   border-radius:18px;
-  background: rgba(59,130,246,.10);
-  border:1px solid rgba(59,130,246,.35);
+  background: rgba(59,130,246,.12);
+  border:1px solid rgba(59,130,246,.40);
 }
 
 .finalModules{
@@ -208,9 +226,10 @@ p{
 .finalModule{
   padding:12px;
   border-radius:14px;
-  background: rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
   font-size:14px;
+  color: rgba(242,246,255,.86);
 }
 
 .finalChoices{
@@ -223,15 +242,17 @@ p{
 .finalChoice{
   padding:14px;
   border-radius:16px;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.04);
+
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05);
+
   cursor:pointer;
   min-height:44px;
 }
 
 .finalChoice.selected{
-  background: rgba(59,130,246,.16);
-  border-color: rgba(59,130,246,.55);
+  background: rgba(59,130,246,.18);
+  border-color: rgba(59,130,246,.62);
 }
 
 /* =========================
@@ -258,7 +279,7 @@ p{
 .gateShade{
   position:absolute;
   inset:0;
-  background: radial-gradient(circle at 50% 40%, rgba(0,0,0,.2), rgba(0,0,0,.8));
+  background: radial-gradient(circle at 50% 40%, rgba(0,0,0,.18), rgba(0,0,0,.82));
 }
 
 .gateCenter{
@@ -271,37 +292,56 @@ p{
 }
 
 .playBtn{
-  width:90px;
-  height:90px;
+  width:92px;
+  height:92px;
   border-radius:50%;
-  border:2px solid rgba(255,255,255,.4);
-  background:rgba(0,0,0,.4);
+  border:2px solid rgba(255,255,255,.45);
+  background:rgba(0,0,0,.42);
   color:#fff;
-  font-size:32px;
+  font-size:34px;
   cursor:pointer;
 }
 
 /* =========================
-   RESPONSIVE
+   Responsive
    ========================= */
 
+/* Tablet */
 @media (max-width:900px){
   .container{ width:calc(100% - 40px); }
 }
 
+/* Mobile */
 @media (max-width:600px){
-  .container{ width:calc(100% - 24px); margin:18px auto 34px; }
-  .card{ padding:18px; border-radius:18px; }
+  .container{
+    width:calc(100% - 24px);
+    margin:18px auto 34px;
+  }
 
-  h1{ font-size:24px; }
+  .card{
+    padding:18px;
+    border-radius:18px;
+  }
+
+  h1{
+    font-size:24px;
+    line-height:1.15;
+  }
+
   h2{ font-size:20px; }
+
+  .btn{
+    padding:13px 14px;
+  }
 
   .finalModules{ grid-template-columns:1fr; }
   .finalChoices{ grid-template-columns:1fr; }
 }
 
+/* Telegram / very small */
 @media (max-width:380px){
   h1{ font-size:22px; }
   .btn{ font-size:15px; }
   .option{ font-size:15px; }
+  .small{ font-size:13px; }
 }

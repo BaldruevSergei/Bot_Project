@@ -15,7 +15,7 @@ const DEV_BYPASS_TG = true;
 // 👉 ВАЖНО: задай эти 2 константы под прод
 // Google Apps Script Web App URL (принимает POST JSON)
 const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_SCRIPT_WEBAPP_URL_HERE";
-// Telegram username консультанта БЕЗ @
+// Telegram username консультанта или ссылка. В твоём коде используется как URL.
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
 
 // --- storage keys ---
@@ -281,20 +281,34 @@ function renderMarketingScreen() {
     renderLanguageScreen();
   });
 }
-// 3) Language
+
+// 3) Language (NEUTRAL, ALWAYS 3 LANGS — no i18n here)
 function renderLanguageScreen() {
   stopTimer();
 
   setView(`
     <div class="container">
       <div class="card">
-        <h1>${htmlEscape(tr("chooseLangTitle", "Choose language"))}</h1>
-        <p class="small">${htmlEscape(tr("chooseLangText", ""))}</p>
+        <h1 style="margin:0; font-size:20px; line-height:1.25;">
+          🇷🇺 Выберите язык<br>
+          🇺🇿 Tilni tanlang<br>
+          🇬🇧 Choose language
+        </h1>
+
+        <div class="spacer"></div>
+
+        <p class="small" style="margin:0; line-height:1.45;">
+          🇷🇺 Этот язык будет использоваться в тесте и результатах.<br>
+          🇺🇿 Bu til test va natijalarda ishlatiladi.<br>
+          🇬🇧 This language will be used in the test and results.
+        </p>
 
         <div class="spacer"></div>
 
         <div class="row" style="flex-wrap:wrap; gap:10px;">
-          ${LANGS.map(x => `<button class="btn" data-lang="${x.code}">${htmlEscape(x.label)}</button>`).join("")}
+          <button class="btn" data-lang="ru">Русский</button>
+          <button class="btn" data-lang="uz">O‘zbekcha</button>
+          <button class="btn" data-lang="en">English</button>
         </div>
       </div>
     </div>
@@ -587,7 +601,8 @@ function renderBlockSummaryScreen() {
 
         <div class="spacer"></div>
 
-        <div class="row">
+        <!-- FIX: buttons column + gap -->
+        <div class="row" style="flex-direction:column; gap:12px;">
           ${
             hasNext
               ? `<button class="btn primary" id="nextBlockBtn">${htmlEscape(tr("yes", "Next"))}</button>`
@@ -754,7 +769,7 @@ function renderFinalSummaryScreen() {
 
         <div class="spacer"></div>
 
-        <div class="row">
+        <div class="row" style="flex-direction:column; gap:12px;">
           <button class="btn primary" id="sendBtn" disabled>
             ${htmlEscape(tr("sendResult", "Send result"))}
           </button>
@@ -826,7 +841,6 @@ function renderFinalSummaryScreen() {
         });
       }
     } catch (e) {
-      // не блокируем UX, но сообщаем
       console.log("send analytics error", e);
       alert(tr("sendFail", "Network error. Try again."));
       return;
@@ -857,8 +871,7 @@ function renderFinalSummaryScreen() {
         .replace("{direction}", dirLabel)
     );
 
-    // Telegram deep link
-    window.open(`https://t.me/${CONSULT_USERNAME}?text=${msg}`, "_blank");
+    window.open(`${CONSULT_USERNAME}?text=${msg}`, "_blank");
   });
 }
 
