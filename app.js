@@ -16,7 +16,7 @@ const DEV_BYPASS_TG = true;
 // Google Apps Script Web App URL (принимает POST JSON)
 const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_SCRIPT_WEBAPP_URL_HERE";
 // Telegram username консультанта БЕЗ @
-const CONSULT_USERNAME = "PASTE_CONSULT_USERNAME_HERE";
+const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
 
 // --- storage keys ---
 const LANG_KEY = "forbrain_lang_v1";

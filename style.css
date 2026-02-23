@@ -1,6 +1,5 @@
 /* =========================================================
-   ForBrain UI — Production Ready
-   Clean version (no duplicates)
+   ForBrain UI — Production Ready (Mobile Optimized)
    ========================================================= */
 
 /* =========================
@@ -14,6 +13,12 @@ html, body { height: 100%; }
 body{
   margin:0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  /* 🔥 Улучшена читаемость */
+  font-size:16px;
+  line-height:1.45;
+  -webkit-text-size-adjust:100%;
+
   color: rgba(234,240,255,.92);
 
   background:
@@ -68,13 +73,13 @@ img{ max-width:100%; display:block; }
 
 h1{
   font-size: clamp(26px, 3.6vw, 36px);
-  margin:0 0 10px;
+  margin:0 0 12px;
   line-height:1.2;
 }
 
 h2{
   font-size: clamp(18px, 2.2vw, 22px);
-  margin: 8px 0 16px;
+  margin: 10px 0 16px;
   line-height:1.4;
   font-weight:600;
 }
@@ -86,12 +91,15 @@ h3{
 
 p{
   margin:0 0 10px;
-  color: rgba(234,240,255,.82);
+  font-size:16px;
+  line-height:1.55;
+  color: rgba(234,240,255,.85);
 }
 
 .small{
-  font-size:13px;
-  color: rgba(234,240,255,.62);
+  font-size:14px;
+  line-height:1.4;
+  color: rgba(234,240,255,.65);
 }
 
 /* =========================
@@ -123,6 +131,7 @@ p{
   border:1px solid rgba(255,255,255,.10);
   cursor:pointer;
   transition:.15s;
+  font-size:16px;
 }
 
 .option + .option{ margin-top:10px; }
@@ -142,7 +151,9 @@ p{
 
 .btn{
   border-radius:14px;
-  padding:12px 14px;
+  padding:13px 16px;
+  min-height:44px; /* iOS tap area */
+  font-size:16px;
   border:1px solid rgba(255,255,255,.12);
   background: rgba(255,255,255,.06);
   color:rgba(234,240,255,.92);
@@ -168,11 +179,12 @@ p{
 
 .input{
   width:100%;
-  padding:12px;
+  padding:14px;
   border-radius:14px;
   background: rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.12);
   color:#fff;
+  font-size:16px;
 }
 
 /* =========================
@@ -180,7 +192,7 @@ p{
    ========================= */
 
 .finalPromo{
-  padding:14px;
+  padding:16px;
   border-radius:18px;
   background: rgba(59,130,246,.10);
   border:1px solid rgba(59,130,246,.35);
@@ -194,11 +206,11 @@ p{
 }
 
 .finalModule{
-  padding:10px 12px;
+  padding:12px;
   border-radius:14px;
   background: rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.10);
-  font-size:13px;
+  font-size:14px;
 }
 
 .finalChoices{
@@ -209,11 +221,12 @@ p{
 }
 
 .finalChoice{
-  padding:12px;
+  padding:14px;
   border-radius:16px;
   border:1px solid rgba(255,255,255,.12);
   background: rgba(255,255,255,.04);
   cursor:pointer;
+  min-height:44px;
 }
 
 .finalChoice.selected{
@@ -272,24 +285,23 @@ p{
    RESPONSIVE
    ========================= */
 
-/* Tablet */
 @media (max-width:900px){
   .container{ width:calc(100% - 40px); }
-  h1{ font-size:26px; }
 }
 
-/* Mobile */
 @media (max-width:600px){
-  .container{ width:calc(100% - 24px); margin:20px auto 40px; }
-  .card{ padding:16px; border-radius:18px; }
-  h1{ font-size:22px; }
+  .container{ width:calc(100% - 24px); margin:18px auto 34px; }
+  .card{ padding:18px; border-radius:18px; }
+
+  h1{ font-size:24px; }
+  h2{ font-size:20px; }
+
   .finalModules{ grid-template-columns:1fr; }
   .finalChoices{ grid-template-columns:1fr; }
 }
 
-/* Telegram ultra small */
 @media (max-width:380px){
-  h1{ font-size:19px; }
-  .btn{ padding:9px; font-size:13px; }
-  .option{ padding:10px; font-size:13px; }
+  h1{ font-size:22px; }
+  .btn{ font-size:15px; }
+  .option{ font-size:15px; }
 }
