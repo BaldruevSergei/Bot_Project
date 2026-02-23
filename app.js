@@ -833,18 +833,21 @@ function renderFinalSummaryScreen() {
     appendLocalLog(payload);
 
     try {
-      if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_")) {
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-      }
-    } catch (e) {
-      console.log("send analytics error", e);
-      alert(tr("sendFail", "Network error. Try again."));
-      return;
-    }
+  if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_")) {
+
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",          // 👈 ВАЖНО
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+  }
+} catch (e) {
+  console.log("send analytics error", e);
+}
 
     sent = true;
     sendBtn.disabled = true;
