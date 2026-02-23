@@ -12,11 +12,14 @@ const app = document.getElementById("app");
 // DEV: true = можно тестить в браузере без Telegram
 const DEV_BYPASS_TG = true;
 
-// 👉 ВАЖНО: задай эти 2 константы под прод
 // Google Apps Script Web App URL (принимает POST JSON)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnfiRzYm--M7D4M8CpAtAU2dEJ_zne7jMXMoBhg5K9aFQ665k5mZP5u3sYn_WLz5gpyA/exec";
-// Telegram username консультанта или ссылка. В твоём коде используется как URL.
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykcxSYdjkuz9KQZ1ZWmaJeE18zBccgCIIYmlbehc0o4Kq-jBxbDGVL6payvWDKfKAVrQ/exec";
+
+// Telegram username консультанта / ссылка
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
+
+// 🔐 секрет для Apps Script (должен совпадать с SECRET в Code.gs)
+const APP_SECRET = "forbrain_secret_2026_x9K";
 
 // --- storage keys ---
 const LANG_KEY = "forbrain_lang_v1";
@@ -282,7 +285,7 @@ function renderMarketingScreen() {
   });
 }
 
-// 3) Language (NEUTRAL, ALWAYS 3 LANGS — no i18n here)
+// 3) Language (NEUTRAL: always 3 langs, no i18n)
 function renderLanguageScreen() {
   stopTimer();
 
@@ -329,10 +332,6 @@ function renderLanguageScreen() {
 // 4) Intro
 function renderIntroScreen() {
   stopTimer();
-
-  if (!isTelegramWebApp()) {
-    // optional: show "Open in Telegram" notice in prod
-  }
 
   setView(`
     <div class="container">
@@ -601,7 +600,6 @@ function renderBlockSummaryScreen() {
 
         <div class="spacer"></div>
 
-        <!-- FIX: buttons column + gap -->
         <div class="row" style="flex-direction:column; gap:12px;">
           ${
             hasNext
@@ -693,7 +691,6 @@ function renderFinalSummaryScreen() {
   const tgId = String(u?.id || "0");
   const username = u?.username || "";
 
-  // --- profile calc (без "недостаточно данных") ---
   const s1 = history.stage1?.breakdown || {};
 
   const pctSafe = (obj) => {
@@ -733,7 +730,6 @@ function renderFinalSummaryScreen() {
 
         <div class="spacer"></div>
 
-        <!-- promo -->
         <div class="card" style="background:rgba(59,130,246,.08); border-color:rgba(59,130,246,.35);">
           <h3 style="margin:0;">${htmlEscape(tr("intensiveTitle", ""))}</h3>
           <div class="spacer"></div>
@@ -771,7 +767,7 @@ function renderFinalSummaryScreen() {
 
         <div class="row" style="flex-direction:column; gap:12px;">
           <button class="btn primary" id="sendBtn" disabled>
-            ${htmlEscape(tr("sendResult", "Send result"))}
+            ${htmlEscape(tr("sendResult", "Save choice"))}
           </button>
 
           <button class="btn" id="consultBtn" disabled>
@@ -785,7 +781,6 @@ function renderFinalSummaryScreen() {
     </div>
   `);
 
-  // logic
   let selectedDir = null;
   let sent = false;
 
@@ -810,17 +805,32 @@ function renderFinalSummaryScreen() {
   sendBtn.addEventListener("click", async () => {
     if (!guardClick(250)) return;
     if (!selectedDir) return;
+    if (sent) return;
+
+    // 🔒 сразу блокируем кнопку, чтобы не было двойного клика
+    sendBtn.disabled = true;
+    sendBtn.textContent = tr("sending", "Отправка...");
 
     const custom = (document.getElementById("customInput")?.value || "").trim();
     const finalDir = (selectedDir === "custom") ? custom : selectedDir;
 
     if (selectedDir === "custom" && !finalDir) {
       alert(tr("needCustomDir", "Please type your option."));
+      sendBtn.disabled = false;
+      sendBtn.textContent = tr("sendResult", "Save choice");
       return;
     }
 
+    const u = getTelegramUser();
+    const tgId2 = String(u?.id || "0");
+
+    // ✅ уникальный id события сохранения (для дедупликации на стороне Apps Script)
+    const eventId = `save_${tgId2}_${Date.now()}`;
+
     const payload = {
-      tg_id: tgId,
+      secret: APP_SECRET,
+      event_id: eventId,
+      tg_id: tgId2,
       username,
       lang,
       profile: profileText,
@@ -829,33 +839,32 @@ function renderFinalSummaryScreen() {
       ts: new Date().toISOString(),
     };
 
-    // локально логируем (demo)
     appendLocalLog(payload);
 
     try {
-  if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_")) {
-
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",          // 👈 ВАЖНО
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-  }
-} catch (e) {
-  console.log("send analytics error", e);
-}
+      if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_")) {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors", // чтобы не падало на CORS
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      }
+    } catch (e) {
+      console.log("send analytics error", e);
+      alert(tr("sendFail", "Network error. Try again."));
+      sendBtn.disabled = false;
+      sendBtn.textContent = tr("sendResult", "Save choice");
+      return;
+    }
 
     sent = true;
-    sendBtn.disabled = true;
     consultBtn.disabled = false;
 
     haptic?.(18);
     beep?.(980, 0.06);
     alert(tr("savedOk", "Saved!"));
+    // оставляем кнопку disabled навсегда
   });
 
   consultBtn.addEventListener("click", () => {
