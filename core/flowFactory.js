@@ -1,6 +1,6 @@
 export function makeFlow(lang = "ru") {
   return [
-    { id: "intro", mode: "learn", timeSec: 0, file: `./data/${lang}/intro/00_intro_ai.txt` },
+    { id: "intro", mode: "learn", timeSec: 20, file: `./data/${lang}/intro/00_intro_ai.txt` },
 
     // Stage 1: квотный рандом по 4 направлениям
     {
@@ -15,7 +15,7 @@ export function makeFlow(lang = "ru") {
       ],
     },
 
-    // Physics (пример: берём квоты из трёх уровней)
+    // Physics
     {
       id: "physics",
       mode: "quiz",
@@ -27,7 +27,7 @@ export function makeFlow(lang = "ru") {
       ],
     },
 
-    // IT (по твоим файлам)
+    // IT
     {
       id: "it",
       mode: "quiz",

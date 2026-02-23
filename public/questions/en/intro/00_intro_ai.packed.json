@@ -8,8 +8,8 @@
       "Yes, if it has more data than a human"
     ],
     "k": "VA==",
-    "ok": "",
-    "bad": ""
+    "ok": "Correct. Even large amounts of data do not guarantee correct understanding of a new situation. AI works based on probabilities.",
+    "bad": "Even if there is a lot of data, new situations may differ from the examples. AI makes conclusions based on similarity and probability, so it can make mistakes."
   },
   {
     "q": "In 2026, AI can create images based on a text description. If you ask a neural network to «draw a flying cat in space», it will generate an image even though such a cat does not exist. What does this mean?",
@@ -20,7 +20,7 @@
       "The neural network invents everything randomly"
     ],
     "k": "VA==",
-    "ok": "",
-    "bad": ""
+    "ok": "Excellent. The neural network does not «see the world» like a human — it combines learned patterns and examples.",
+    "bad": "The neural network does not «see the world» like a human. It builds results from learned patterns and combinations, which is why it can create things that do not exist in reality."
   }
 ]

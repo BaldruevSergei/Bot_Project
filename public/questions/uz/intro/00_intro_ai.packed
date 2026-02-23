@@ -8,8 +8,8 @@
       "Ha, agar ma’lumotlar insonnikidan ko‘p bo‘lsa"
     ],
     "k": "VA==",
-    "ok": "",
-    "bad": ""
+    "ok": "To‘g‘ri. Hatto katta hajmdagi ma’lumot ham yangi vaziyatni to‘g‘ri tushunishni kafolatlamaydi. AI ehtimollik asosida ishlaydi.",
+    "bad": "Ma’lumotlar ko‘p bo‘lsa ham, yangi vaziyatlar misollardan farq qilishi mumkin. AI o‘xshashlik va ehtimollik asosida xulosa chiqaradi, shuning uchun xato qilishi mumkin."
   },
   {
     "q": "2026 yilda AI matnli tavsif asosida tasvirlar yaratishi mumkin. Agar neyron tarmoqqa «kosmosda uchayotgan mushukni chiz» deb so‘ralsa, u bunday mushuk mavjud bo‘lmasa ham rasm yaratadi. Bu nimani anglatadi?",
@@ -20,7 +20,7 @@
       "Neyron tarmoq hamma narsani tasodifan o‘ylab topadi"
     ],
     "k": "VA==",
-    "ok": "",
-    "bad": ""
+    "ok": "A’lo. Neyron tarmoq «dunyoni ko‘rmaydi» inson kabi — u o‘rganilgan andozalar va misollarni birlashtiradi.",
+    "bad": "Neyron tarmoq «dunyoni ko‘rmaydi» inson kabi. U natijani o‘rganilgan andozalar va kombinatsiyalardan yig‘adi, shuning uchun haqiqatda mavjud bo‘lmagan narsalarni ham yaratishi mumkin."
   }
 ]

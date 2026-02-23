@@ -1,3 +1,4 @@
+console.log("PACK SCRIPT REAL VERSION 3");
 const fs = require("fs");
 const path = require("path");
 
@@ -5,10 +6,9 @@ const ROOT = process.cwd();
 const DATA_DIR = path.join(ROOT, "data");
 const OUT_DIR = path.join(ROOT, "public", "questions");
 
-// 🔐 КЛЮЧ ДОЛЖЕН БЫТЬ ТАКОЙ ЖЕ КАК В cryptobox.js
 const KEY = "forbrain_secret_key_2026";
 
-// -------- crypto (Node version of cryptobox.js) --------
+// ================= CRYPTO =================
 function encryptNode(str) {
   let out = "";
   for (let i = 0; i < str.length; i++) {
@@ -19,7 +19,7 @@ function encryptNode(str) {
   return Buffer.from(out, "binary").toString("base64");
 }
 
-// -------- helpers --------
+// ================= HELPERS =================
 function ensureDir(p) {
   fs.mkdirSync(p, { recursive: true });
 }
@@ -33,14 +33,17 @@ function writeJson(p, obj) {
   fs.writeFileSync(p, JSON.stringify(obj, null, 2), "utf8");
 }
 
-// -------- parser --------
+// ================= PARSER =================
 function parseTxt(raw) {
+  // удаляем BOM если есть
+  raw = raw.replace(/^\uFEFF/, "");
+
   const text = raw.replace(/\r\n/g, "\n").trim();
   if (!text) return [];
 
   const blocks = text
     .split(/\n\s*\n+/g)
-    .map((s) => s.trim())
+    .map(s => s.trim())
     .filter(Boolean);
 
   const out = [];
@@ -48,17 +51,34 @@ function parseTxt(raw) {
   for (const block of blocks) {
     const lines = block
       .split("\n")
-      .map((s) => s.trim())
+      .map(s => s.trim())
       .filter(Boolean);
 
-    if (lines.length < 3) continue;
+    if (lines.length < 2) continue;
 
     const q = lines[0];
+
     const options = [];
     let correctIndex = -1;
 
+    let feedbackOk = "";
+    let feedbackBad = "";
+
     for (let i = 1; i < lines.length; i++) {
-      let line = lines[i];
+      let line = lines[i].trim();
+
+      // ========= FEEDBACK =========
+      if (/^!!/.test(line)) {
+        feedbackOk += line.replace(/^!!\s*/, "") + " ";
+        continue;
+      }
+
+      if (/^!(?!!)/.test(line)) {
+        feedbackBad += line.replace(/^!\s*/, "") + " ";
+        continue;
+      }
+
+      // ========= OPTIONS =========
       let isCorrect = false;
 
       if (line.startsWith("*")) {
@@ -66,30 +86,34 @@ function parseTxt(raw) {
         line = line.slice(1).trim();
       }
 
+      // убираем A) B) C) и русские аналоги
       line = line.replace(/^[A-DА-Г]\)\s*/i, "");
 
       options.push(line);
-      if (isCorrect) correctIndex = options.length - 1;
+
+      if (isCorrect) {
+        correctIndex = options.length - 1;
+      }
     }
 
+    if (!options.length) continue;
     if (correctIndex < 0) correctIndex = 0;
 
-    // 🔐 Шифруем индекс
     const encrypted = encryptNode(String(correctIndex));
 
     out.push({
       q,
       o: options,
       k: encrypted,
-      ok: "",
-      bad: ""
+      ok: feedbackOk.trim(),
+      bad: feedbackBad.trim(),
     });
   }
 
   return out;
 }
 
-// -------- walk --------
+// ================= WALK =================
 function walkDir(dir, files = []) {
   for (const name of fs.readdirSync(dir)) {
     const full = path.join(dir, name);
@@ -104,8 +128,11 @@ function isLangFolderName(x) {
   return x === "ru" || x === "uz" || x === "en";
 }
 
+// ================= PACK =================
 function packAll() {
-  const all = walkDir(DATA_DIR).filter(f => f.toLowerCase().endsWith(".txt"));
+  const all = walkDir(DATA_DIR).filter(f =>
+    f.toLowerCase().endsWith(".txt")
+  );
 
   for (const filePath of all) {
     const rel = path.relative(DATA_DIR, filePath).replace(/\\/g, "/");

@@ -1,290 +1,288 @@
+// core/i18n.js
+
 export const LANGS = [
+  { code: "uz", label: "O‘zbekcha" },
   { code: "ru", label: "Русский" },
-  { code: "uz", label: "O‘zbek" },
   { code: "en", label: "English" },
 ];
 
 export const I18N = {
-  ru: {
-    // -------- Language --------
-    chooseLangTitle: "Выбор языка",
-    chooseLangText: "Сначала выберите язык — дальше будет описание теста.",
-
-    openInTelegramTitle: "Открой в Telegram",
-    openInTelegramText: "Этот тест работает как Telegram WebApp.",
-    openInTelegramHint: "Открой через бота и нажми кнопку запуска.",
-
-    // -------- Intro --------
-    introTitle: "Технологии 2026",
-    introText:
-      "Короткий тест (3–5 минут) для учеников и родителей. Покажет сильные стороны: логика, алгоритмы, пространственное мышление, основы физики и IT. В конце вы получите профиль и рекомендации по направлению (3D / кибербезопасность / программирование / физика / IT).",
-    startBtn: "Начать",
-    tipFast: "⏱ Отвечайте быстро. Назад не возвращаемся.",
-
-    // -------- Top bar --------
-    block: "Блок",
-    question: "Вопрос",
-    score: "Очки",
-
-    // -------- Buttons --------
-    answerBtn: "Ответить",
-    nextBtn: "Дальше",
-    learnHint: "Интро: после ответа покажем подсказку.",
-    quizHint: "Челлендж: без подсказок. Есть таймер!",
-
-    // -------- Block summary --------
-    doneTitle: "Готово!",
-    result: "Результат",
-    continueQ: "Продолжить?",
-    yes: "Да",
-    no: "Нет",
-
-    // -------- Consent --------
-    consentTitle: "Согласие",
-    consentText:
-      "Мы можем сохранить твой результат и выбор курса, чтобы дать рекомендации.",
-    consentChk:
-      "Я согласен(на), что мои ответы могут быть сохранены и проанализированы.",
-    consentYes: "Да, показать результат",
-    consentNo: "Нет, не сохранять",
-
-    // -------- Feedback --------
-    feedbackOk: "Отлично! Идём дальше.",
-    feedbackBad: "Смотри внимательнее. Идём дальше.",
-
-    // -------- Profile --------
-    profileTitle: "Твой профиль",
-    profileLabel: "Предрасположенность",
-    strengthsTitle: "Сильные стороны",
-    strengthsNeed: "Сильные стороны появятся после Stage1.",
-    profileEngineer: "🛠️ Инженер / 3D-направление",
-    profileCoder: "💻 IT / программирование",
-    profileUniversal: "⚖️ Универсальный технарь",
-    profileNeedStage1: "ℹ️ Пройди Stage1 для профиля",
-
-    // -------- Course pick --------
-    coursePickTitle: "Что прокачать дальше?",
-    coursePickHint:
-      "Выбери интерес. Сохранение — только если ты дал согласие.",
-    course3d: "🎮 3D-моделирование",
-    courseCyber: "🛡️ Кибербезопасность",
-    coursePhysics: "⚡ Физика",
-    courseIT: "🧠 Информатика",
-    courseProg: "💻 Программирование",
-    courseOther: "✍️ Свой вариант",
-    courseOtherPlaceholder: "Если свой вариант — напиши сюда",
-
-    saveBtn: "Сохранить выбор",
-    restartBtn: "Пройти заново",
-    consentShort: "Согласие",
-    savedOnce: "Этот аккаунт уже сохранил выбор (1 раз).",
-    needConsent: "Нужно согласие (галочка).",
-    savedOk: "Готово! (Сохранено локально для демо.)",
-    savedDemoHint:
-      "Сейчас это сохраняется в localStorage (демо).",
-
-    // -------- Tags --------
-    tags: {
-      logic: "Логика",
-      spatial: "Пространство",
-      algorithm: "Алгоритмы",
-      engineering: "Инженерность",
-      physics: "Физика",
-      it: "Информатика",
-    },
-  },
-
-  en: {
-    chooseLangTitle: "Choose language",
-    chooseLangText:
-      "Choose language first — test information will be shown next.",
-
-    openInTelegramTitle: "Open in Telegram",
-    openInTelegramText:
-      "This test works as a Telegram WebApp.",
-    openInTelegramHint:
-      "Open via the bot and press Start.",
-
-    introTitle: "Technology 2026",
-    introText:
-      "A short test (3–5 minutes) for students and parents. It shows strengths: logic, algorithms, spatial thinking, basic physics and IT. At the end you get a profile and recommendations (3D / Cybersecurity / Programming / Physics / IT).",
-    startBtn: "Start",
-    tipFast: "⏱ Answer fast. No going back.",
-
-    block: "Block",
-    question: "Question",
-    score: "Score",
-
-    answerBtn: "Answer",
-    nextBtn: "Next",
-    learnHint:
-      "Intro: you will see a hint after answering.",
-    quizHint:
-      "Challenge: no hints. Timer is on.",
-
-    doneTitle: "Done!",
-    result: "Result",
-    continueQ: "Continue?",
-    yes: "Yes",
-    no: "No",
-
-    consentTitle: "Consent",
-    consentText:
-      "We can save your result and chosen course to give recommendations.",
-    consentChk:
-      "I agree that my answers may be saved and analyzed.",
-    consentYes: "Yes, show result",
-    consentNo: "No, don't save",
-
-    feedbackOk: "Nice! Go on.",
-    feedbackBad: "Almost. Go on.",
-
-    profileTitle: "Your profile",
-    profileLabel: "Profile",
-    strengthsTitle: "Strengths",
-    strengthsNeed:
-      "Strengths will appear after Stage1.",
-    profileEngineer:
-      "🛠️ Engineering / 3D",
-    profileCoder:
-      "💻 IT / Programming",
-    profileUniversal:
-      "⚖️ Universal",
-    profileNeedStage1:
-      "ℹ️ Finish Stage1 for profile",
-
-    coursePickTitle:
-      "What to improve next?",
-    coursePickHint:
-      "Pick your interest. Saved only if you gave consent.",
-    course3d: "🎮 3D Modeling",
-    courseCyber: "🛡️ Cybersecurity",
-    coursePhysics: "⚡ Physics",
-    courseIT: "🧠 IT",
-    courseProg: "💻 Programming",
-    courseOther: "✍️ Other",
-    courseOtherPlaceholder:
-      "If Other — type here",
-
-    saveBtn: "Save choice",
-    restartBtn: "Restart",
-    consentShort: "Consent",
-    savedOnce:
-      "Already saved once (per account).",
-    needConsent: "Consent required.",
-    savedOk: "Saved (local demo).",
-    savedDemoHint:
-      "Currently saved to localStorage (demo).",
-
-    tags: {
-      logic: "Logic",
-      spatial: "Spatial",
-      algorithm: "Algorithm",
-      engineering: "Engineering",
-      physics: "Physics",
-      it: "IT",
-    },
-  },
-
   uz: {
+    // brand / gate
+    brandTitle: "ForBrain Akademiya",
+    gatePlayAria: "Boshlash",
+    gateSub: "Boshlash uchun bosing",
+
+    // marketing
+    marketingTitle: "Farzandingiz qaysi yo‘nalishga moyil?",
+    marketingSubtitle: "3–5 daqiqalik bepul test kuchli tomonlarni ko‘rsatadi.",
+    marketingTagLogic: "Mantiq",
+    marketingTagIT: "IT va dasturlash",
+    marketingTag3D: "3D grafika va muhandislik fikrlash",
+    marketingTagPhysics: "Fizika",
+    marketingTagAI: "Sun’iy intellekt",
+    marketingContinue: "Davom etish",
+
+    // language
     chooseLangTitle: "Tilni tanlang",
-    chooseLangText:
-      "Avval tilni tanlang — keyin test haqida ma’lumot chiqadi.",
+    chooseLangText: "Test va natijalar tanlangan tilda bo‘ladi.",
 
-    openInTelegramTitle:
-      "Telegram orqali oching",
-    openInTelegramText:
-      "Bu test Telegram WebApp sifatida ishlaydi.",
-    openInTelegramHint:
-      "Bot orqali oching va Start tugmasini bosing.",
-
-    introTitle: "Texnologiyalar 2026",
-    introText:
-      "Qisqa test (3–5 daqiqa) o‘quvchilar va ota-onalar uchun. Kuchli tomonlarni aniqlaydi: mantiq, algoritmlar, fazoviy fikrlash, fizika va IT asoslari. Yakunda profil va tavsiyalar olasiz (3D / Kiber / Dasturlash / Fizika / IT).",
+    // intro
+    introTitle: "ForBrain",
+    introText: "Qisqa test: savollarga tez javob bering.",
+    tipFast: "Maslahat: ko‘p o‘ylamang, birinchi fikr ko‘pincha to‘g‘ri.",
     startBtn: "Boshlash",
-    tipFast:
-      "⏱ Tez javob bering. Orqaga qaytilmaydi.",
 
+    // test UI
     block: "Blok",
     question: "Savol",
     score: "Ball",
-
     answerBtn: "Javob berish",
     nextBtn: "Keyingi",
-    learnHint:
-      "Kirish: javobdan keyin izoh chiqadi.",
-    quizHint:
-      "Challenge: izohsiz. Timer bor.",
+    learnHint: "O‘rganish rejimi: javobdan keyin izoh chiqadi.",
+    quizHint: "Test rejimi: tez javob bering.",
+    feedbackOk: "To‘g‘ri.",
+    feedbackBad: "Noto‘g‘ri.",
 
-    doneTitle: "Tugadi!",
+    // block summary
+    doneTitle: "Tayyor!",
     result: "Natija",
-    continueQ: "Davom etamizmi?",
-    yes: "Ha",
-    no: "Yo‘q",
-
-    consentTitle: "Rozilik",
-    consentText:
-      "Natijani va kurs tanlovini saqlab, tavsiya berishimiz mumkin.",
-    consentChk:
-      "Javoblarim saqlanishi va tahlil qilinishiga roziman.",
-    consentYes:
-      "Ha, natijani ko‘rsat",
-    consentNo:
-      "Yo‘q, saqlama",
-
-    feedbackOk: "A’lo! Davom etamiz.",
-    feedbackBad:
-      "Yana bir qarab ko‘ring. Davom etamiz.",
-
-    profileTitle: "Profilingiz",
-    profileLabel: "Yo‘nalish",
-    strengthsTitle: "Kuchli tomonlar",
-    strengthsNeed:
-      "Kuchli tomonlar Stage1 dan keyin chiqadi.",
-    profileEngineer:
-      "🛠️ Muhandis / 3D yo‘nalish",
-    profileCoder:
-      "💻 IT / Dasturlash",
-    profileUniversal:
-      "⚖️ Universal",
-    profileNeedStage1:
-      "ℹ️ Profil uchun Stage1 ni tugating",
-
-    coursePickTitle:
-      "Nimani rivojlantiramiz?",
-    coursePickHint:
-      "Qiziqishni tanlang. Saqlash faqat rozilik bo‘lsa.",
-    course3d:
-      "🎮 3D-modellashtirish",
-    courseCyber:
-      "🛡️ Kiberxavfsizlik",
-    coursePhysics: "⚡ Fizika",
-    courseIT: "🧠 Informatika",
-    courseProg:
-      "💻 Dasturlash",
-    courseOther: "✍️ Boshqa",
-    courseOtherPlaceholder:
-      "Agar boshqa bo‘lsa — yozing",
-
-    saveBtn: "Saqlash",
+    continueQ: "Davom ettirasizmi?",
+    yes: "Keyingi",
     restartBtn: "Qayta boshlash",
-    consentShort: "Rozilik",
-    savedOnce:
-      "Bu akkaunt 1 marta saqlagan.",
-    needConsent:
-      "Rozilik kerak (belgi).",
-    savedOk:
-      "Tayyor! (Demo: lokal saqlandi.)",
-    savedDemoHint:
-      "Hozir localStorage ga saqlanadi (demo).",
+    finalAsk: "Yakuniy profil va tavsiyalarni ko‘rsatamizmi?",
+    showResult: "Natijani ko‘rsatish",
 
-    tags: {
-      logic: "Mantiq",
-      spatial: "Fazoviy",
-      algorithm: "Algoritmlar",
-      engineering: "Muhandislik",
-      physics: "Fizika",
-      it: "IT",
-    },
+    // consent
+    consentTitle: "Rozilik",
+    consentText: "Natijani saqlash va konsultatsiya uchun rozilik kerak.",
+    consentChk: "Roziman.",
+    consentYes: "Ha",
+    consentNo: "Yo‘q",
+
+    // final
+    finalTitle: "Sizning profilingiz",
+    finalProfileUniversal: "Universal texnik profil",
+    finalProfileIT: "IT va dasturlashga moyillik kuchli",
+    finalProfileEngineering: "Muhandislik/3D fikrlash kuchli",
+
+    intensiveTitle: "3 oylik intensiv (bahor)",
+    intensiveLine1: "Logika, IT, 3D-grafika, fizika va sun’iy intellektni kuchaytiramiz.",
+    intensiveLine2: "Boshlang‘ichdan o‘rtacha darajagacha — hamma uchun mos.",
+    intensiveLine3: "Darslar tizimli, amaliy va motivatsion formatda.",
+    intensiveStart: "Boshlanishi: mart oyidan",
+
+    chooseDirection: "Qaysi yo‘nalishni kuchaytirmoqchisiz?",
+    dirLogic: "Mantiq",
+    dirIT: "IT",
+    dir3D: "3D-grafika",
+    dirPhysics: "Fizika",
+    dirAI: "Sun’iy intellekt",
+    dirCustom: "Boshqa",
+    dirCustomPlaceholder: "Agar “Boshqa” bo‘lsa, yozing...",
+
+    sendResult: "Tanlovni saqlash",
+    getConsult: "Konsultatsiya olish",
+    twoClicksHint: "2 ta aniq bosish: avval saqlang, keyin konsultatsiyaga o‘ting.",
+
+    savedOk: "Saqlandi!",
+    needCustomDir: "Iltimos, “Boshqa” uchun matn kiriting.",
+    sendFail: "Internet xatosi. Qayta urinib ko‘ring.",
+
+    // labels for message
+    dirLabel_logic: "Mantiq",
+    dirLabel_it: "IT",
+    dirLabel_3d: "3D-grafika",
+    dirLabel_physics: "Fizika",
+    dirLabel_ai: "Sun’iy intellekt",
+
+    consultMessage:
+      "Salom! Men testdan o‘tdim. Profil: {profile}. Yo‘nalish: {direction}. Konsultatsiya olmoqchiman.",
+  },
+
+  ru: {
+    // brand / gate
+    brandTitle: "ForBrain Академия",
+    gatePlayAria: "Старт",
+    gateSub: "Нажмите, чтобы начать",
+
+    // marketing
+    marketingTitle: "Ваш ребёнок к какому направлению склонен?",
+    marketingSubtitle: "Бесплатный тест за 3–5 минут покажет сильные стороны.",
+    marketingTagLogic: "Логика",
+    marketingTagIT: "IT и программирование",
+    marketingTag3D: "3D-графика и инженерное мышление",
+    marketingTagPhysics: "Физика",
+    marketingTagAI: "Искусственный интеллект",
+    marketingContinue: "Продолжить",
+
+    // language
+    chooseLangTitle: "Выберите язык",
+    chooseLangText: "Тест и результаты будут на выбранном языке.",
+
+    // intro
+    introTitle: "ForBrain",
+    introText: "Короткий тест: отвечайте быстро и честно.",
+    tipFast: "Совет: не думайте слишком долго — первая мысль часто верная.",
+    startBtn: "Начать",
+
+    // test UI
+    block: "Блок",
+    question: "Вопрос",
+    score: "Очки",
+    answerBtn: "Ответить",
+    nextBtn: "Дальше",
+    learnHint: "Режим обучения: после ответа будет объяснение.",
+    quizHint: "Тестовый режим: отвечайте быстро.",
+    feedbackOk: "Верно.",
+    feedbackBad: "Неверно.",
+
+    // block summary
+    doneTitle: "Готово!",
+    result: "Результат",
+    continueQ: "Продолжить?",
+    yes: "Далее",
+    restartBtn: "Пройти заново",
+    finalAsk: "Показать итоговый профиль и рекомендации?",
+    showResult: "Показать результат",
+
+    // consent
+    consentTitle: "Согласие",
+    consentText: "Чтобы сохранить результат и перейти к консультации, нужно согласие.",
+    consentChk: "Я согласен(на).",
+    consentYes: "Да",
+    consentNo: "Нет",
+
+    // final
+    finalTitle: "Твой профиль",
+    finalProfileUniversal: "Универсальный технический профиль",
+    finalProfileIT: "Сильная склонность к IT и программированию",
+    finalProfileEngineering: "Сильная склонность к инженерии и 3D-мышлению",
+
+    intensiveTitle: "Весенний 3-месячный интенсив",
+    intensiveLine1: "Прокачка логики, IT, 3D-графики, физики и искусственного интеллекта.",
+    intensiveLine2: "Подходит для любого уровня подготовки.",
+    intensiveLine3: "Системно, практично и без перегруза — один шаг за другим.",
+    intensiveStart: "Старт: в марте",
+
+    chooseDirection: "Что вы хотите прокачать в первую очередь?",
+    dirLogic: "Логика",
+    dirIT: "IT",
+    dir3D: "3D-графика",
+    dirPhysics: "Физика",
+    dirAI: "Искусственный интеллект",
+    dirCustom: "Другое",
+    dirCustomPlaceholder: "Если выбрали «Другое», напишите…",
+
+    sendResult: "Сохранить выбор",
+    getConsult: "Получить консультацию",
+    twoClicksHint: "Два аккуратных клика: 1) сохранить выбор 2) получить консультацию.",
+
+    savedOk: "Сохранено!",
+    needCustomDir: "Пожалуйста, заполните поле «Другое».",
+    sendFail: "Ошибка сети. Попробуйте ещё раз.",
+
+    // labels for message
+    dirLabel_logic: "Логика",
+    dirLabel_it: "IT",
+    dirLabel_3d: "3D-графика",
+    dirLabel_physics: "Физика",
+    dirLabel_ai: "Искусственный интеллект",
+
+    consultMessage:
+      "Здравствуйте! Я прошёл(ла) тест. Профиль: {profile}. Выбор: {direction}. Хочу получить консультацию.",
+  },
+
+  en: {
+    // brand / gate
+    brandTitle: "ForBrain Academy",
+    gatePlayAria: "Start",
+    gateSub: "Tap / Click to start",
+
+    // marketing
+    marketingTitle: "Which direction is your child inclined to?",
+    marketingSubtitle: "A free 3–5 minute test will show strong sides.",
+    marketingTagLogic: "Logic",
+    marketingTagIT: "IT & programming",
+    marketingTag3D: "3D graphics & engineering thinking",
+    marketingTagPhysics: "Physics",
+    marketingTagAI: "Artificial Intelligence",
+    marketingContinue: "Continue",
+
+    // language
+    chooseLangTitle: "Choose language",
+    chooseLangText: "The test and results will be in the selected language.",
+
+    // intro
+    introTitle: "ForBrain",
+    introText: "Short test: answer quickly and honestly.",
+    tipFast: "Tip: don’t overthink — your first idea is often right.",
+    startBtn: "Start",
+
+    // test UI
+    block: "Block",
+    question: "Question",
+    score: "Score",
+    answerBtn: "Answer",
+    nextBtn: "Next",
+    learnHint: "Learning mode: you will see an explanation after answering.",
+    quizHint: "Quiz mode: answer fast.",
+    feedbackOk: "Correct.",
+    feedbackBad: "Incorrect.",
+
+    // block summary
+    doneTitle: "Done!",
+    result: "Result",
+    continueQ: "Continue?",
+    yes: "Next",
+    restartBtn: "Restart",
+    finalAsk: "Show final profile and recommendations?",
+    showResult: "Show result",
+
+    // consent
+    consentTitle: "Consent",
+    consentText: "Consent is required to save the result and go to consultation.",
+    consentChk: "I agree.",
+    consentYes: "Yes",
+    consentNo: "No",
+
+    // final
+    finalTitle: "Your profile",
+    finalProfileUniversal: "Universal technical profile",
+    finalProfileIT: "Strong inclination to IT and programming",
+    finalProfileEngineering: "Strong inclination to engineering & 3D thinking",
+
+    intensiveTitle: "Spring 3-month intensive",
+    intensiveLine1: "Boost logic, IT, 3D graphics, physics and artificial intelligence.",
+    intensiveLine2: "Suitable for any skill level.",
+    intensiveLine3: "Step-by-step, practical and without overload.",
+    intensiveStart: "Starts in March",
+
+    chooseDirection: "What do you want to boost first?",
+    dirLogic: "Logic",
+    dirIT: "IT",
+    dir3D: "3D graphics",
+    dirPhysics: "Physics",
+    dirAI: "Artificial Intelligence",
+    dirCustom: "Other",
+    dirCustomPlaceholder: "If “Other”, type your option…",
+
+    sendResult: "Save choice",
+    getConsult: "Get consultation",
+    twoClicksHint: "Two clear clicks: 1) save choice 2) open consultation.",
+
+    savedOk: "Saved!",
+    needCustomDir: "Please fill “Other”.",
+    sendFail: "Network error. Please try again.",
+
+    // labels for message
+    dirLabel_logic: "Logic",
+    dirLabel_it: "IT",
+    dirLabel_3d: "3D graphics",
+    dirLabel_physics: "Physics",
+    dirLabel_ai: "Artificial Intelligence",
+
+    consultMessage:
+      "Hello! I finished the test. Profile: {profile}. Choice: {direction}. I would like a consultation.",
   },
 };

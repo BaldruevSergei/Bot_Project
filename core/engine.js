@@ -17,18 +17,20 @@ export class Engine {
   }
 
   answer(selectedIndex) {
-    const q = this.current();
-    if (!q) return { ok: false, feedback: "" };
+  const q = this.current();
+  if (!q) return { ok: false, feedback: "" };
 
-    const correctIndex = Number(decrypt(q.k));
-    const ok = Number(selectedIndex) === correctIndex;
+  const correctIndex = Number(decrypt(q.k));
+  const ok = Number(selectedIndex) === correctIndex;
 
-    if (ok) this.score += 1;
+  if (ok) this.score += 1;
 
-    // feedback можно держать пустым, а в app.js подставлять t.feedbackOk/Bad
-    return { ok, feedback: q.feedback || "" };
-  }
+  const feedback = ok
+    ? (q.feedbackOk || "")
+    : (q.feedbackBad || "");
 
+  return { ok, feedback };
+}
   skip() {
     this.index += 1;
     return true;

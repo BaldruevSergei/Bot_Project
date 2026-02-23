@@ -12,6 +12,12 @@ const app = document.getElementById("app");
 // DEV: true = можно тестить в браузере без Telegram
 const DEV_BYPASS_TG = true;
 
+// 👉 ВАЖНО: задай эти 2 константы под прод
+// Google Apps Script Web App URL (принимает POST JSON)
+const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_SCRIPT_WEBAPP_URL_HERE";
+// Telegram username консультанта БЕЗ @
+const CONSULT_USERNAME = "PASTE_CONSULT_USERNAME_HERE";
+
 // --- storage keys ---
 const LANG_KEY = "forbrain_lang_v1";
 const CONSENT_KEY = "forbrain_consent_v1";
@@ -34,7 +40,11 @@ let history = {};   // { blockId: {...} }
 let timerId = null;
 let timeLeft = 0;
 
-let lastClickTs = 0; // ✅ FIX: было не объявлено
+let lastClickTs = 0;
+
+if (window.Telegram?.WebApp) {
+  window.Telegram.WebApp.expand();
+}
 
 // ---------------- helpers ----------------
 function guardClick(minMs = 250) {
@@ -70,6 +80,18 @@ function levelByPercent(p) {
 
 function vibro(ms = 18) {
   try { navigator.vibrate?.(ms); } catch {}
+}
+
+function tr(key, fallback = "") {
+  const v = t?.[key];
+  return (v === undefined || v === null || v === "") ? fallback : v;
+}
+
+function setLang(code) {
+  lang = code;
+  localStorage.setItem(LANG_KEY, lang);
+  t = I18N[lang] || I18N.uz;
+  FLOW = makeFlow(lang);
 }
 
 // ---------------- Telegram gate ----------------
@@ -139,14 +161,12 @@ async function fetchJsonTry(urls) {
   throw lastErr || new Error("fetch failed");
 }
 
-async function loadPackedBlock(lang, relPath) {
-  // relPath: "it/03_it_l1"
+async function loadPackedBlock(langCode, relPath) {
   const bases = [
-    `./public/questions/${lang}/${relPath}`,
-    `./questions/${lang}/${relPath}`,
+    `./public/questions/${langCode}/${relPath}`,
+    `./questions/${langCode}/${relPath}`,
   ];
 
-  // ✅ поддержим и ".packed.json" и ".packed"
   const urls = [];
   for (const b of bases) {
     urls.push(new URL(`${b}.packed.json`, window.location.href).toString());
@@ -157,7 +177,6 @@ async function loadPackedBlock(lang, relPath) {
 }
 
 function normalizePacked(arr) {
-  // packed: {q,o,k,ok,bad} -> engine format
   return (arr || []).map(x => ({
     question: x.q,
     options: x.o,
@@ -168,7 +187,6 @@ function normalizePacked(arr) {
 }
 
 function toRelPathFromDataFile(file) {
-  // "./data/ru/it/03_it_l1.txt" -> "it/03_it_l1"
   return file
     .replace(/^\.?\/*data\//, "")
     .replace(/^\w+\//, "")
@@ -177,7 +195,7 @@ function toRelPathFromDataFile(file) {
 
 // ---------------- Screens ----------------
 
-// 1) Gate (video + play)
+// 1) Gate (video + play) — RU + UZ always
 function renderPlayGate() {
   stopTimer();
 
@@ -191,28 +209,38 @@ function renderPlayGate() {
 
       <div class="gateCenter">
         <button class="playBtn" id="playBtn" aria-label="Play">▶</button>
-        <div class="gateText">ForBrain • Technology</div>
-        <div class="gateSub">Tap / Click to start</div>
+
+        <div class="gateText">
+          ForBrain Akademiya • Академия
+        </div>
+
+        <div class="gateSub">
+          Boshlash uchun bosing / Нажмите, чтобы начать
+        </div>
       </div>
     </div>
   `);
 
   document.getElementById("playBtn").addEventListener("click", () => {
     if (!guardClick(200)) return;
-    haptic?.(10); beep?.(720, 0.04); vibro(20);
+
+    haptic?.(10);
+    beep?.(720, 0.04);
+    vibro(20);
+
     document.querySelector(".gate")?.classList.add("fadeOut");
     setTimeout(() => renderMarketingScreen(), 250);
   });
 }
 
-// 2) Marketing (UZ+RU вместе)
+// 2) Marketing (RU + UZ together, NO i18n here by design)
 function renderMarketingScreen() {
   stopTimer();
 
   setView(`
     <div class="container">
       <div class="card">
-        <h1 style="margin:0;">ForBrain Technology</h1>
+        <h1 style="margin:0;">ForBrain Akademiya • Академия</h1>
 
         <div class="spacer"></div>
 
@@ -233,12 +261,16 @@ function renderMarketingScreen() {
         <div style="text-align:left;">
           <div class="badge">🧠 Mantiq / Логика</div><div class="spacer"></div>
           <div class="badge">💻 IT va dasturlash / IT и программирование</div><div class="spacer"></div>
-          <div class="badge">🎮 3D va muhandislik / 3D и инженерное мышление</div><div class="spacer"></div>
-          <div class="badge">⚡ Fizika / Физика</div>
+          <div class="badge">🎮 3D-grafika va muhandislik / 3D-графика и инженерное мышление</div><div class="spacer"></div>
+          <div class="badge">⚡ Fizika / Физика</div><div class="spacer"></div>
+          <div class="badge">🤖 Sun’iy intellekt / Искусственный интеллект</div>
         </div>
 
         <div class="spacer"></div>
-        <button class="btn primary" id="goLang">Davom etish / Продолжить</button>
+
+        <button class="btn primary" id="goLang">
+          Davom etish / Продолжить
+        </button>
       </div>
     </div>
   `);
@@ -249,7 +281,6 @@ function renderMarketingScreen() {
     renderLanguageScreen();
   });
 }
-
 // 3) Language
 function renderLanguageScreen() {
   stopTimer();
@@ -257,8 +288,8 @@ function renderLanguageScreen() {
   setView(`
     <div class="container">
       <div class="card">
-        <h1>${htmlEscape(t.chooseLangTitle || "Choose language")}</h1>
-        <p class="small">${htmlEscape(t.chooseLangText || "")}</p>
+        <h1>${htmlEscape(tr("chooseLangTitle", "Choose language"))}</h1>
+        <p class="small">${htmlEscape(tr("chooseLangText", ""))}</p>
 
         <div class="spacer"></div>
 
@@ -273,11 +304,7 @@ function renderLanguageScreen() {
     btn.addEventListener("click", () => {
       if (!guardClick(200)) return;
 
-      lang = btn.dataset.lang;
-      localStorage.setItem(LANG_KEY, lang);
-
-      t = I18N[lang] || I18N.uz;
-      FLOW = makeFlow(lang);
+      setLang(btn.dataset.lang);
 
       haptic?.(8); beep?.(720, 0.03); vibro(12);
       renderIntroScreen();
@@ -290,20 +317,20 @@ function renderIntroScreen() {
   stopTimer();
 
   if (!isTelegramWebApp()) {
-    // в проде можно показать “Открой в Telegram”
+    // optional: show "Open in Telegram" notice in prod
   }
 
   setView(`
     <div class="container">
       <div class="card">
-        <h1>${htmlEscape(t.introTitle || "ForBrain")}</h1>
-        <p>${htmlEscape(t.introText || "")}</p>
+        <h1>${htmlEscape(tr("introTitle", "ForBrain"))}</h1>
+        <p>${htmlEscape(tr("introText", ""))}</p>
 
         <div class="spacer"></div>
-        <p class="small">${htmlEscape(t.tipFast || "")}</p>
+        <p class="small">${htmlEscape(tr("tipFast", ""))}</p>
 
         <div class="spacer"></div>
-        <button class="btn primary" id="startBtn">${htmlEscape(t.startBtn || "Start")}</button>
+        <button class="btn primary" id="startBtn">${htmlEscape(tr("startBtn", "Start"))}</button>
       </div>
     </div>
   `);
@@ -327,7 +354,7 @@ async function loadBlock(idx) {
   const block = FLOW[idx];
   breakdown = {};
 
-  if (!block) throw new Error("FLOW пустой или idx вне диапазона");
+  if (!block) throw new Error("FLOW empty or idx out of range");
 
   if (block.file) {
     const rel = toRelPathFromDataFile(block.file);
@@ -358,7 +385,7 @@ async function loadBlock(idx) {
     return;
   }
 
-  throw new Error("Непонятная конфигурация блока в FLOW");
+  throw new Error("Unknown block config in FLOW");
 }
 
 // ---------------- Test UI ----------------
@@ -377,9 +404,9 @@ function renderTopBar() {
   return `
     <div class="card">
       <div class="row" style="justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-        <span class="badge">${htmlEscape(t.block || "Блок")}: <b>${htmlEscape(blockId)}</b></span>
-        <span class="badge">${htmlEscape(t.question || "Вопрос")}: <b>${current}/${total}</b></span>
-        <span class="badge">${htmlEscape(t.score || "Очки")}: <b>${engine?.score ?? 0}</b></span>
+        <span class="badge">${htmlEscape(tr("block", "Block"))}: <b>${htmlEscape(blockId)}</b></span>
+        <span class="badge">${htmlEscape(tr("question", "Question"))}: <b>${current}/${total}</b></span>
+        <span class="badge">${htmlEscape(tr("score", "Score"))}: <b>${engine?.score ?? 0}</b></span>
         ${timerBadge}
       </div>
       <div class="spacer"></div>
@@ -413,14 +440,14 @@ function renderQuestionScreen() {
 
         <div class="row">
           <button class="btn primary" id="answerBtn" disabled>
-            ${htmlEscape(t.answerBtn || "Ответить")}
+            ${htmlEscape(tr("answerBtn", "Answer"))}
           </button>
         </div>
 
         <p class="small">${
           FLOW[flowIndex].mode === "learn"
-            ? htmlEscape(t.learnHint || "")
-            : htmlEscape(t.quizHint || "")
+            ? htmlEscape(tr("learnHint", ""))
+            : htmlEscape(tr("quizHint", ""))
         }</p>
       </div>
     </div>
@@ -475,7 +502,7 @@ function renderFeedbackScreen(res) {
   const ok = !!res.ok;
   const msg = (res.feedback && res.feedback.trim())
     ? res.feedback
-    : (ok ? (t.feedbackOk || "Верно.") : (t.feedbackBad || "Неверно."));
+    : (ok ? (tr("feedbackOk", "Correct.")) : (tr("feedbackBad", "Incorrect.")));
 
   setView(`
     <div class="container">
@@ -489,7 +516,7 @@ function renderFeedbackScreen(res) {
         <div class="spacer"></div>
 
         <div class="row">
-          <button class="btn primary" id="nextBtn">${htmlEscape(t.nextBtn || "Дальше")}</button>
+          <button class="btn primary" id="nextBtn">${htmlEscape(tr("nextBtn", "Next"))}</button>
         </div>
       </div>
     </div>
@@ -541,12 +568,12 @@ function renderBlockSummaryScreen() {
   setView(`
     <div class="container">
       <div class="card">
-        <h1>${htmlEscape(t.doneTitle || "Готово!")}</h1>
+        <h1>${htmlEscape(tr("doneTitle", "Done!"))}</h1>
 
         <div class="spacer"></div>
 
-        <p><b>${htmlEscape(t.block || "Блок")}:</b> ${htmlEscape(blockId)}</p>
-        <p><b>${htmlEscape(t.result || "Результат")}:</b> ${score}/${total} • <b>${overall}%</b> • <b>${levelByPercent(overall)}</b></p>
+        <p><b>${htmlEscape(tr("block", "Block"))}:</b> ${htmlEscape(blockId)}</p>
+        <p><b>${htmlEscape(tr("result", "Result"))}:</b> ${score}/${total} • <b>${overall}%</b> • <b>${levelByPercent(overall)}</b></p>
 
         ${blockId === "stage1" ? renderBreakdownBars() : ""}
 
@@ -554,8 +581,8 @@ function renderBlockSummaryScreen() {
 
         ${
           hasNext
-            ? `<p>${htmlEscape(t.continueQ || "Продолжить?")}</p>`
-            : `<p>${htmlEscape("Показать итоговый профиль и рекомендации?")}</p>`
+            ? `<p>${htmlEscape(tr("continueQ", "Continue?"))}</p>`
+            : `<p>${htmlEscape(tr("finalAsk", "Show final profile and recommendations?"))}</p>`
         }
 
         <div class="spacer"></div>
@@ -563,10 +590,10 @@ function renderBlockSummaryScreen() {
         <div class="row">
           ${
             hasNext
-              ? `<button class="btn primary" id="nextBlockBtn">${htmlEscape(t.yes || "Далее")}</button>`
-              : `<button class="btn primary" id="finalBtn">${htmlEscape("Показать результат")}</button>`
+              ? `<button class="btn primary" id="nextBlockBtn">${htmlEscape(tr("yes", "Next"))}</button>`
+              : `<button class="btn primary" id="finalBtn">${htmlEscape(tr("showResult", "Show result"))}</button>`
           }
-          <button class="btn" id="restartBtn">${htmlEscape(t.restartBtn || "Пройти заново")}</button>
+          <button class="btn" id="restartBtn">${htmlEscape(tr("restartBtn", "Restart"))}</button>
         </div>
       </div>
     </div>
@@ -603,23 +630,23 @@ function renderConsentScreen(onDone) {
   setView(`
     <div class="container">
       <div class="card">
-        <h1 style="margin:0;">${htmlEscape(t.consentTitle || "Согласие")}</h1>
+        <h1 style="margin:0;">${htmlEscape(tr("consentTitle", "Consent"))}</h1>
 
         <div class="spacer"></div>
-        <p class="small">${htmlEscape(t.consentText || "")}</p>
+        <p class="small">${htmlEscape(tr("consentText", ""))}</p>
 
         <div class="spacer"></div>
 
         <label class="small">
           <input type="checkbox" id="consentChk">
-          ${htmlEscape(t.consentChk || "Я согласен(на).")}
+          ${htmlEscape(tr("consentChk", "I agree."))}
         </label>
 
         <div class="spacer"></div>
 
         <div class="row">
-          <button class="btn primary" id="consentYes" disabled>${htmlEscape(t.consentYes || "Да")}</button>
-          <button class="btn" id="consentNo">${htmlEscape(t.consentNo || "Нет")}</button>
+          <button class="btn primary" id="consentYes" disabled>${htmlEscape(tr("consentYes", "Yes"))}</button>
+          <button class="btn" id="consentNo">${htmlEscape(tr("consentNo", "No"))}</button>
         </div>
       </div>
     </div>
@@ -643,131 +670,195 @@ function renderConsentScreen(onDone) {
   });
 }
 
+// ---------------- FINAL SCREEN ----------------
 function renderFinalSummaryScreen() {
   stopTimer();
 
   const u = getTelegramUser();
   const tgId = String(u?.id || "0");
-  const savedKey = SAVED_KEY_PREFIX + tgId;
+  const username = u?.username || "";
 
-  const consent = localStorage.getItem(CONSENT_KEY) === "1";
-  const alreadySaved = localStorage.getItem(savedKey) === "1";
-
+  // --- profile calc (без "недостаточно данных") ---
   const s1 = history.stage1?.breakdown || {};
-  const pLogic = s1.logic ? pct(s1.logic.correct, s1.logic.total) : null;
-  const pAlgo  = s1.algorithm ? pct(s1.algorithm.correct, s1.algorithm.total) : null;
-  const pSpat  = s1.spatial ? pct(s1.spatial.correct, s1.spatial.total) : null;
-  const pEng   = s1.engineering ? pct(s1.engineering.correct, s1.engineering.total) : null;
 
-  const engineerScore = (pSpat ?? 0) + (pEng ?? 0);
-  const coderScore = (pAlgo ?? 0) + (pLogic ?? 0);
+  const pctSafe = (obj) => {
+    if (!obj || !obj.total) return 0;
+    return Math.round((obj.correct / obj.total) * 100);
+  };
 
-  let profileIcon = "⚖️";
-  if (!history.stage1) profileIcon = "ℹ️";
-  else if (engineerScore - coderScore >= 20) profileIcon = "🛠️";
-  else if (coderScore - engineerScore >= 20) profileIcon = "💻";
+  const logic = pctSafe(s1.logic);
+  const algo = pctSafe(s1.algorithm);
+  const spatial = pctSafe(s1.spatial);
+  const eng = pctSafe(s1.engineering);
+
+  const coderScore = logic + algo;
+  const engineerScore = spatial + eng;
+
+  let profileKey = "finalProfileUniversal";
+  let profileIcon = "🧠";
+
+  if (coderScore - engineerScore >= 20) {
+    profileKey = "finalProfileIT";
+    profileIcon = "💻";
+  } else if (engineerScore - coderScore >= 20) {
+    profileKey = "finalProfileEngineering";
+    profileIcon = "🛠️";
+  }
+
+  const profileText = tr(profileKey, "Universal profile");
 
   setView(`
     <div class="container">
       <div class="card">
-        <h1 style="margin:0;">${htmlEscape(t.profileTitle || "Твой профиль")}</h1>
+        <h1 style="margin:0;">${htmlEscape(tr("finalTitle", "Your result"))}</h1>
 
         <div class="spacer"></div>
 
-        <p class="small"><b>Telegram:</b> @${htmlEscape(u?.username || "no_username")} (id: ${htmlEscape(tgId)})</p>
-        <p><b>${htmlEscape(t.profileLabel || "Профиль")}:</b> ${profileIcon}</p>
+        <p><b>${profileIcon} ${htmlEscape(profileText)}</b></p>
 
         <div class="spacer"></div>
 
-        <h3>${htmlEscape(t.coursePickTitle || "Что дальше?")}</h3>
-        <p class="small">${htmlEscape(t.coursePickHint || "")}</p>
-
-        <div class="row" style="flex-wrap:wrap; gap:10px;">
-          <button class="btn" data-course="3D">${htmlEscape(t.course3d || "3D")}</button>
-          <button class="btn" data-course="Cyber">${htmlEscape(t.courseCyber || "Cyber")}</button>
-          <button class="btn" data-course="Physics">${htmlEscape(t.coursePhysics || "Physics")}</button>
-          <button class="btn" data-course="IT">${htmlEscape(t.courseIT || "IT")}</button>
-          <button class="btn" data-course="Prog">${htmlEscape(t.courseProg || "Programming")}</button>
-          <button class="btn" data-course="Other">${htmlEscape(t.courseOther || "Other")}</button>
+        <!-- promo -->
+        <div class="card" style="background:rgba(59,130,246,.08); border-color:rgba(59,130,246,.35);">
+          <h3 style="margin:0;">${htmlEscape(tr("intensiveTitle", ""))}</h3>
+          <div class="spacer"></div>
+          <p style="margin:0;">${htmlEscape(tr("intensiveLine1", ""))}</p>
+          <div class="spacer"></div>
+          <p class="small" style="margin:0;">${htmlEscape(tr("intensiveLine2", ""))}</p>
+          <p class="small" style="margin:0;">${htmlEscape(tr("intensiveLine3", ""))}</p>
+          <div class="spacer"></div>
+          <p style="margin:0;"><b>${htmlEscape(tr("intensiveStart", ""))}</b></p>
         </div>
 
         <div class="spacer"></div>
-        <input id="customCourse" class="input" placeholder="${htmlEscape(t.courseOtherPlaceholder || "")}" />
+
+        <p class="small" style="margin:0;">${htmlEscape(tr("chooseDirection", ""))}</p>
+        <div class="spacer"></div>
+
+        <div class="row" style="flex-wrap:wrap; gap:10px;">
+          <button class="btn dirBtn" data-dir="logic">🧠 ${htmlEscape(tr("dirLogic", "Logic"))}</button>
+          <button class="btn dirBtn" data-dir="it">💻 ${htmlEscape(tr("dirIT", "IT"))}</button>
+          <button class="btn dirBtn" data-dir="3d">🎮 ${htmlEscape(tr("dir3D", "3D"))}</button>
+          <button class="btn dirBtn" data-dir="physics">⚡ ${htmlEscape(tr("dirPhysics", "Physics"))}</button>
+          <button class="btn dirBtn" data-dir="ai">🤖 ${htmlEscape(tr("dirAI", "AI"))}</button>
+          <button class="btn dirBtn" data-dir="custom">✍️ ${htmlEscape(tr("dirCustom", "Other"))}</button>
+        </div>
 
         <div class="spacer"></div>
-        <p class="small">
-          ${consent ? "Consent: ✅" : "Consent: ❌"}
-          ${alreadySaved ? `<br><b>${htmlEscape(t.savedOnce || "Already saved.")}</b>` : ""}
-        </p>
+
+        <input
+          id="customInput"
+          class="input"
+          placeholder="${htmlEscape(tr("dirCustomPlaceholder", ""))}"
+        />
 
         <div class="spacer"></div>
 
         <div class="row">
-          <button class="btn primary" id="saveBtn" disabled>${htmlEscape(t.saveBtn || "Save")}</button>
-          <button class="btn" id="restartBtn">${htmlEscape(t.restartBtn || "Restart")}</button>
+          <button class="btn primary" id="sendBtn" disabled>
+            ${htmlEscape(tr("sendResult", "Send result"))}
+          </button>
+
+          <button class="btn" id="consultBtn" disabled>
+            ${htmlEscape(tr("getConsult", "Get consultation"))}
+          </button>
         </div>
 
         <div class="spacer"></div>
-        <p class="small">${htmlEscape(t.savedDemoHint || "")}</p>
+        <p class="small" style="margin:0;">${htmlEscape(tr("twoClicksHint", ""))}</p>
       </div>
     </div>
   `);
 
-  let pickedCourse = null;
-  const saveBtn = document.getElementById("saveBtn");
+  // logic
+  let selectedDir = null;
+  let sent = false;
 
-  if (alreadySaved || !consent) saveBtn.disabled = true;
+  const sendBtn = document.getElementById("sendBtn");
+  const consultBtn = document.getElementById("consultBtn");
 
-  document.querySelectorAll("[data-course]").forEach(btn => {
+  document.querySelectorAll(".dirBtn").forEach(btn => {
     btn.addEventListener("click", () => {
-      if (!guardClick(150)) return;
-      if (alreadySaved || !consent) return;
+      if (!guardClick(120)) return;
 
-      document.querySelectorAll("[data-course]").forEach(x => x.classList.remove("selected"));
+      document.querySelectorAll(".dirBtn").forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
 
-      pickedCourse = btn.dataset.course;
-      saveBtn.disabled = false;
+      selectedDir = btn.dataset.dir;
+      sendBtn.disabled = false;
 
       haptic?.(8);
       beep?.(720, 0.03);
     });
   });
 
-  saveBtn.addEventListener("click", () => {
+  sendBtn.addEventListener("click", async () => {
     if (!guardClick(250)) return;
+    if (!selectedDir) return;
 
-    if (!consent) {
-      alert(t.needConsent || "Consent required.");
+    const custom = (document.getElementById("customInput")?.value || "").trim();
+    const finalDir = (selectedDir === "custom") ? custom : selectedDir;
+
+    if (selectedDir === "custom" && !finalDir) {
+      alert(tr("needCustomDir", "Please type your option."));
       return;
     }
-    if (alreadySaved) return;
 
-    const custom = (document.getElementById("customCourse").value || "").trim();
-    const finalCourse = pickedCourse === "Other" ? custom : pickedCourse;
-
-    appendLocalLog({
+    const payload = {
       tg_id: tgId,
-      tg_username: u?.username || "",
+      username,
       lang,
-      course: finalCourse || "",
-      profile: profileIcon,
+      profile: profileText,
+      direction: finalDir || "",
       history,
-    });
+      ts: new Date().toISOString(),
+    };
 
-    localStorage.setItem(savedKey, "1");
-    haptic?.(25);
-    beep?.(1100, 0.08);
-    alert(t.savedOk || "Saved!");
+    // локально логируем (demo)
+    appendLocalLog(payload);
 
-    renderFinalSummaryScreen();
+    try {
+      if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_")) {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      }
+    } catch (e) {
+      // не блокируем UX, но сообщаем
+      console.log("send analytics error", e);
+      alert(tr("sendFail", "Network error. Try again."));
+      return;
+    }
+
+    sent = true;
+    sendBtn.disabled = true;
+    consultBtn.disabled = false;
+
+    haptic?.(18);
+    beep?.(980, 0.06);
+    alert(tr("savedOk", "Saved!"));
   });
 
-  document.getElementById("restartBtn").addEventListener("click", () => {
+  consultBtn.addEventListener("click", () => {
     if (!guardClick(250)) return;
-    flowIndex = 0;
-    history = {};
-    renderPlayGate();
+    if (!sent) return;
+
+    const msgTemplate = tr("consultMessage", "Hello! I finished the test. Profile: {profile}. Direction: {direction}.");
+    const custom = (document.getElementById("customInput")?.value || "").trim();
+    const dirLabel = selectedDir === "custom"
+      ? (custom || tr("dirCustom", "Other"))
+      : tr(`dirLabel_${selectedDir}`, selectedDir);
+
+    const msg = encodeURIComponent(
+      msgTemplate
+        .replace("{profile}", profileText)
+        .replace("{direction}", dirLabel)
+    );
+
+    // Telegram deep link
+    window.open(`https://t.me/${CONSULT_USERNAME}?text=${msg}`, "_blank");
   });
 }
 
