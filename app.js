@@ -14,7 +14,7 @@ const DEV_BYPASS_TG = true;
 
 // 👉 ВАЖНО: задай эти 2 константы под прод
 // Google Apps Script Web App URL (принимает POST JSON)
-const GOOGLE_SCRIPT_URL = "PASTE_YOUR_GOOGLE_SCRIPT_WEBAPP_URL_HERE";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnfiRzYm--M7D4M8CpAtAU2dEJ_zne7jMXMoBhg5K9aFQ665k5mZP5u3sYn_WLz5gpyA/exec";
 // Telegram username консультанта или ссылка. В твоём коде используется как URL.
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
 
