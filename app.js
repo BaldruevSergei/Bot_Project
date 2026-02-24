@@ -954,18 +954,18 @@ function renderFinalSummaryScreen() {
     // уникальный event_id (пусть будет с временем — сервер сам сделает upsert по device_id)
     const eventId = `save_${deviceId}_${Date.now()}`;
 
-    const payload = {
-      secret: APP_SECRET,
-      event_id: eventId,
-      device_id: deviceId,
-      tg_id: tgId2,
-      username,
-      lang,
-      profile: profileText,
-      direction: finalDir || "",
-      history,
-      ts: new Date().toISOString(),
-    };
+   const payload = {
+  secret: APP_SECRET,
+  event_id: eventId,
+  device_id: deviceId,   // ✅ ОБЯЗАТЕЛЬНО
+  tg_id: tgId2,
+  username,
+  lang,
+  profile: profileText,
+  direction: finalDir || "",
+  history,
+  ts: new Date().toISOString(),
+};
 
     appendLocalLog(payload);
 
