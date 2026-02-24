@@ -13,7 +13,7 @@ const app = document.getElementById("app");
 const DEV_BYPASS_TG = true;
 
 // Google Apps Script Web App URL (принимает POST JSON)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAAS2ZwiaKQlyITA2R7VdAHQGc8MG-XnEkMIekh8Mw4oQuLD4yKt6I7A6UzszrZw5ytg/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9plk_7JycRGh0RVQexjHR7UBntb8zo18NVM6xw5AwixyxcHssBnwBq4FdS1BoBc4u/exec";
 
 // Telegram username консультанта / ссылка
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
