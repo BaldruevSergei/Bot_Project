@@ -14,7 +14,7 @@ const DEV_BYPASS_TG = true;
 
 // Google Apps Script Web App URL (принимает POST JSON)
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzG5AJat4Wp834RjzsTBvi54EhM2wxwtNrWbK1Q8H5bbTBURImF1dR9cKP-fSc0Xx-hxg/exec";
+  "https://script.google.com/macros/s/AKfycbwWGrn4DtbEw4O8DmymhaM5Fu_s-f42nfiKEzaMhf8OcEtwmwcM3FRNAj005TaAfJcBZg/exec";
 
 // Telegram username консультанта / ссылка
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
@@ -28,11 +28,14 @@ const CONSENT_KEY = "forbrain_consent_v1";
 const SAVED_KEY_PREFIX = "forbrain_saved_tg_";
 const LOCAL_LOG_KEY = "forbrain_local_log_v1";
 
-// ---- device lock v1 ----
+// ---- device lock v1 (запираем после клика "консультация") ----
 const DEVICE_ID_KEY = "fb_device_id_v1";
 const COMPLETED_KEY = "fb_completed_v1";
 
-// 1) get/create device id
+// ---- choice lock v1 (запираем Save choice, чтобы не спамили) ----
+const CHOICE_SAVED_KEY = "fb_choice_saved_v1";
+const CHOICE_LAST_DIR_KEY = "fb_choice_last_dir_v1";
+
 function getDeviceId() {
   let id = localStorage.getItem(DEVICE_ID_KEY);
   if (!id) {
@@ -43,15 +46,22 @@ function getDeviceId() {
   }
   return id;
 }
-
-// 2) check lock
 function isCompleted() {
   return localStorage.getItem(COMPLETED_KEY) === "1";
 }
-
-// 3) set lock on finish
 function markCompleted() {
   localStorage.setItem(COMPLETED_KEY, "1");
+}
+
+function isChoiceSaved() {
+  return localStorage.getItem(CHOICE_SAVED_KEY) === "1";
+}
+function markChoiceSaved(dir) {
+  localStorage.setItem(CHOICE_SAVED_KEY, "1");
+  if (dir) localStorage.setItem(CHOICE_LAST_DIR_KEY, dir);
+}
+function getLastChoice() {
+  return localStorage.getItem(CHOICE_LAST_DIR_KEY) || "";
 }
 
 const deviceId = getDeviceId();
@@ -510,7 +520,10 @@ function renderQuestionScreen() {
         <h2>${htmlEscape(q.question)}</h2>
 
         ${q.options
-          .map((o, i) => `<div class="option" data-idx="${i}">${htmlEscape(o)}</div>`)
+          .map(
+            (o, i) =>
+              `<div class="option" data-idx="${i}">${htmlEscape(o)}</div>`
+          )
           .join("")}
 
         <div class="spacer"></div>
@@ -627,7 +640,9 @@ function renderBreakdownBars() {
 
       return `
       <div class="spacer"></div>
-      <div class="badge">${htmlEscape(labels[tag] ?? tag)}: <b>${c}/${tt}</b> • <b>${p}%</b></div>
+      <div class="badge">${htmlEscape(
+        labels[tag] ?? tag
+      )}: <b>${c}/${tt}</b> • <b>${p}%</b></div>
       <div class="spacer"></div>
       <div class="progress"><div style="width:${p}%"></div></div>
     `;
@@ -698,15 +713,17 @@ function renderBlockSummaryScreen() {
   `);
 
   if (hasNext) {
-    document.getElementById("nextBlockBtn").addEventListener("click", async () => {
-      if (!guardClick(250)) return;
-      haptic?.(10);
-      beep?.(880, 0.05);
+    document
+      .getElementById("nextBlockBtn")
+      .addEventListener("click", async () => {
+        if (!guardClick(250)) return;
+        haptic?.(10);
+        beep?.(880, 0.05);
 
-      flowIndex = nextIndex;
-      await loadBlock(flowIndex);
-      renderQuestionScreen();
-    });
+        flowIndex = nextIndex;
+        await loadBlock(flowIndex);
+        renderQuestionScreen();
+      });
   } else {
     document.getElementById("finalBtn").addEventListener("click", () => {
       if (!guardClick(250)) return;
@@ -878,6 +895,14 @@ function renderFinalSummaryScreen() {
   const sendBtn = document.getElementById("sendBtn");
   const consultBtn = document.getElementById("consultBtn");
 
+  // если уже сохранял раньше — не даём Save, но консультацию разрешаем
+  if (isChoiceSaved()) {
+    sent = true;
+    sendBtn.disabled = true;
+    sendBtn.textContent = tr("savedOk", "Saved!");
+    consultBtn.disabled = false;
+  }
+
   document.querySelectorAll(".dirBtn").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (!guardClick(120)) return;
@@ -888,7 +913,9 @@ function renderFinalSummaryScreen() {
       btn.classList.add("selected");
 
       selectedDir = btn.dataset.dir;
-      sendBtn.disabled = false;
+
+      // если уже сохранял ранее — Save не включаем (иначе спам)
+      if (!isChoiceSaved()) sendBtn.disabled = false;
 
       haptic?.(8);
       beep?.(720, 0.03);
@@ -899,6 +926,13 @@ function renderFinalSummaryScreen() {
     if (!guardClick(250)) return;
     if (!selectedDir) return;
     if (sent) return;
+
+    // фронтовая защита от спама
+    if (isChoiceSaved()) {
+      alert(tr("alreadySaved", "Вы уже сохраняли выбор с этого устройства."));
+      consultBtn.disabled = false;
+      return;
+    }
 
     // 🔒 сразу блокируем кнопку, чтобы не было двойного клика
     sendBtn.disabled = true;
@@ -917,7 +951,7 @@ function renderFinalSummaryScreen() {
     const u2 = getTelegramUser();
     const tgId2 = String(u2?.id || "0");
 
-    // ✅ уникальный id события сохранения (дедуп по устройству)
+    // уникальный event_id (пусть будет с временем — сервер сам сделает upsert по device_id)
     const eventId = `save_${deviceId}_${Date.now()}`;
 
     const payload = {
@@ -955,32 +989,51 @@ function renderFinalSummaryScreen() {
     sent = true;
     consultBtn.disabled = false;
 
+    // ✅ запоминаем, что Save уже был (и какой dir)
+    markChoiceSaved(finalDir);
+
     haptic?.(18);
     beep?.(980, 0.06);
     alert(tr("savedOk", "Saved!"));
   });
 
+  function resolveDirLabel() {
+    const custom = (document.getElementById("customInput")?.value || "").trim();
+
+    // если выбрали сейчас
+    if (selectedDir) {
+      if (selectedDir === "custom") return custom || tr("dirCustom", "Other");
+      return tr(`dirLabel_${selectedDir}`, selectedDir);
+    }
+
+    // если уже сохраняли раньше — берём последнее из localStorage
+    const last = getLastChoice();
+    if (last) return tr(`dirLabel_${last}`, last);
+
+    return tr("dirCustom", "Other");
+  }
+
   consultBtn.addEventListener("click", () => {
     if (!guardClick(250)) return;
-    if (!sent) return;
+
+    // консультацию разрешаем если: либо уже sent, либо уже раньше сохраняли (isChoiceSaved)
+    if (!sent && !isChoiceSaved()) return;
 
     const msgTemplate = tr(
       "consultMessage",
       "Hello! I finished the test. Profile: {profile}. Direction: {direction}."
     );
-    const custom = (document.getElementById("customInput")?.value || "").trim();
-    const dirLabel =
-      selectedDir === "custom"
-        ? custom || tr("dirCustom", "Other")
-        : tr(`dirLabel_${selectedDir}`, selectedDir);
+
+    const dirLabel = resolveDirLabel();
 
     const msg = encodeURIComponent(
-      msgTemplate.replace("{profile}", profileText).replace("{direction}", dirLabel)
+      msgTemplate
+        .replace("{profile}", profileText)
+        .replace("{direction}", dirLabel)
     );
 
-    // ✅ Сначала пытаемся открыть чат, и только если получилось — ставим "замок"
     const w = window.open(`${CONSULT_USERNAME}?text=${msg}`, "_blank");
-    if (w) markCompleted();
+    if (w) markCompleted(); // ✅ запираем устройство только после реального ухода к консультанту
   });
 }
 
