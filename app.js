@@ -12,8 +12,9 @@ const app = document.getElementById("app");
 // DEV: true = можно тестить в браузере без Telegram
 const DEV_BYPASS_TG = true;
 
-const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbws_vFXNKeVxUkWKsKkYbLKPsqBNfoY8-s89r9lAx2pwxFo4ffpupOPOj0vvHHBmorDMg/exec";
+// Google Apps Script Web App URL (принимает POST JSON)
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwSc3f3SPeSE1Xx6A9EnYosH9iLZeAj8tMeW544xamFl_BIAhF1YDNmZmAQrs3kNkiSYw/exec";
+
 // Telegram username консультанта / ссылка
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
 
@@ -952,18 +953,18 @@ function renderFinalSummaryScreen() {
     // уникальный event_id (пусть будет с временем — сервер сам сделает upsert по device_id)
     const eventId = `save_${deviceId}_${Date.now()}`;
 
-   const payload = {
-  secret: APP_SECRET,
-  event_id: eventId,
-  device_id: deviceId,   // ✅ ОБЯЗАТЕЛЬНО
-  tg_id: tgId2,
-  username,
-  lang,
-  profile: profileText,
-  direction: finalDir || "",
-  history,
-  ts: new Date().toISOString(),
-};
+    const payload = {
+      secret: APP_SECRET,
+      event_id: eventId,
+      device_id: deviceId,
+      tg_id: tgId2,
+      username,
+      lang,
+      profile: profileText,
+      direction: finalDir || "",
+      history,
+      ts: new Date().toISOString(),
+    };
 
     appendLocalLog(payload);
 
