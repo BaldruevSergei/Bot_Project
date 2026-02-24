@@ -13,7 +13,8 @@ const app = document.getElementById("app");
 const DEV_BYPASS_TG = true;
 
 // Google Apps Script Web App URL (принимает POST JSON)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzG5AJat4Wp834RjzsTBvi54EhM2wxwtNrWbK1Q8H5bbTBURImF1dR9cKP-fSc0Xx-hxg/exec";
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbzG5AJat4Wp834RjzsTBvi54EhM2wxwtNrWbK1Q8H5bbTBURImF1dR9cKP-fSc0Xx-hxg/exec";
 
 // Telegram username консультанта / ссылка
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
@@ -27,6 +28,53 @@ const CONSENT_KEY = "forbrain_consent_v1";
 const SAVED_KEY_PREFIX = "forbrain_saved_tg_";
 const LOCAL_LOG_KEY = "forbrain_local_log_v1";
 
+// ---- device lock v1 ----
+const DEVICE_ID_KEY = "fb_device_id_v1";
+const COMPLETED_KEY = "fb_completed_v1";
+
+// 1) get/create device id
+function getDeviceId() {
+  let id = localStorage.getItem(DEVICE_ID_KEY);
+  if (!id) {
+    id =
+      (crypto.randomUUID && crypto.randomUUID()) ||
+      "d_" + Math.random().toString(16).slice(2);
+    localStorage.setItem(DEVICE_ID_KEY, id);
+  }
+  return id;
+}
+
+// 2) check lock
+function isCompleted() {
+  return localStorage.getItem(COMPLETED_KEY) === "1";
+}
+
+// 3) set lock on finish
+function markCompleted() {
+  localStorage.setItem(COMPLETED_KEY, "1");
+}
+
+const deviceId = getDeviceId();
+
+// если уже проходил — показываем заглушку и выходим
+if (isCompleted()) {
+  document.getElementById("app").innerHTML = `
+    <div style="padding:20px; font-family: sans-serif;">
+      <h2>Вы уже проходили тест с этого устройства</h2>
+      <p>Если нужен разбор — нажмите «Написать консультанту».</p>
+      <a href="${CONSULT_USERNAME}" target="_blank" rel="noopener"
+         style="display:inline-block; padding:12px 16px; border:1px solid #000; text-decoration:none;">
+        Написать консультанту
+      </a>
+    </div>
+  `;
+  throw new Error("Device locked: already completed");
+}
+
+if (window.Telegram?.WebApp) {
+  window.Telegram.WebApp.expand();
+}
+
 // --- i18n state ---
 let lang = localStorage.getItem(LANG_KEY) || "uz";
 let t = I18N[lang] || I18N.uz;
@@ -38,16 +86,12 @@ let engine = null;
 let selected = null;
 
 let breakdown = {}; // { tag: {correct,total} }
-let history = {};   // { blockId: {...} }
+let history = {}; // { blockId: {...} }
 
 let timerId = null;
 let timeLeft = 0;
 
 let lastClickTs = 0;
-
-if (window.Telegram?.WebApp) {
-  window.Telegram.WebApp.expand();
-}
 
 // ---------------- helpers ----------------
 function guardClick(minMs = 250) {
@@ -82,12 +126,14 @@ function levelByPercent(p) {
 }
 
 function vibro(ms = 18) {
-  try { navigator.vibrate?.(ms); } catch {}
+  try {
+    navigator.vibrate?.(ms);
+  } catch {}
 }
 
 function tr(key, fallback = "") {
   const v = t?.[key];
-  return (v === undefined || v === null || v === "") ? fallback : v;
+  return v === undefined || v === null || v === "" ? fallback : v;
 }
 
 function setLang(code) {
@@ -133,7 +179,7 @@ function startTimerForQuestion() {
       stopTimer();
       haptic?.(25);
       beep?.(180, 0.12);
-      engine?.skip();
+      engine?.skip?.();
       goNext();
     }
   }, 1000);
@@ -155,7 +201,10 @@ async function fetchJsonTry(urls) {
   for (const u of urls) {
     try {
       const res = await fetch(u, { cache: "no-store" });
-      if (!res.ok) { lastErr = new Error(`${res.status} ${u}`); continue; }
+      if (!res.ok) {
+        lastErr = new Error(`${res.status} ${u}`);
+        continue;
+      }
       return await res.json();
     } catch (e) {
       lastErr = e;
@@ -180,7 +229,7 @@ async function loadPackedBlock(langCode, relPath) {
 }
 
 function normalizePacked(arr) {
-  return (arr || []).map(x => ({
+  return (arr || []).map((x) => ({
     question: x.q,
     options: x.o,
     k: x.k,
@@ -280,7 +329,9 @@ function renderMarketingScreen() {
 
   document.getElementById("goLang").addEventListener("click", () => {
     if (!guardClick(200)) return;
-    haptic?.(8); beep?.(880, 0.04); vibro(15);
+    haptic?.(8);
+    beep?.(880, 0.04);
+    vibro(15);
     renderLanguageScreen();
   });
 }
@@ -317,13 +368,15 @@ function renderLanguageScreen() {
     </div>
   `);
 
-  document.querySelectorAll("[data-lang]").forEach(btn => {
+  document.querySelectorAll("[data-lang]").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (!guardClick(200)) return;
 
       setLang(btn.dataset.lang);
 
-      haptic?.(8); beep?.(720, 0.03); vibro(12);
+      haptic?.(8);
+      beep?.(720, 0.03);
+      vibro(12);
       renderIntroScreen();
     });
   });
@@ -343,7 +396,9 @@ function renderIntroScreen() {
         <p class="small">${htmlEscape(tr("tipFast", ""))}</p>
 
         <div class="spacer"></div>
-        <button class="btn primary" id="startBtn">${htmlEscape(tr("startBtn", "Start"))}</button>
+        <button class="btn primary" id="startBtn">${htmlEscape(
+          tr("startBtn", "Start")
+        )}</button>
       </div>
     </div>
   `);
@@ -351,7 +406,9 @@ function renderIntroScreen() {
   document.getElementById("startBtn").addEventListener("click", async () => {
     if (!guardClick(250)) return;
 
-    haptic?.(10); beep?.(880, 0.05); vibro(18);
+    haptic?.(10);
+    beep?.(880, 0.05);
+    vibro(18);
 
     flowIndex = 0;
     history = {};
@@ -384,7 +441,7 @@ async function loadBlock(idx) {
       const packed = await loadPackedBlock(lang, rel);
       const normalized = normalizePacked(packed);
 
-      const tagged = normalized.map(q => ({ ...q, tag: part.tag }));
+      const tagged = normalized.map((q) => ({ ...q, tag: part.tag }));
       const selectedPart = takeRandom(tagged, part.pick);
 
       breakdown[part.tag] ??= { correct: 0, total: 0 };
@@ -410,16 +467,23 @@ function renderTopBar() {
   const blockId = FLOW[flowIndex]?.id ?? "block";
   const sec = FLOW[flowIndex]?.timeSec ?? 0;
 
-  const timerBadge = sec && sec > 0
-    ? `<span class="badge">⏳ <b id="timerValue">${timeLeft}s</b></span>`
-    : `<span class="badge">⏳ <b>—</b></span>`;
+  const timerBadge =
+    sec && sec > 0
+      ? `<span class="badge">⏳ <b id="timerValue">${timeLeft}s</b></span>`
+      : `<span class="badge">⏳ <b>—</b></span>`;
 
   return `
     <div class="card">
       <div class="row" style="justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
-        <span class="badge">${htmlEscape(tr("block", "Block"))}: <b>${htmlEscape(blockId)}</b></span>
-        <span class="badge">${htmlEscape(tr("question", "Question"))}: <b>${current}/${total}</b></span>
-        <span class="badge">${htmlEscape(tr("score", "Score"))}: <b>${engine?.score ?? 0}</b></span>
+        <span class="badge">${htmlEscape(
+          tr("block", "Block")
+        )}: <b>${htmlEscape(blockId)}</b></span>
+        <span class="badge">${htmlEscape(
+          tr("question", "Question")
+        )}: <b>${current}/${total}</b></span>
+        <span class="badge">${htmlEscape(
+          tr("score", "Score")
+        )}: <b>${engine?.score ?? 0}</b></span>
         ${timerBadge}
       </div>
       <div class="spacer"></div>
@@ -445,9 +509,9 @@ function renderQuestionScreen() {
       <div class="card">
         <h2>${htmlEscape(q.question)}</h2>
 
-        ${q.options.map((o, i) =>
-          `<div class="option" data-idx="${i}">${htmlEscape(o)}</div>`
-        ).join("")}
+        ${q.options
+          .map((o, i) => `<div class="option" data-idx="${i}">${htmlEscape(o)}</div>`)
+          .join("")}
 
         <div class="spacer"></div>
 
@@ -470,11 +534,13 @@ function renderQuestionScreen() {
 
   const btn = document.getElementById("answerBtn");
 
-  document.querySelectorAll(".option").forEach(el => {
+  document.querySelectorAll(".option").forEach((el) => {
     el.addEventListener("click", () => {
       if (!guardClick(120)) return;
 
-      document.querySelectorAll(".option").forEach(x => x.classList.remove("selected"));
+      document
+        .querySelectorAll(".option")
+        .forEach((x) => x.classList.remove("selected"));
       el.classList.add("selected");
 
       selected = Number(el.dataset.idx);
@@ -513,9 +579,12 @@ function renderFeedbackScreen(res) {
   stopTimer();
 
   const ok = !!res.ok;
-  const msg = (res.feedback && res.feedback.trim())
-    ? res.feedback
-    : (ok ? (tr("feedbackOk", "Correct.")) : (tr("feedbackBad", "Incorrect.")));
+  const msg =
+    res.feedback && res.feedback.trim()
+      ? res.feedback
+      : ok
+      ? tr("feedbackOk", "Correct.")
+      : tr("feedbackBad", "Incorrect.");
 
   setView(`
     <div class="container">
@@ -529,7 +598,9 @@ function renderFeedbackScreen(res) {
         <div class="spacer"></div>
 
         <div class="row">
-          <button class="btn primary" id="nextBtn">${htmlEscape(tr("nextBtn", "Next"))}</button>
+          <button class="btn primary" id="nextBtn">${htmlEscape(
+            tr("nextBtn", "Next")
+          )}</button>
         </div>
       </div>
     </div>
@@ -544,22 +615,24 @@ function renderFeedbackScreen(res) {
 }
 
 function renderBreakdownBars() {
-  const labels = (t.tags || {});
+  const labels = t.tags || {};
   const keys = Object.keys(breakdown);
   if (!keys.length) return "";
 
-  return keys.map(tag => {
-    const c = breakdown[tag].correct;
-    const tt = breakdown[tag].total;
-    const p = pct(c, tt);
+  return keys
+    .map((tag) => {
+      const c = breakdown[tag].correct;
+      const tt = breakdown[tag].total;
+      const p = pct(c, tt);
 
-    return `
+      return `
       <div class="spacer"></div>
       <div class="badge">${htmlEscape(labels[tag] ?? tag)}: <b>${c}/${tt}</b> • <b>${p}%</b></div>
       <div class="spacer"></div>
       <div class="progress"><div style="width:${p}%"></div></div>
     `;
-  }).join("");
+    })
+    .join("");
 }
 
 function renderBlockSummaryScreen() {
@@ -571,7 +644,9 @@ function renderBlockSummaryScreen() {
   const overall = pct(score, total);
 
   history[blockId] = {
-    score, total, overall,
+    score,
+    total,
+    overall,
     breakdown: JSON.parse(JSON.stringify(breakdown)),
   };
 
@@ -586,7 +661,9 @@ function renderBlockSummaryScreen() {
         <div class="spacer"></div>
 
         <p><b>${htmlEscape(tr("block", "Block"))}:</b> ${htmlEscape(blockId)}</p>
-        <p><b>${htmlEscape(tr("result", "Result"))}:</b> ${score}/${total} • <b>${overall}%</b> • <b>${levelByPercent(overall)}</b></p>
+        <p><b>${htmlEscape(tr("result", "Result"))}:</b> ${score}/${total} • <b>${overall}%</b> • <b>${levelByPercent(
+    overall
+  )}</b></p>
 
         ${blockId === "stage1" ? renderBreakdownBars() : ""}
 
@@ -595,7 +672,9 @@ function renderBlockSummaryScreen() {
         ${
           hasNext
             ? `<p>${htmlEscape(tr("continueQ", "Continue?"))}</p>`
-            : `<p>${htmlEscape(tr("finalAsk", "Show final profile and recommendations?"))}</p>`
+            : `<p>${htmlEscape(
+                tr("finalAsk", "Show final profile and recommendations?")
+              )}</p>`
         }
 
         <div class="spacer"></div>
@@ -603,10 +682,16 @@ function renderBlockSummaryScreen() {
         <div class="row" style="flex-direction:column; gap:12px;">
           ${
             hasNext
-              ? `<button class="btn primary" id="nextBlockBtn">${htmlEscape(tr("yes", "Next"))}</button>`
-              : `<button class="btn primary" id="finalBtn">${htmlEscape(tr("showResult", "Show result"))}</button>`
+              ? `<button class="btn primary" id="nextBlockBtn">${htmlEscape(
+                  tr("yes", "Next")
+                )}</button>`
+              : `<button class="btn primary" id="finalBtn">${htmlEscape(
+                  tr("showResult", "Show result")
+                )}</button>`
           }
-          <button class="btn" id="restartBtn">${htmlEscape(tr("restartBtn", "Restart"))}</button>
+          <button class="btn" id="restartBtn">${htmlEscape(
+            tr("restartBtn", "Restart")
+          )}</button>
         </div>
       </div>
     </div>
@@ -615,7 +700,8 @@ function renderBlockSummaryScreen() {
   if (hasNext) {
     document.getElementById("nextBlockBtn").addEventListener("click", async () => {
       if (!guardClick(250)) return;
-      haptic?.(10); beep?.(880, 0.05);
+      haptic?.(10);
+      beep?.(880, 0.05);
 
       flowIndex = nextIndex;
       await loadBlock(flowIndex);
@@ -624,7 +710,8 @@ function renderBlockSummaryScreen() {
   } else {
     document.getElementById("finalBtn").addEventListener("click", () => {
       if (!guardClick(250)) return;
-      haptic?.(10); beep?.(880, 0.05);
+      haptic?.(10);
+      beep?.(880, 0.05);
       renderConsentScreen(() => renderFinalSummaryScreen());
     });
   }
@@ -658,8 +745,12 @@ function renderConsentScreen(onDone) {
         <div class="spacer"></div>
 
         <div class="row">
-          <button class="btn primary" id="consentYes" disabled>${htmlEscape(tr("consentYes", "Yes"))}</button>
-          <button class="btn" id="consentNo">${htmlEscape(tr("consentNo", "No"))}</button>
+          <button class="btn primary" id="consentYes" disabled>${htmlEscape(
+            tr("consentYes", "Yes")
+          )}</button>
+          <button class="btn" id="consentNo">${htmlEscape(
+            tr("consentNo", "No")
+          )}</button>
         </div>
       </div>
     </div>
@@ -787,11 +878,13 @@ function renderFinalSummaryScreen() {
   const sendBtn = document.getElementById("sendBtn");
   const consultBtn = document.getElementById("consultBtn");
 
-  document.querySelectorAll(".dirBtn").forEach(btn => {
+  document.querySelectorAll(".dirBtn").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (!guardClick(120)) return;
 
-      document.querySelectorAll(".dirBtn").forEach(b => b.classList.remove("selected"));
+      document
+        .querySelectorAll(".dirBtn")
+        .forEach((b) => b.classList.remove("selected"));
       btn.classList.add("selected");
 
       selectedDir = btn.dataset.dir;
@@ -812,7 +905,7 @@ function renderFinalSummaryScreen() {
     sendBtn.textContent = tr("sending", "Отправка...");
 
     const custom = (document.getElementById("customInput")?.value || "").trim();
-    const finalDir = (selectedDir === "custom") ? custom : selectedDir;
+    const finalDir = selectedDir === "custom" ? custom : selectedDir;
 
     if (selectedDir === "custom" && !finalDir) {
       alert(tr("needCustomDir", "Please type your option."));
@@ -821,15 +914,16 @@ function renderFinalSummaryScreen() {
       return;
     }
 
-    const u = getTelegramUser();
-    const tgId2 = String(u?.id || "0");
+    const u2 = getTelegramUser();
+    const tgId2 = String(u2?.id || "0");
 
-    // ✅ уникальный id события сохранения (для дедупликации на стороне Apps Script)
-    const eventId = `save_${tgId2}_${Date.now()}`;
+    // ✅ уникальный id события сохранения (дедуп по устройству)
+    const eventId = `save_${deviceId}_${Date.now()}`;
 
     const payload = {
       secret: APP_SECRET,
       event_id: eventId,
+      device_id: deviceId,
       tg_id: tgId2,
       username,
       lang,
@@ -845,7 +939,7 @@ function renderFinalSummaryScreen() {
       if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_")) {
         await fetch(GOOGLE_SCRIPT_URL, {
           method: "POST",
-          mode: "no-cors", // чтобы не падало на CORS
+          mode: "no-cors",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
@@ -864,26 +958,29 @@ function renderFinalSummaryScreen() {
     haptic?.(18);
     beep?.(980, 0.06);
     alert(tr("savedOk", "Saved!"));
-    // оставляем кнопку disabled навсегда
   });
 
   consultBtn.addEventListener("click", () => {
     if (!guardClick(250)) return;
     if (!sent) return;
 
-    const msgTemplate = tr("consultMessage", "Hello! I finished the test. Profile: {profile}. Direction: {direction}.");
+    const msgTemplate = tr(
+      "consultMessage",
+      "Hello! I finished the test. Profile: {profile}. Direction: {direction}."
+    );
     const custom = (document.getElementById("customInput")?.value || "").trim();
-    const dirLabel = selectedDir === "custom"
-      ? (custom || tr("dirCustom", "Other"))
-      : tr(`dirLabel_${selectedDir}`, selectedDir);
+    const dirLabel =
+      selectedDir === "custom"
+        ? custom || tr("dirCustom", "Other")
+        : tr(`dirLabel_${selectedDir}`, selectedDir);
 
     const msg = encodeURIComponent(
-      msgTemplate
-        .replace("{profile}", profileText)
-        .replace("{direction}", dirLabel)
+      msgTemplate.replace("{profile}", profileText).replace("{direction}", dirLabel)
     );
 
-    window.open(`${CONSULT_USERNAME}?text=${msg}`, "_blank");
+    // ✅ Сначала пытаемся открыть чат, и только если получилось — ставим "замок"
+    const w = window.open(`${CONSULT_USERNAME}?text=${msg}`, "_blank");
+    if (w) markCompleted();
   });
 }
 
