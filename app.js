@@ -12,8 +12,8 @@ const app = document.getElementById("app");
 // DEV: true = можно тестить в браузере без Telegram
 const DEV_BYPASS_TG = true;
 
-// Google Apps Script Web App URL (принимает POST JSON)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyOKPt5Ud0wFyv4Z0uUZPABQ2F7kbK_-__cG61cgbPMNv0uPyVB2X1_MKDfIPcb5gppQ/exec"
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbws_vFXNKeVxUkWKsKkYbLKPsqBNfoY8-s89r9lAx2pwxFo4ffpupOPOj0vvHHBmorDMg/exec";
 // Telegram username консультанта / ссылка
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
 
