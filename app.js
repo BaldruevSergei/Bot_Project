@@ -14,7 +14,7 @@ const DEV_BYPASS_TG = true;
 
 // Google Apps Script Web App URL (принимает POST JSON)
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwWGrn4DtbEw4O8DmymhaM5Fu_s-f42nfiKEzaMhf8OcEtwmwcM3FRNAj005TaAfJcBZg/exec";
+  "https://script.google.com/macros/s/AKfycbxXNFiTKOdsz-7q7vN_LAbtm3gRpRXeC7ZnWh-5gS1CIwpVEU8tutm_BP2M1BryArzS8Q/exec";
 
 // Telegram username консультанта / ссылка
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
