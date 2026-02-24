@@ -13,7 +13,7 @@ const app = document.getElementById("app");
 const DEV_BYPASS_TG = true;
 
 // Google Apps Script Web App URL (принимает POST JSON)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwSc3f3SPeSE1Xx6A9EnYosH9iLZeAj8tMeW544xamFl_BIAhF1YDNmZmAQrs3kNkiSYw/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxorGRI-gZ8MDQQ2xrc_ewfeEcaHSywejSfhQ7_TfD33w9hDQii2BUdU-9-StXxxywDCQ/exec";
 
 // Telegram username консультанта / ссылка
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
@@ -970,12 +970,11 @@ function renderFinalSummaryScreen() {
 
     try {
       if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_")) {
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
+      await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" }, // ✅ важно
+      body: JSON.stringify(payload),
+      });
       }
     } catch (e) {
       console.log("send analytics error", e);
