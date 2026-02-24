@@ -13,7 +13,7 @@ const app = document.getElementById("app");
 const DEV_BYPASS_TG = true;
 
 // Google Apps Script Web App URL (принимает POST JSON)
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGL1xMmJIC92wff1KukEu5liAbmyHjpy1H1JW_IKB0QGTb1i4C7hZwUAjlOcHRyRH0uA/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyAAS2ZwiaKQlyITA2R7VdAHQGc8MG-XnEkMIekh8Mw4oQuLD4yKt6I7A6UzszrZw5ytg/exec";
 
 // Telegram username консультанта / ссылка
 const CONSULT_USERNAME = "https://t.me/muhlisa_yuldashovna";
@@ -969,21 +969,37 @@ function renderFinalSummaryScreen() {
     appendLocalLog(payload);
 
     try {
-      if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_")) {
-      await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" }, // ✅ важно
-      body: JSON.stringify(payload),
-      });
-      }
-    } catch (e) {
-      console.log("send analytics error", e);
-      alert(tr("sendFail", "Network error. Try again."));
-      sendBtn.disabled = false;
-      sendBtn.textContent = tr("sendResult", "Save choice");
-      return;
-    }
+  if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("PASTE_")) {
+    const body = JSON.stringify(payload);
 
+    // Надёжно для кросс-домена (часто работает даже когда fetch душится CORS)
+    let ok = false;
+    try {
+      ok = navigator.sendBeacon(
+        GOOGLE_SCRIPT_URL,
+        new Blob([body], { type: "text/plain;charset=UTF-8" })
+      );
+    } catch {}
+
+    // fallback: обязательно no-cors и БЕЗ headers
+    if (!ok) {
+      // ✅ Самый “железный” вариант для Google Apps Script из браузера:
+    // - НЕ ставим headers вообще (иначе часто появляется preflight/CORS)
+    // - mode: "no-cors" (ответ не прочитаем, но запрос уйдёт и запись произойдёт)
+    await fetch(GOOGLE_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: JSON.stringify(payload),
+   });
+    }
+  }
+} catch (e) {
+  console.log("send analytics error", e);
+  alert(tr("sendFail", "Network error. Try again."));
+  sendBtn.disabled = false;
+  sendBtn.textContent = tr("sendResult", "Save choice");
+  return;
+}
     sent = true;
     consultBtn.disabled = false;
 
