@@ -305,18 +305,35 @@ function renderMarketingScreen() {
 
         <div class="spacer"></div>
 
-        <p style="font-size:18px; font-weight:700; margin:0;">
-          Farzandingiz qaysi yo‘nalishga moyil?<br>
-          Ваш ребёнок к какому направлению склонен?
-        </p>
+        <p style="font-size:20px; font-weight:800; margin:0;">
+  O‘zingni tekshir: qaysi yo‘nalish senga yaqin?
+</p>
+<p style="font-size:18px; font-weight:800; margin:6px 0 0 0;">
+  Проверь себя: к чему у тебя сильная предрасположенность?
+</p>
 
-        <div class="spacer"></div>
+<div class="spacer"></div>
 
-        <p class="small" style="margin:0;">
-          3–5 daqiqalik bepul test kuchli tomonlarni aniqlaydi.<br>
-          Бесплатный тест за 3–5 минут покажет сильные стороны.
-        </p>
+<p style="margin:0; opacity:.9;">
+  3–5 daqiqa — va texnik profilingni bilib olasan.
+</p>
+<p style="margin:6px 0 0 0; opacity:.9;">
+  3–5 минут — и ты узнаешь свой технический профиль.
+</p>
 
+<p class="small" style="margin-top:12px; opacity:.8;">
+  Sun’iy intellekt davri allaqachon boshlandi. Kelajakda qayerda kuchli bo‘lishingni bilib ol.
+</p>
+<p class="small" style="margin:6px 0 0 0; opacity:.8;">
+  Эпоха искусственного интеллекта уже началась. Пойми, где ты будешь сильнее завтра.
+</p>
+
+<div class="spacer"></div>
+
+
+<button class="btn primary" id="goLang">
+  Testni boshlash / Пройти тест
+</button>
         <div class="spacer"></div>
 
         <div style="text-align:left;">
@@ -329,9 +346,7 @@ function renderMarketingScreen() {
 
         <div class="spacer"></div>
 
-        <button class="btn primary" id="goLang">
-          Davom etish / Продолжить
-        </button>
+        
       </div>
     </div>
   `);
@@ -1060,4 +1075,5 @@ function goNext() {
 }
 
 // START
-renderPlayGate();
+// START
+renderMarketingScreen();

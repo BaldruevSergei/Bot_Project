@@ -9,29 +9,29 @@ export const LANGS = [
 export const I18N = {
   uz: {
     // brand / gate
-    brandTitle: "ForBrain Akademiya",
-    gatePlayAria: "Boshlash",
-    gateSub: "Boshlash uchun bosing",
+    brandTitle: "ForBrain",
+    gatePlayAria: "O‘zingni tekshir",
+    gateSub: "Muhandis miyang bormi? 3–5 daqiqa",
 
     // marketing
-    marketingTitle: "Farzandingiz qaysi yo‘nalishga moyil?",
-    marketingSubtitle: "3–5 daqiqalik bepul test kuchli tomonlarni ko‘rsatadi.",
+    marketingTitle: "Sen qaysi yo‘nalishga ko‘proq moyilsan?",
+    marketingSubtitle: "3–5 daqiqa — va texnik profilingni bilib olasan.",
     marketingTagLogic: "Mantiq",
-    marketingTagIT: "IT va dasturlash",
-    marketingTag3D: "3D grafika va muhandislik fikrlash",
+    marketingTagIT: "IT va kod",
+    marketingTag3D: "3D va muhandislik fikrlash",
     marketingTagPhysics: "Fizika",
     marketingTagAI: "Sun’iy intellekt",
-    marketingContinue: "Davom etish",
+    marketingContinue: "Testni boshlash",
 
     // language
-    chooseLangTitle: "Tilni tanlang",
+    chooseLangTitle: "Tilni tanla",
     chooseLangText: "Test va natijalar tanlangan tilda bo‘ladi.",
 
     // intro
-    introTitle: "ForBrain",
-    introText: "Qisqa test: savollarga tez javob bering.",
-    tipFast: "Maslahat: ko‘p o‘ylamang, birinchi fikr ko‘pincha to‘g‘ri.",
-    startBtn: "Boshlash",
+    introTitle: "Tezkor test",
+    introText: "Tez va halol javob ber. Birinchi fikr ko‘pincha to‘g‘ri.",
+    tipFast: "Bu yerda bilim emas, fikrlash tekshiriladi.",
+    startBtn: "Boshladik",
 
     // test UI
     block: "Blok",
@@ -40,90 +40,90 @@ export const I18N = {
     answerBtn: "Javob berish",
     nextBtn: "Keyingi",
     learnHint: "O‘rganish rejimi: javobdan keyin izoh chiqadi.",
-    quizHint: "Test rejimi: tez javob bering.",
+    quizHint: "Test rejimi: tez javob ber.",
     feedbackOk: "To‘g‘ri.",
     feedbackBad: "Noto‘g‘ri.",
 
     // block summary
-    doneTitle: "Tayyor!",
+    doneTitle: "Bo‘ldi!",
     result: "Natija",
-    continueQ: "Davom ettirasizmi?",
+    continueQ: "Davom etamizmi?",
     yes: "Keyingi",
     restartBtn: "Qayta boshlash",
     finalAsk: "Yakuniy profil va tavsiyalarni ko‘rsatamizmi?",
-    showResult: "Natijani ko‘rsatish",
+    showResult: "Profilni ko‘rsatish",
 
     // consent
     consentTitle: "Rozilik",
-    consentText: "Natijani saqlash va konsultatsiya uchun rozilik kerak.",
+    consentText: "Natijani saqlash va konsultatsiyaga o‘tish uchun rozilik kerak.",
     consentChk: "Roziman.",
     consentYes: "Ha",
     consentNo: "Yo‘q",
 
     // final
-    finalTitle: "Sizning profilingiz",
+    finalTitle: "Sening profiling",
     finalProfileUniversal: "Universal texnik profil",
-    finalProfileIT: "IT va dasturlashga moyillik kuchli",
+    finalProfileIT: "IT va dasturlashga kuchli moyillik",
     finalProfileEngineering: "Muhandislik/3D fikrlash kuchli",
 
-    intensiveTitle: "3 oylik intensiv (bahor)",
-    intensiveLine1: "Logika, IT, 3D-grafika, fizika va sun’iy intellektni kuchaytiramiz.",
-    intensiveLine2: "Boshlang‘ichdan o‘rtacha darajagacha — hamma uchun mos.",
-    intensiveLine3: "Darslar tizimli, amaliy va motivatsion formatda.",
-    intensiveStart: "Boshlanishi: mart oyidan",
+    intensiveTitle: "3 oylik Tech Intensive",
+    intensiveLine1: "Mantiq, IT, 3D, fizika va sun’iy intellektni birga kuchaytiramiz.",
+    intensiveLine2: "Nazariya kam — amaliyot ko‘p. Zerikish yo‘q.",
+    intensiveLine3: "Boshlang‘ichdan kuchligacha — hamma uchun mos.",
+    intensiveStart: "Start: mart",
 
-    chooseDirection: "Qaysi yo‘nalishni kuchaytirmoqchisiz?",
+    chooseDirection: "Nimani eng ko‘p kuchaytirmoqchisan?",
     dirLogic: "Mantiq",
     dirIT: "IT",
-    dir3D: "3D-grafika",
+    dir3D: "3D",
     dirPhysics: "Fizika",
     dirAI: "Sun’iy intellekt",
     dirCustom: "Boshqa",
-    dirCustomPlaceholder: "Agar “Boshqa” bo‘lsa, yozing...",
+    dirCustomPlaceholder: "Agar “Boshqa” bo‘lsa, yoz…",
 
-    sendResult: "Tanlovni saqlash",
+    sendResult: "Profilni saqlash",
     getConsult: "Konsultatsiya olish",
-    twoClicksHint: "2 ta aniq bosish: avval saqlang, keyin konsultatsiyaga o‘ting.",
+    twoClicksHint: "2 ta klik: 1) saqla 2) konsultatsiyaga o‘t",
 
     savedOk: "Saqlandi!",
-    needCustomDir: "Iltimos, “Boshqa” uchun matn kiriting.",
-    sendFail: "Internet xatosi. Qayta urinib ko‘ring.",
+    needCustomDir: "Iltimos, “Boshqa” uchun matn yoz.",
+    sendFail: "Internet xatosi. Qayta urinib ko‘r.",
 
     // labels for message
     dirLabel_logic: "Mantiq",
     dirLabel_it: "IT",
-    dirLabel_3d: "3D-grafika",
+    dirLabel_3d: "3D",
     dirLabel_physics: "Fizika",
     dirLabel_ai: "Sun’iy intellekt",
 
     consultMessage:
-      "Salom! Men testdan o‘tdim. Profil: {profile}. Yo‘nalish: {direction}. Konsultatsiya olmoqchiman.",
+      "Salom! Men testdan o‘tdim. Profil: {profile}. Tanlovim: {direction}. Konsultatsiya olmoqchiman.",
   },
 
   ru: {
     // brand / gate
-    brandTitle: "ForBrain Академия",
-    gatePlayAria: "Старт",
-    gateSub: "Нажмите, чтобы начать",
+    brandTitle: "ForBrain",
+    gatePlayAria: "Проверить себя",
+    gateSub: "Есть ли у тебя мозг инженера? 3–5 минут",
 
     // marketing
-    marketingTitle: "Ваш ребёнок к какому направлению склонен?",
-    marketingSubtitle: "Бесплатный тест за 3–5 минут покажет сильные стороны.",
+    marketingTitle: "Ты технарь или просто думаешь, что технарь?",
+    marketingSubtitle: "3–5 минут — и ты узнаешь свой технический профиль.",
     marketingTagLogic: "Логика",
-    marketingTagIT: "IT и программирование",
-    marketingTag3D: "3D-графика и инженерное мышление",
+    marketingTagIT: "IT и код",
+    marketingTag3D: "3D и инженерия",
     marketingTagPhysics: "Физика",
     marketingTagAI: "Искусственный интеллект",
-    marketingContinue: "Продолжить",
+    marketingContinue: "Пройти тест",
 
     // language
-    chooseLangTitle: "Выберите язык",
+    chooseLangTitle: "Выбери язык",
     chooseLangText: "Тест и результаты будут на выбранном языке.",
 
     // intro
-    introTitle: "ForBrain",
-    introText: "Короткий тест: отвечайте быстро и честно.",
-    tipFast: "Совет: не думайте слишком долго — первая мысль часто верная.",
+    introTitle: "Честный тест мышления",
+    introText: "Отвечай быстро и честно. Первая реакция важнее долгих раздумий.",
+    tipFast: "Здесь проверяется не знание, а способ мышления.",
     startBtn: "Начать",
 
     // test UI
@@ -133,18 +133,18 @@ export const I18N = {
     answerBtn: "Ответить",
     nextBtn: "Дальше",
     learnHint: "Режим обучения: после ответа будет объяснение.",
-    quizHint: "Тестовый режим: отвечайте быстро.",
+    quizHint: "Тестовый режим: отвечай быстро.",
     feedbackOk: "Верно.",
     feedbackBad: "Неверно.",
 
     // block summary
     doneTitle: "Готово!",
     result: "Результат",
-    continueQ: "Продолжить?",
+    continueQ: "Продолжаем?",
     yes: "Далее",
     restartBtn: "Пройти заново",
     finalAsk: "Показать итоговый профиль и рекомендации?",
-    showResult: "Показать результат",
+    showResult: "Показать профиль",
 
     // consent
     consentTitle: "Согласие",
@@ -154,69 +154,69 @@ export const I18N = {
     consentNo: "Нет",
 
     // final
-    finalTitle: "Твой профиль",
-    finalProfileUniversal: "Универсальный технический профиль",
-    finalProfileIT: "Сильная склонность к IT и программированию",
-    finalProfileEngineering: "Сильная склонность к инженерии и 3D-мышлению",
+    finalTitle: "Твой технический профиль",
+    finalProfileUniversal: "Универсальный технический потенциал",
+    finalProfileIT: "Сильная склонность к IT и алгоритмическому мышлению",
+    finalProfileEngineering: "Сильная склонность к инженерному и пространственному мышлению",
 
-    intensiveTitle: "Весенний 3-месячный интенсив",
-    intensiveLine1: "Прокачка логики, IT, 3D-графики, физики и искусственного интеллекта.",
-    intensiveLine2: "Подходит для любого уровня подготовки.",
-    intensiveLine3: "Системно, практично и без перегруза — один шаг за другим.",
-    intensiveStart: "Старт: в марте",
+    intensiveTitle: "3-месячный Tech Intensive",
+    intensiveLine1: "Прокачаем логику, IT, 3D, физику и искусственный интеллект.",
+    intensiveLine2: "Без скучной теории — больше практики и реальных задач.",
+    intensiveLine3: "Подходит для любого уровня — от новичка до сильного.",
+    intensiveStart: "Старт: март",
 
-    chooseDirection: "Что вы хотите прокачать в первую очередь?",
+    chooseDirection: "Что хочешь прокачать сильнее всего?",
     dirLogic: "Логика",
     dirIT: "IT",
-    dir3D: "3D-графика",
+    dir3D: "3D",
     dirPhysics: "Физика",
-    dirAI: "Искусственный интеллект",
+    dirAI: "ИИ",
     dirCustom: "Другое",
-    dirCustomPlaceholder: "Если выбрали «Другое», напишите…",
+    dirCustomPlaceholder: "Если «Другое», напиши…",
 
-    sendResult: "Сохранить выбор",
-    getConsult: "Получить консультацию",
-    twoClicksHint: "Два аккуратных клика: 1) сохранить выбор 2) получить консультацию.",
+    sendResult: "Сохранить профиль",
+    getConsult: "Записаться на консультацию",
+    twoClicksHint: "Два клика: 1) сохранить 2) перейти к консультации",
 
     savedOk: "Сохранено!",
-    needCustomDir: "Пожалуйста, заполните поле «Другое».",
-    sendFail: "Ошибка сети. Попробуйте ещё раз.",
+    needCustomDir: "Заполни поле «Другое».",
+    sendFail: "Ошибка сети. Попробуй ещё раз.",
 
     // labels for message
     dirLabel_logic: "Логика",
     dirLabel_it: "IT",
-    dirLabel_3d: "3D-графика",
+    dirLabel_3d: "3D",
     dirLabel_physics: "Физика",
-    dirLabel_ai: "Искусственный интеллект",
+    dirLabel_ai: "ИИ",
 
     consultMessage:
-      "Здравствуйте! Я прошёл(ла) тест. Профиль: {profile}. Выбор: {direction}. Хочу получить консультацию.",
+      "Привет! Я прошёл(ла) тест. Профиль: {profile}. Выбор: {direction}. Хочу консультацию.",
   },
 
   en: {
     // brand / gate
-    brandTitle: "ForBrain Academy",
-    gatePlayAria: "Start",
-    gateSub: "Tap / Click to start",
+    brandTitle: "ForBrain",
+    gatePlayAria: "Check yourself",
+    gateSub: "Do you have an engineer’s brain? 3–5 min",
 
     // marketing
-    marketingTitle: "Which direction is your child inclined to?",
-    marketingSubtitle: "A free 3–5 minute test will show strong sides.",
+    marketingTitle: "Are you really a tech person — or just think you are?",
+    marketingSubtitle: "3–5 minutes to reveal your technical profile.",
     marketingTagLogic: "Logic",
-    marketingTagIT: "IT & programming",
-    marketingTag3D: "3D graphics & engineering thinking",
+    marketingTagIT: "IT & code",
+    marketingTag3D: "3D & engineering",
     marketingTagPhysics: "Physics",
     marketingTagAI: "Artificial Intelligence",
-    marketingContinue: "Continue",
+    marketingContinue: "Start the test",
 
     // language
     chooseLangTitle: "Choose language",
     chooseLangText: "The test and results will be in the selected language.",
 
     // intro
-    introTitle: "ForBrain",
-    introText: "Short test: answer quickly and honestly.",
-    tipFast: "Tip: don’t overthink — your first idea is often right.",
+    introTitle: "A real thinking test",
+    introText: "Answer fast and honestly. Your first reaction matters.",
+    tipFast: "This checks how you think, not what you memorized.",
     startBtn: "Start",
 
     // test UI
@@ -225,7 +225,7 @@ export const I18N = {
     score: "Score",
     answerBtn: "Answer",
     nextBtn: "Next",
-    learnHint: "Learning mode: you will see an explanation after answering.",
+    learnHint: "Learning mode: you’ll see an explanation after answering.",
     quizHint: "Quiz mode: answer fast.",
     feedbackOk: "Correct.",
     feedbackBad: "Incorrect.",
@@ -236,40 +236,40 @@ export const I18N = {
     continueQ: "Continue?",
     yes: "Next",
     restartBtn: "Restart",
-    finalAsk: "Show final profile and recommendations?",
-    showResult: "Show result",
+    finalAsk: "Show the final profile and recommendations?",
+    showResult: "Show profile",
 
     // consent
     consentTitle: "Consent",
-    consentText: "Consent is required to save the result and go to consultation.",
+    consentText: "Consent is required to save the result and open consultation.",
     consentChk: "I agree.",
     consentYes: "Yes",
     consentNo: "No",
 
     // final
-    finalTitle: "Your profile",
-    finalProfileUniversal: "Universal technical profile",
-    finalProfileIT: "Strong inclination to IT and programming",
-    finalProfileEngineering: "Strong inclination to engineering & 3D thinking",
+    finalTitle: "Your technical profile",
+    finalProfileUniversal: "Universal technical potential",
+    finalProfileIT: "Strong inclination to IT & algorithmic thinking",
+    finalProfileEngineering: "Strong inclination to engineering & spatial thinking",
 
-    intensiveTitle: "Spring 3-month intensive",
-    intensiveLine1: "Boost logic, IT, 3D graphics, physics and artificial intelligence.",
-    intensiveLine2: "Suitable for any skill level.",
-    intensiveLine3: "Step-by-step, practical and without overload.",
+    intensiveTitle: "3-month Tech Intensive",
+    intensiveLine1: "Boost logic, IT, 3D, physics and artificial intelligence — together.",
+    intensiveLine2: "Less boring theory — more practice and real tasks.",
+    intensiveLine3: "Works for any level — beginner to advanced.",
     intensiveStart: "Starts in March",
 
-    chooseDirection: "What do you want to boost first?",
+    chooseDirection: "What do you want to boost the most?",
     dirLogic: "Logic",
     dirIT: "IT",
-    dir3D: "3D graphics",
+    dir3D: "3D",
     dirPhysics: "Physics",
-    dirAI: "Artificial Intelligence",
+    dirAI: "AI",
     dirCustom: "Other",
-    dirCustomPlaceholder: "If “Other”, type your option…",
+    dirCustomPlaceholder: "If “Other”, type it…",
 
-    sendResult: "Save choice",
-    getConsult: "Get consultation",
-    twoClicksHint: "Two clear clicks: 1) save choice 2) open consultation.",
+    sendResult: "Save profile",
+    getConsult: "Book a consultation",
+    twoClicksHint: "Two clicks: 1) save 2) open consultation",
 
     savedOk: "Saved!",
     needCustomDir: "Please fill “Other”.",
@@ -278,11 +278,11 @@ export const I18N = {
     // labels for message
     dirLabel_logic: "Logic",
     dirLabel_it: "IT",
-    dirLabel_3d: "3D graphics",
+    dirLabel_3d: "3D",
     dirLabel_physics: "Physics",
-    dirLabel_ai: "Artificial Intelligence",
+    dirLabel_ai: "AI",
 
     consultMessage:
-      "Hello! I finished the test. Profile: {profile}. Choice: {direction}. I would like a consultation.",
+      "Hi! I finished the test. Profile: {profile}. Choice: {direction}. I want a consultation.",
   },
 };
