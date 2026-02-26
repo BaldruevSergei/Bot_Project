@@ -295,52 +295,128 @@ function renderPlayGate() {
 }
 
 // 2) Marketing (RU + UZ together, NO i18n here by design)
+// 2) Marketing (RU default + small Uzbek toggle, ничего не ломаем)
 function renderMarketingScreen() {
   stopTimer();
 
+  // локальный язык только для этого экрана (не ломает твой выбор языка в следующем шаге)
+  // по умолчанию покажем RU (как фильтр), но кнопку дадим для UZ.
+  let mkLang = localStorage.getItem("fb_mk_lang_v1") || "ru";
+  if (mkLang !== "ru" && mkLang !== "uz") mkLang = "ru";
+
+  const COPY = {
+    ru: {
+      h1: "ForBrain",
+      title: "Очный инженерный интенсив (3 месяца)",
+      meta: "📍 Ангрен · Для подростков 14–17 лет",
+      chips: [
+        "💻 IT",
+        "🎮 3D-моделирование",
+        "⚡ Физика",
+        "🧠 Логика",
+        "🤖 Основы ИИ",
+      ],
+      desc:
+        "Системная программа развития технического мышления. Маленькая группа. Очные занятия.",
+      diag:
+        "🔎 Бесплатная диагностика — 3 минуты. По результату — приглашение в программу.",
+      start: "📅 Старт новой группы в марте. Количество мест ограничено.",
+      btn: "Пройти диагностику",
+      note: "Диагностика ни к чему не обязывает.",
+      toggle: "O‘zbek tilida",
+    },
+    uz: {
+      h1: "ForBrain",
+      title: "3 oylik oflayn muhandislik intensiv",
+      meta: "📍 Angren · 14–17 yosh",
+      chips: [
+        "💻 IT",
+        "🎮 3D-modellashtirish",
+        "⚡ Fizika",
+        "🧠 Mantiq",
+        "🤖 AI asoslari",
+      ],
+      desc:
+        "Texnik fikrlashni rivojlantirish bo‘yicha tizimli dastur. Kichik guruh. Oflayn darslar.",
+      diag:
+        "🔎 Bepul diagnostika — 3 daqiqa. Natijaga ko‘ra — dasturga taklif.",
+      start: "📅 Yangi guruh mart oyida. Joylar cheklangan.",
+      btn: "Diagnostikadan o‘tish",
+      note: "Diagnostika hech narsaga majburlamaydi.",
+      toggle: "Русский",
+    },
+  };
+
+  const c = COPY[mkLang];
+
   setView(`
     <div class="container">
-      <div class="card">
-       <h1 style="margin:0 0 10px 0;">ForBrain</h1>
+      <div class="card" style="position:relative;">
 
-<p style="font-size:18px; font-weight:800; margin:0;">
-  O‘zingni tekshir / Проверь себя
-</p>
+        <!-- маленькая кнопка переключения -->
+        <button class="btn" id="mkLangToggle"
+          style="
+            position:absolute; top:10px; right:10px;
+            font-size:12px; padding:6px 10px; border-radius:999px;
+            opacity:.85;
+          ">
+          ${htmlEscape(c.toggle)}
+        </button>
 
-<p style="margin:10px 0 0 0; opacity:.92; line-height:1.35;">
-  3–5 daqiqa — texnik profilingni bilib ol.<br>
-  3–5 минут — узнай свой технический профиль.
-</p>
+        <h1 style="margin-top:6px;">${htmlEscape(c.h1)}</h1>
 
-<p class="small" style="margin:10px 0 0 0; opacity:.78;">
-  AI davri boshlandi — ortda qolma.<br>
-  Эпоха ИИ уже началась — не оставайся в стороне.
-</p>
+        <h2 style="margin:0 0 10px 0; font-size:20px; line-height:1.25;">
+          ${htmlEscape(c.title)}
+        </h2>
 
-<div class="spacer"></div>
+        <div class="badge" style="margin-bottom:12px;">
+          ${htmlEscape(c.meta)}
+        </div>
 
-<p class="small" style="margin:0; opacity:.78;">
-  Profil shu yo‘nalishlar asosida aniqlanadi:<br>
-  Профиль определяется среди этих направлений:
-</p>
+        <div style="text-align:left;">
+          ${c.chips.map((x) => `<div class="badge">${htmlEscape(x)}</div><div class="spacer"></div>`).join("")}
+        </div>
 
-<div class="spacer"></div>
+        <div class="spacer"></div>
 
-<div style="opacity:.88; font-size:15px; line-height:1.25;">
-  <div style="margin:10px 0;">🧠&nbsp; Mantiq / Логика</div>
-  <div style="margin:10px 0;">💻&nbsp; IT va dasturlash / IT и программирование</div>
-  <div style="margin:10px 0;">🎮&nbsp; 3D-grafika va muhandislik / 3D-графика и инженерное мышление</div>
-  <div style="margin:10px 0;">⚡&nbsp; Fizika / Физика</div>
-  <div style="margin:10px 0;">🤖&nbsp; Sun’iy intellekt / Искусственный интеллект</div>
-</div>
+        <p style="opacity:.92; margin:0 0 10px 0;">
+          ${htmlEscape(c.desc)}
+        </p>
 
-<div class="spacer"></div>
+        <p style="opacity:.92; margin:0 0 10px 0;">
+          ${htmlEscape(c.diag)}
+        </p>
 
-<button class="btn primary" id="goLang">
-  Testni boshlash / Пройти тест
-</button>
+        <p class="small" style="opacity:.9; margin:0;">
+          ${htmlEscape(c.start)}
+        </p>
+
+        <div class="spacer"></div>
+
+        <button class="btn primary" id="goLang">
+          ${htmlEscape(c.btn)}
+        </button>
+
+        <p class="small" style="opacity:.75; margin-top:10px;">
+          ${htmlEscape(c.note)}
+        </p>
+
+      </div>
+    </div>
   `);
 
+  // переключатель языка на этом экране (без смены lang для теста)
+  document.getElementById("mkLangToggle").addEventListener("click", () => {
+    if (!guardClick(200)) return;
+    mkLang = mkLang === "ru" ? "uz" : "ru";
+    localStorage.setItem("fb_mk_lang_v1", mkLang);
+    haptic?.(8);
+    beep?.(720, 0.03);
+    vibro(12);
+    renderMarketingScreen(); // перерисовываем этот же экран
+  });
+
+  // дальше — как было: идём на выбор языка (твоя логика остаётся)
   document.getElementById("goLang").addEventListener("click", () => {
     if (!guardClick(200)) return;
     haptic?.(8);
@@ -349,7 +425,6 @@ function renderMarketingScreen() {
     renderLanguageScreen();
   });
 }
-
 // 3) Language (NEUTRAL: always 3 langs, no i18n)
 function renderLanguageScreen() {
   stopTimer();
@@ -391,11 +466,11 @@ function renderLanguageScreen() {
       haptic?.(8);
       beep?.(720, 0.03);
       vibro(12);
+
       renderIntroScreen();
     });
   });
 }
-
 // 4) Intro
 function renderIntroScreen() {
   stopTimer();
