@@ -301,54 +301,44 @@ function renderMarketingScreen() {
   setView(`
     <div class="container">
       <div class="card">
-        <h1 style="margin:0;">ForBrain Akademiya • Академия</h1>
+       <h1 style="margin:0 0 10px 0;">ForBrain</h1>
 
-        <div class="spacer"></div>
-
-        <p style="font-size:20px; font-weight:800; margin:0;">
-  O‘zingni tekshir: qaysi yo‘nalish senga yaqin?
-</p>
-<p style="font-size:18px; font-weight:800; margin:6px 0 0 0;">
-  Проверь себя: к чему у тебя сильная предрасположенность?
+<p style="font-size:18px; font-weight:800; margin:0;">
+  O‘zingni tekshir / Проверь себя
 </p>
 
-<div class="spacer"></div>
-
-<p style="margin:0; opacity:.9;">
-  3–5 daqiqa — va texnik profilingni bilib olasan.
-</p>
-<p style="margin:6px 0 0 0; opacity:.9;">
-  3–5 минут — и ты узнаешь свой технический профиль.
+<p style="margin:10px 0 0 0; opacity:.92; line-height:1.35;">
+  3–5 daqiqa — texnik profilingni bilib ol.<br>
+  3–5 минут — узнай свой технический профиль.
 </p>
 
-<p class="small" style="margin-top:12px; opacity:.8;">
-  Sun’iy intellekt davri allaqachon boshlandi. Kelajakda qayerda kuchli bo‘lishingni bilib ol.
-</p>
-<p class="small" style="margin:6px 0 0 0; opacity:.8;">
-  Эпоха искусственного интеллекта уже началась. Пойми, где ты будешь сильнее завтра.
+<p class="small" style="margin:10px 0 0 0; opacity:.78;">
+  AI davri boshlandi — ortda qolma.<br>
+  Эпоха ИИ уже началась — не оставайся в стороне.
 </p>
 
 <div class="spacer"></div>
 
+<p class="small" style="margin:0; opacity:.78;">
+  Profil shu yo‘nalishlar asosida aniqlanadi:<br>
+  Профиль определяется среди этих направлений:
+</p>
+
+<div class="spacer"></div>
+
+<div style="opacity:.88; font-size:15px; line-height:1.25;">
+  <div style="margin:10px 0;">🧠&nbsp; Mantiq / Логика</div>
+  <div style="margin:10px 0;">💻&nbsp; IT va dasturlash / IT и программирование</div>
+  <div style="margin:10px 0;">🎮&nbsp; 3D-grafika va muhandislik / 3D-графика и инженерное мышление</div>
+  <div style="margin:10px 0;">⚡&nbsp; Fizika / Физика</div>
+  <div style="margin:10px 0;">🤖&nbsp; Sun’iy intellekt / Искусственный интеллект</div>
+</div>
+
+<div class="spacer"></div>
 
 <button class="btn primary" id="goLang">
   Testni boshlash / Пройти тест
 </button>
-        <div class="spacer"></div>
-
-        <div style="text-align:left;">
-          <div class="badge">🧠 Mantiq / Логика</div><div class="spacer"></div>
-          <div class="badge">💻 IT va dasturlash / IT и программирование</div><div class="spacer"></div>
-          <div class="badge">🎮 3D-grafika va muhandislik / 3D-графика и инженерное мышление</div><div class="spacer"></div>
-          <div class="badge">⚡ Fizika / Физика</div><div class="spacer"></div>
-          <div class="badge">🤖 Sun’iy intellekt / Искусственный интеллект</div>
-        </div>
-
-        <div class="spacer"></div>
-
-        
-      </div>
-    </div>
   `);
 
   document.getElementById("goLang").addEventListener("click", () => {
@@ -718,8 +708,8 @@ function renderBlockSummaryScreen() {
                   tr("showResult", "Show result")
                 )}</button>`
           }
-          <button class="btn" id="restartBtn">${htmlEscape(
-            tr("restartBtn", "Restart")
+          //<button class="btn" id="restartBtn">${htmlEscape(
+            //tr("restartBtn", "Restart")
           )}</button>
         </div>
       </div>

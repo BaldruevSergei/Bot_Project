@@ -11,11 +11,12 @@ export const I18N = {
     // brand / gate
     brandTitle: "ForBrain",
     gatePlayAria: "O‘zingni tekshir",
-    gateSub: "Muhandis miyang bormi? 3–5 daqiqa",
+    gateSub: "3–5 daqiqa — texnik profilingni bilib ol",
 
     // marketing
-    marketingTitle: "Sen qaysi yo‘nalishga ko‘proq moyilsan?",
-    marketingSubtitle: "3–5 daqiqa — va texnik profilingni bilib olasan.",
+    marketingTitle: "O‘zingni tekshir: qaysi yo‘nalish senga yaqin?",
+    marketingSubtitle:
+      "3–5 daqiqa — kuchli tomoningni bilib ol. AI davri boshlandi — ortda qolma.",
     marketingTagLogic: "Mantiq",
     marketingTagIT: "IT va kod",
     marketingTag3D: "3D va muhandislik fikrlash",
@@ -31,7 +32,7 @@ export const I18N = {
     introTitle: "Tezkor test",
     introText: "Tez va halol javob ber. Birinchi fikr ko‘pincha to‘g‘ri.",
     tipFast: "Bu yerda bilim emas, fikrlash tekshiriladi.",
-    startBtn: "Boshladik",
+    startBtn: "Boshlash",
 
     // test UI
     block: "Blok",
@@ -45,34 +46,37 @@ export const I18N = {
     feedbackBad: "Noto‘g‘ri.",
 
     // block summary
-    doneTitle: "Bo‘ldi!",
+    doneTitle: "Tayyor!",
     result: "Natija",
     continueQ: "Davom etamizmi?",
     yes: "Keyingi",
-    restartBtn: "Qayta boshlash",
+    //restartBtn: "Qayta boshlash",
     finalAsk: "Yakuniy profil va tavsiyalarni ko‘rsatamizmi?",
     showResult: "Profilni ko‘rsatish",
 
     // consent
     consentTitle: "Rozilik",
-    consentText: "Natijani saqlash va konsultatsiyaga o‘tish uchun rozilik kerak.",
+    consentText:
+      "Natijani saqlash va konsultatsiyaga o‘tish uchun rozilik kerak.",
     consentChk: "Roziman.",
     consentYes: "Ha",
     consentNo: "Yo‘q",
 
     // final
-    finalTitle: "Sening profiling",
-    finalProfileUniversal: "Universal texnik profil",
-    finalProfileIT: "IT va dasturlashga kuchli moyillik",
+    finalTitle: "Sening texnik profiling",
+    finalProfileUniversal: "Universal texnik potensial",
+    finalProfileIT: "IT va algoritmik fikrlash kuchli",
     finalProfileEngineering: "Muhandislik/3D fikrlash kuchli",
 
     intensiveTitle: "3 oylik Tech Intensive",
-    intensiveLine1: "Mantiq, IT, 3D, fizika va sun’iy intellektni birga kuchaytiramiz.",
-    intensiveLine2: "Nazariya kam — amaliyot ko‘p. Zerikish yo‘q.",
-    intensiveLine3: "Boshlang‘ichdan kuchligacha — hamma uchun mos.",
+    
+    intensiveLine2:
+      "Amaliy mashqlar: IT, 3D, fizika va AI — real vazifalar bilan.",
+    intensiveLine3:
+      "Maqsad: kuchli tomonni ochish va tez o‘sish uchun yo‘l xaritasi berish.",
     intensiveStart: "Start: mart",
 
-    chooseDirection: "Nimani eng ko‘p kuchaytirmoqchisan?",
+    chooseDirection: "Nimani birinchi bo‘lib kuchaytirmoqchisan?",
     dirLogic: "Mantiq",
     dirIT: "IT",
     dir3D: "3D",
@@ -97,18 +101,19 @@ export const I18N = {
     dirLabel_ai: "Sun’iy intellekt",
 
     consultMessage:
-      "Salom! Men testdan o‘tdim. Profil: {profile}. Tanlovim: {direction}. Konsultatsiya olmoqchiman.",
+      "Salom! Men testdan o‘tdim. Profil: {profile}. Yo‘nalish: {direction}. Konsultatsiya olmoqchiman.",
   },
 
   ru: {
     // brand / gate
     brandTitle: "ForBrain",
     gatePlayAria: "Проверить себя",
-    gateSub: "Есть ли у тебя мозг инженера? 3–5 минут",
+    gateSub: "3–5 минут — узнай свой технический профиль",
 
     // marketing
-    marketingTitle: "Ты технарь или просто думаешь, что технарь?",
-    marketingSubtitle: "3–5 минут — и ты узнаешь свой технический профиль.",
+    marketingTitle: "Проверь себя: к чему у тебя сильная предрасположенность?",
+    marketingSubtitle:
+      "3–5 минут — увидишь свои сильные стороны. Эпоха ИИ уже началась — не оставайся в стороне.",
     marketingTagLogic: "Логика",
     marketingTagIT: "IT и код",
     marketingTag3D: "3D и инженерия",
@@ -122,8 +127,8 @@ export const I18N = {
 
     // intro
     introTitle: "Честный тест мышления",
-    introText: "Отвечай быстро и честно. Первая реакция важнее долгих раздумий.",
-    tipFast: "Здесь проверяется не знание, а способ мышления.",
+    introText: "Отвечай быстро и честно. Первая реакция часто самая точная.",
+    tipFast: "Проверяем не знания, а способ мышления.",
     startBtn: "Начать",
 
     // test UI
@@ -140,15 +145,16 @@ export const I18N = {
     // block summary
     doneTitle: "Готово!",
     result: "Результат",
-    continueQ: "Продолжаем?",
+    continueQ: "Продолжим?",
     yes: "Далее",
-    restartBtn: "Пройти заново",
+    //restartBtn: "Пройти заново",
     finalAsk: "Показать итоговый профиль и рекомендации?",
     showResult: "Показать профиль",
 
     // consent
     consentTitle: "Согласие",
-    consentText: "Чтобы сохранить результат и перейти к консультации, нужно согласие.",
+    consentText:
+      "Чтобы сохранить результат и перейти к консультации, нужно согласие.",
     consentChk: "Я согласен(на).",
     consentYes: "Да",
     consentNo: "Нет",
@@ -157,15 +163,16 @@ export const I18N = {
     finalTitle: "Твой технический профиль",
     finalProfileUniversal: "Универсальный технический потенциал",
     finalProfileIT: "Сильная склонность к IT и алгоритмическому мышлению",
-    finalProfileEngineering: "Сильная склонность к инженерному и пространственному мышлению",
+    finalProfileEngineering:
+      "Сильная склонность к инженерному и пространственному мышлению",
 
     intensiveTitle: "3-месячный Tech Intensive",
-    intensiveLine1: "Прокачаем логику, IT, 3D, физику и искусственный интеллект.",
-    intensiveLine2: "Без скучной теории — больше практики и реальных задач.",
-    intensiveLine3: "Подходит для любого уровня — от новичка до сильного.",
+    intensiveLine2: "Практика вместо воды: IT, 3D, физика и ИИ — через реальные задачи.",
+    intensiveLine3:
+      "Цель: дать понятный план роста и быстро усилить твой профиль.",
     intensiveStart: "Старт: март",
 
-    chooseDirection: "Что хочешь прокачать сильнее всего?",
+    chooseDirection: "Что хочешь прокачать в первую очередь?",
     dirLogic: "Логика",
     dirIT: "IT",
     dir3D: "3D",
@@ -197,11 +204,12 @@ export const I18N = {
     // brand / gate
     brandTitle: "ForBrain",
     gatePlayAria: "Check yourself",
-    gateSub: "Do you have an engineer’s brain? 3–5 min",
+    gateSub: "3–5 minutes — discover your technical profile",
 
     // marketing
-    marketingTitle: "Are you really a tech person — or just think you are?",
-    marketingSubtitle: "3–5 minutes to reveal your technical profile.",
+    marketingTitle: "Check yourself: what are you naturally strong at?",
+    marketingSubtitle:
+      "3–5 minutes to see your strengths. The AI era is here — don’t stay behind.",
     marketingTagLogic: "Logic",
     marketingTagIT: "IT & code",
     marketingTag3D: "3D & engineering",
@@ -215,8 +223,8 @@ export const I18N = {
 
     // intro
     introTitle: "A real thinking test",
-    introText: "Answer fast and honestly. Your first reaction matters.",
-    tipFast: "This checks how you think, not what you memorized.",
+    introText: "Answer fast and honestly. Your first reaction is often best.",
+    tipFast: "We test how you think, not what you memorized.",
     startBtn: "Start",
 
     // test UI
@@ -235,7 +243,7 @@ export const I18N = {
     result: "Result",
     continueQ: "Continue?",
     yes: "Next",
-    restartBtn: "Restart",
+   // restartBtn: "Restart",
     finalAsk: "Show the final profile and recommendations?",
     showResult: "Show profile",
 
@@ -253,12 +261,14 @@ export const I18N = {
     finalProfileEngineering: "Strong inclination to engineering & spatial thinking",
 
     intensiveTitle: "3-month Tech Intensive",
-    intensiveLine1: "Boost logic, IT, 3D, physics and artificial intelligence — together.",
-    intensiveLine2: "Less boring theory — more practice and real tasks.",
-    intensiveLine3: "Works for any level — beginner to advanced.",
+   
+    intensiveLine2:
+      "Practice over theory: IT, 3D, physics and AI through real tasks.",
+    intensiveLine3:
+      "Goal: a clear growth plan and a stronger technical profile.",
     intensiveStart: "Starts in March",
 
-    chooseDirection: "What do you want to boost the most?",
+    chooseDirection: "What do you want to boost first?",
     dirLogic: "Logic",
     dirIT: "IT",
     dir3D: "3D",
