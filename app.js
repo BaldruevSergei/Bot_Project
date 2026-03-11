@@ -11,6 +11,8 @@ const app = document.getElementById("app");
 
 // DEV: true = можно тестить в браузере без Telegram
 const DEV_BYPASS_TG = true;
+// Telegram канал бесплатного кружка
+const FREE_CLUB_URL = "https://t.me/+9j-3AYahHHQwZjky";
 
 // Google Apps Script Web App URL (принимает POST JSON)
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw4j3HInxtmH-DNte0qg4BPyOqIRr7aKekqwe5iGzXB6dtIwhWhXaVcYREVVLBmZv9mGQ/exec";
@@ -952,15 +954,19 @@ function renderFinalSummaryScreen() {
 
         <div class="spacer"></div>
 
-        <div class="row" style="flex-direction:column; gap:12px;">
-          <button class="btn primary" id="sendBtn" disabled>
-            ${htmlEscape(tr("sendResult", "Save choice"))}
-          </button>
+       <div class="row" style="flex-direction:column; gap:12px;">
+  <button class="btn primary" id="sendBtn" disabled>
+    ${htmlEscape(tr("sendResult", "Save choice"))}
+  </button>
 
-          <button class="btn" id="consultBtn" disabled>
-            ${htmlEscape(tr("getConsult", "Get consultation"))}
-          </button>
-        </div>
+  <button class="btn" id="consultBtn" disabled>
+    ${htmlEscape(tr("getConsult", "Get consultation"))}
+  </button>
+
+  <button class="btn" id="freeClubBtn">
+    🛰 Бесплатный кружок (Astronomy / IT)
+  </button>
+</div>
 
         <div class="spacer"></div>
         <p class="small" style="margin:0;">${htmlEscape(tr("twoClicksHint", ""))}</p>
@@ -1130,6 +1136,14 @@ function renderFinalSummaryScreen() {
     if (w) markCompleted(); // ✅ запираем устройство только после реального ухода к консультанту
   });
 }
+document.getElementById("freeClubBtn").addEventListener("click", () => {
+  if (!guardClick(250)) return;
+
+  haptic?.(10);
+  beep?.(880, 0.05);
+
+  window.open(FREE_CLUB_URL, "_blank");
+});
 
 // ---------------- flow navigation ----------------
 function goNext() {
