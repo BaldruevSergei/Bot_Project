@@ -958,14 +958,14 @@ function renderFinalSummaryScreen() {
   <button class="btn primary" id="sendBtn" disabled>
     ${htmlEscape(tr("sendResult", "Save choice"))}
   </button>
-
+<button class="btn" id="freeClubBtn">
+    🛰 Бесплатный кружок (Astronomy / IT)
+  </button>
   <button class="btn" id="consultBtn" disabled>
     ${htmlEscape(tr("getConsult", "Get consultation"))}
   </button>
 
-  <button class="btn" id="freeClubBtn">
-    🛰 Бесплатный кружок (Astronomy / IT)
-  </button>
+  
 </div>
 
         <div class="spacer"></div>
@@ -1135,7 +1135,7 @@ function renderFinalSummaryScreen() {
     const w = window.open(`${CONSULT_USERNAME}?text=${msg}`, "_blank");
     if (w) markCompleted(); // ✅ запираем устройство только после реального ухода к консультанту
   });
-}
+
 document.getElementById("freeClubBtn").addEventListener("click", () => {
   if (!guardClick(250)) return;
 
@@ -1144,7 +1144,7 @@ document.getElementById("freeClubBtn").addEventListener("click", () => {
 
   window.open(FREE_CLUB_URL, "_blank");
 });
-
+}
 // ---------------- flow navigation ----------------
 function goNext() {
   stopTimer();
